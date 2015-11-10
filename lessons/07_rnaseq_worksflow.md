@@ -85,8 +85,9 @@ $ cd unix_oct2015/rnaseq-project
 Let's load up some of the modules we need for this section: 
 
 ```
-     module load seq/samtools
-     module load seq/htseq
+     module load seq/samtools/1.2
+     module load seq/htseq/0.6.1p1
+     module load seq/STAR/2.4.0j
 ```
 
 Create an output directory for our alignment files:
@@ -144,11 +145,9 @@ The basic options for **mapping reads** to the genome using STAR is as follows:
 
 More details on STAR and its functionality can be found in the [user manual](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf), we encourage you to peruse through to get familiar with all available options.
 
-To run STAR we will be using the module available on Orchestra:
+We can access the software by simply using the STAR command followed by the basic parameters described above and any additional parameters. The full command is provided below for you to copy paste into your terminal. If you want to manually enter the command, it is advisable to first type out the full command in a text editor (i.e. [Sublime Text](http://www.sublimetext.com/) or [Notepad++](https://notepad-plus-plus.org/)) on your local machine and then copy paste into the terminal. This will make it easier to catch typos and make appropriate changes. 
 
-	module load seq/STAR
-
-We can access the software by simply using the STAR command followed by the basic parameters described above and any additional parameters. The full command is provided below for you to copy paste into your terminal. Below, we first describe some the extra parameters we have added.
+Below, we first describe some the extra parameters we have added.
 
 Advanced parameters:
 
@@ -161,9 +160,17 @@ Advanced parameters:
 
 
 ```
-STAR --runThreadN 6 --genomeDir /groups/hbctraining/unix_oct2015_other/reference_STAR --readFilesIn data/trimmed_fastq/Mov10_oe_1.qualtrim25.minlen35.fq  --outFileNamePrefix results/STAR/Mov10_oe_1_ --outFilterMultimapNmax 10 --outSAMstrandField intronMotif --outReadsUnmapped Fastx --outSAMtype BAM SortedByCoordinate --outSAMunmapped Within --outSAMattributes NH HI NM MD AS
+STAR --runThreadN 6 --genomeDir /groups/hbctraining/unix_oct2015_other/reference_STAR \
+--readFilesIn data/trimmed_fastq/Mov10_oe_1.qualtrim25.minlen35.fq \ 
+--outFileNamePrefix results/STAR/Mov10_oe_1_ \
+--outFilterMultimapNmax 10 \
+--outSAMstrandField intronMotif \
+--outReadsUnmapped Fastx \
+--outSAMtype BAM SortedByCoordinate \
+--outSAMunmapped Within \
+--outSAMattributes NH HI NM MD AS
 ```
-> If you try `echo $PATH` and you don't see the bcbio path, you can add it in with `PATH=$PATH:/opt/bcbio/local/bin` 
+
 
 #### Exercise
 How many files do you see in your output directory? Using the `less` command take a look at `Mov10_oe_1_Log.final.out` and answer the following questions:  
@@ -182,14 +189,14 @@ These fields are described briefly below, but for more detailed information the 
 ![SAM](../img/SAM_file.png)
 
 
-Let's take a quick look at our alignment. To do so we first convert our BAM file into SAM format using samtools:
+Let's take a quick look at our alignment. To do so we first convert our BAM file into SAM format using samtools and then pipe it to the `less` command. This allows us to look at the contents without having to write it to file (since we don't need a SAM file for downstream analyses).
 
 ```
-$ samtools view -h results/STAR/Mov10_oe_1_Aligned.sortedByCoord.out.bam > Mov10_oe_1_Aligned.sortedByCoord.out.sam
+$ samtools view -h results/STAR/Mov10_oe_1_Aligned.sortedByCoord.out.bam | less
 
 ```
  
-Now we can use the `less` command to scroll through the SAM file and see how the fields correspond to what we expected.
+Sroll through the SAM file and see how the fields correspond to what we expected.
 
 ### Assess the alignment (visualization)
 
