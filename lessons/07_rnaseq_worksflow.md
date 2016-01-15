@@ -8,7 +8,7 @@ Approximate time: 90 minutes
 
 ## Learning Objectives:
 
-* Use a series of command line tools to execute an RNA-Seq workflow
+* Continue through the RNA-Seq workflow to align reads to the reference genome 
 * Learning intricacies of various tools used in NGS analysis (parameters, usage, etc)
 * Assesing input and output filetypes
 
@@ -55,23 +55,9 @@ rnaseq_project
 	└── docs
 ```
 
-Without getting into the details for each step of the workflow, we first describe a general overview of the steps involved in RNA-Seq analysis:
+We previously described a general overview of the steps involved in RNA-Seq analysis, and in this session we will take our clean reads and align them to the reference genome
 
-![Workflow](../img/rnaseq-workflow.png)
-
-1. Quality control on sequence reads
-2. Trim and/or filter reads (if necessary)
-3. Index the reference genome for use by STAR
-4. Align reads to reference genome using STAR (splice-aware aligner)
-5. Count the number of reads mapping to each gene using htseq-count
-6. Statistical analysis (count normalization, linear modeling using R-based tools)
-
-
-We'll first perform the commands for all the above steps (run through the workflow) for a single sample.
-
-Next, we'll create a script for the commands and test it. 
-
-Finally, we'll modify the script to run on the cluster.
+We'll first perform the commands for a single sample. Next, we'll create a script for the commands and test it. Finally, we'll modify the script to run on the cluster.
 
 So let's get started.
 
