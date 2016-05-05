@@ -165,6 +165,7 @@ You should now see that only `Mov10_oe_1.subset` is returned. *How would you mod
 Now that you've learned how to use loops and variables, let's put this processing power to work. Imagine, if you will, a script that will run a series of commands that would do the following for us each time we get a new data set:
 
 - Use for loop to iterate over each FASTQ file
+- Generate a prefix to use for naming our output files
 - Dump out bad reads into a new file
 - Get the count of the number of bad reads and generate a summary for each file
 - And after all the FASTQ files are processed, write the summary to a log file
@@ -268,9 +269,9 @@ To run this script, we simply enter the following command:
 
 To keep your data organized, let's move all of the bad read files out of our `raw_fastq` directory into a new directory called `other`.
 
-	$ mkdir ../other
+	$ mkdir other
 
-	$ mv *bad* ../other
+	$ mv raw_fastq/*bad* other/
 
 
 ---
