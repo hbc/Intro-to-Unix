@@ -1,7 +1,7 @@
 ---
 title: "Getting your project started"
 author: "Jason Williams, Bob Freeman, Meeta Mistry"
-date: "Wednesday, October 7, 2015"
+date: "Thursday, May 5, 2016"
 ---
 
 Approximate time: 30 minutes
@@ -70,10 +70,10 @@ this should give the result: `/home/user_name`
 * **Tip** Remember, when we give a command, rather than copying and pasting, just type it out. Also the '$' indicates we are at the command prompt, do not include that in your command. 
 * **Tip** If you were not in your home directory, the easiest way to get there is to enter the command *cd* - which always returns you to home. 
 
-Now, make a directory for your project within the `unix_oct2015` folder using the `mkdir` command
+Now, make a directory for your project within the `unix_workshop` folder using the `mkdir` command
 
 ```
-$ mkdir unix_oct2015/rnaseq_project
+$ mkdir unix_workshop/rnaseq_project
 ```
 
 Next you want to set up the following directory structure within your project directory to keep files organized. 
@@ -89,7 +89,7 @@ rnaseq_project/
 You can do this by changing into `rnaseq_project` and then using `mkdir` to create the four directories.
 
 ```
-$ cd unix_oct2015/rnaseq_project
+$ cd unix_workshop/rnaseq_project
 $ mkdir data
 $ mkdir meta
 $ mkdir results

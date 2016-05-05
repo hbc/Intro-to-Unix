@@ -1,7 +1,7 @@
 ---
 title: "The Shell"
 author: "Sheldon  McKay, Mary Piper, Radhika Khetani"
-date: "Wednesday, October 7, 2015"
+date: "Thursday, May 5, 2016"
 ---
 
 Approximate time: 90 minutes
@@ -84,15 +84,15 @@ Make sure that your command prompt is now preceded by a character string that co
 
 Copy our example data folder to your home directory using the following command:
 
-```$ cp -r /groups/hbctraining/unix_oct2015/ .```
+```$ cp -r /groups/hbctraining/unix_workshop/ .```
 
->'cp' is the command for copy. This command required you to specify the location of the item you want to copy (/groups/hbctraining/unix_oct2015/) and the location of the destination (.) please note the space between the 2 in the command. The "-r" is an option that modifies the copy command to do something slightly different than usual. The "." means "here", i.e. the destination location is where you currently are.
+>'cp' is the command for copy. This command required you to specify the location of the item you want to copy (/groups/hbctraining/unix_workshop/) and the location of the destination (.) please note the space between the 2 in the command. The "-r" is an option that modifies the copy command to do something slightly different than usual. The "." means "here", i.e. the destination location is where you currently are.
 
 ## Starting with the shell
 
-We have each created our own copy of the example data folder into our home directory, **unix_oct2015**. Let's go into the data folder and explore the data using the shell.
+We have each created our own copy of the example data folder into our home directory, **unix_workshop**. Let's go into the data folder and explore the data using the shell.
 
-```$ cd unix_oct2015```
+```$ cd unix_workshop```
 
 > 'cd' stands for 'change directory'
 
@@ -164,10 +164,10 @@ As you've already just seen, you can move around in different directories or fol
 
 Let's practice moving around a bit.
 
-We're going to work in that `unix_oct2015` directory.
+We're going to work in that `unix_workshop` directory.
 
 First we did something like go to the folder of our username. Then we opened
-`unix_oct2015` then `raw_fastq`
+`unix_workshop` then `raw_fastq`
 
 Like on any computer you have used before the file structure within unix is hierarchical, like an upside down tree with root (/) as the starting point of the tree-like structure:
 
@@ -188,7 +188,7 @@ Type
 > This puts you in your home directory. No matter where you are in the directory system, `cd` will always bring you back to your home directory.
 
 
-Now using `cd` and `ls`, go in to the `unix_oct2015` directory and list its contents. Now go into the `raw_fastq` directory, and list its contents.
+Now using `cd` and `ls`, go in to the `unix_workshop` directory and list its contents. Now go into the `raw_fastq` directory, and list its contents.
 
 Let's also check to see where we are. Sometimes when we're wandering around in the file system, it's easy to lose track of where we are. The command that tells you this is:
 
@@ -196,7 +196,7 @@ Let's also check to see where we are. Sometimes when we're wandering around in t
 
 > This stands for 'print working directory'. i.e. the directory you're currently working in.
 
-What if we want to move back up and out of the `raw_fastq` directory? Can we just type `cd unix_oct2015`? Try it and see what happens.
+What if we want to move back up and out of the `raw_fastq` directory? Can we just type `cd unix_workshop`? Try it and see what happens.
 
 To go 'back up a level' we can use `..`
 
@@ -219,14 +219,14 @@ Type:
 
 Then enter the command:
 
-```$ ls unix_oct2015/```
+```$ ls unix_workshop/```
 
-This will list the contents of the `unix_oct2015` directory without you having to navigate there.
+This will list the contents of the `unix_workshop` directory without you having to navigate there.
 
 The `cd` command works in a similar way.
 
 ```
-$ cd unix_oct2015/raw_fastq/
+$ cd unix_workshop/raw_fastq/
 $ pwd
 ```
 
@@ -253,14 +253,14 @@ which is the full path for your home directory. This tells you that you are in a
 
 Now enter the following command:
 
-```$ cd /home/username/unix_oct2015/raw_fastq/```
+```$ cd /home/username/unix_workshop/raw_fastq/```
 
 This jumps to `raw_fastq`. Now go back to the home directory (`cd`). We saw
 earlier that the command:
 
-```$ cd unix_oct2015/raw_fastq/```
+```$ cd unix_workshop/raw_fastq/```
 
-had the same effect - it took us to the `raw_fastq` directory. But, instead of specifying the full path (`/home/username/unix_oct2015/raw_fastq`), we specified a *relative path*. In other words, we specified the path **relative to our current working directory**. 
+had the same effect - it took us to the `raw_fastq` directory. But, instead of specifying the full path (`/home/username/unix_workshop/raw_fastq`), we specified a *relative path*. In other words, we specified the path **relative to our current working directory**. 
 
 A full path always starts with a `/`. A relative path does not.
 
@@ -272,7 +272,7 @@ Over time, it will become easier for you to keep a mental note of the structure 
 
 ***
 **Exercise**
-* Change directories to `~/unix_oct2015/raw_fastq/`, and list the contents of `unix_oct2015/other` without changing directories again.
+* Change directories to `~/unix_workshop/raw_fastq/`, and list the contents of `unix_workshop/other` without changing directories again.
 
 * List the contents of the `/bin` directory. Do you see anything familiar in there? How can you tell these are programs rather than plain files?
 ***
@@ -288,7 +288,7 @@ directory:
 
 ```$ cd```
 
-```$ cd unix_oct2015/raw_fastq```
+```$ cd unix_workshop/raw_fastq```
 
 Then enter the command:
 
@@ -300,7 +300,7 @@ Another shortcut is the "..":
 
 ```$ ls ..```
 
-The shortcut `..` always refers to the directory above your current directory. So, it prints the contents of the `unix_oct2015`. You can chain these together, so:
+The shortcut `..` always refers to the directory above your current directory. So, it prints the contents of the `unix_workshop`. You can chain these together, so:
 
 ```$ ls ../..```
 
@@ -314,7 +314,7 @@ To summarize, while you are in your home directory, the commands `ls ~`, `ls ~/.
 
 #### Wild cards
 
-Navigate to the `~/unix_oct2015/raw_fastq` directory. This
+Navigate to the `~/unix_workshop/raw_fastq` directory. This
 directory contains FASTQ files from our RNA-Seq experiment. 
 
 The '*' character is a shortcut for "everything". Thus, if you enter `ls *`, you will see all of the contents of a given directory. Now try this command:
@@ -355,7 +355,7 @@ Navigate to the home directory. Typing out directory names can waste a lot of ti
 
 ```$ cd uni<tab>```
 
-The shell will fill in the rest of the directory name for `unix_oct2015`. Now go to `unix_oct2015/raw_fastq` and 
+The shell will fill in the rest of the directory name for `unix_workshop`. Now go to `unix_workshop/raw_fastq` and 
 
 ```$ ls Mov10_oe_<tab><tab>```
 
@@ -415,9 +415,9 @@ We now know how to move around the file system and look at the
 contents of directories, but how do we look at the contents of files?
 
 The easiest way to examine a file is to just print out all of the
-contents using the command `cat`. Print the contents of `unix_oct2015/other/sequences.fa` by entering the following command:
+contents using the command `cat`. Print the contents of `unix_workshop/other/sequences.fa` by entering the following command:
 
-`$ cat ~/unix_oct2015/other/sequences.fa`
+`$ cat ~/unix_workshop/other/sequences.fa`
 
 This prints out the all the contents of `sequences.fa` to the screen.
 
@@ -570,7 +570,7 @@ Open 'awesome.txt' and on a new line add the following `echo "This is my first f
 ****
 **Exercise-extra**
 
-Let's try to find a *hidden directory* in `unix_oct2015`, and list its contents.  What is the name of the file within the hidden directory?
+Let's try to find a *hidden directory* in `unix_workshop`, and list its contents.  What is the name of the file within the hidden directory?
 
 Hint: hidden files and folders in unix start with `.`, for example `.bashrc`
 ****

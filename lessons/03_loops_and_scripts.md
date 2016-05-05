@@ -1,7 +1,7 @@
 ---
 title: "The Shell: Loops & Scripts"
 author: "Bob Freeman, Mary Piper, Radhika Khetani"
-date: "Wednesday, October 28, 2015"
+date: "Thursday, May 5, 2016"
 ---
 
 Approximate time: 60 minutes
@@ -48,7 +48,7 @@ Another powerful concept in the Unix shell is the concept of "Loops".
 
 Looping is a concept shared by several programming languages, and its implementation in bash is very similar to other languages. Let's dive right in!
 
-`$ cd ~/unix_oct2015/raw_fastq`
+`$ cd ~/unix_workshop/raw_fastq`
 
 The structure or the syntax of (*for*) loops in bash is as follows:
 
@@ -78,7 +78,7 @@ Most simply, it writes to the terminal (`echo`) the name of the file and the num
 
 In this case the list of files is specified using the asterisk wildcard: `*.fq`, i.e. all files that end in `.fq`. Then, we execute 2 commands between the `do` and `done`. With a loop, we execute these commands for each file at a time. Once the commands are executed for one file, the loop then executes the same commands on the next file in the list. 
 
-Essentially, **the number of loops == the number of items in the list**, in our case that is 6 times since we have 6 files in `~/unix_oct2015/raw_fastq` that end in `.fq`. This is done by changing the value of the `var` variable 6 times. 
+Essentially, **the number of loops == the number of items in the list**, in our case that is 6 times since we have 6 files in `~/unix_workshop/raw_fastq` that end in `.fq`. This is done by changing the value of the `var` variable 6 times. 
 
 ####What is a "Variable"?
 Just like loops, *variable* is a common concept shared by many programming languages. Variables are essentially a symbolic/temporary name for, or reference to, information. Variables are analogous to "buckets", where information can be maintained and referenced, and modified without too much hassle. 
@@ -129,7 +129,7 @@ You might not realize this, but this is something that you now know how to do. L
 
 Move to our sample data directory and use `nano` to create our new script file:
 
-`$ cd ~/unix_oct2015/raw_fastq`
+`$ cd ~/unix_workshop/raw_fastq`
 
 `$ nano generate_bad_reads_summary.sh`
 
@@ -142,13 +142,13 @@ This line is the absolute path to the Bash interpreter. The shebang line ensures
 After the shebang line, we enter the commands we want to execute. First we want to move into our `raw_fastq` directory:
 
 ```
-$ cd ~/unix_oct2015/raw_fastq
+$ cd ~/unix_workshop/raw_fastq
 ```
 
 And now we loop over all the FASTQs:
 
 ```bash
-for filename in ~/unix_oct2015/raw_fastq/*.fq;
+for filename in ~/unix_workshop/raw_fastq/*.fq;
 ```
 
 and we execute the commands for each loop:
@@ -189,9 +189,9 @@ You're script should look like:
 ```bash
 #!/bin/bash
 
-cd ~/unix_oct2015/raw_fastq
+cd ~/unix_workshop/raw_fastq
 
-for filename in ~/unix_oct2015/raw_fastq/*.fq; do 
+for filename in ~/unix_workshop/raw_fastq/*.fq; do 
 echo $filename;
 grep -B1 -A2 NNNNNNNNNN $filename > $filename-badreads.fastq;
 grep -cH NNNNNNNNNN $filename-badreads.fastq > $filename-badreads.counts;
@@ -209,10 +209,10 @@ Exit out of `nano`, and voila! You now have a script you can use to assess the q
 #!/bin/bash 
 
 # enter directory with raw FASTQs
-cd ~/unix_oct2015/raw_fastq
+cd ~/unix_workshop/raw_fastq
 
 # count bad reads for each FASTQ file in our directory
-for filename in ~/unix_oct2015/raw_fastq/*.fq; do 
+for filename in ~/unix_workshop/raw_fastq/*.fq; do 
   echo $filename; 
 
   # grab all the bad read records
@@ -238,7 +238,7 @@ $ bash generate_bad_reads_summary.sh
 
 To keep your data organized, let's move all of the bad read files out of our `raw_fastq` directory into the `other` directory
 
-`$ mv ~/unix_oct2015/raw_fastq/*bad* ~/unix_oct2015/other`
+`$ mv ~/unix_workshop/raw_fastq/*bad* ~/unix_workshop/other`
 
 
 ---

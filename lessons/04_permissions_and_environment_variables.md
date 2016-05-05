@@ -1,7 +1,7 @@
 ---
 title: "Permissions and Environment variables"
 author: "Christina Koch, Radhika Khetani"
-date: "Tuesday, October 6, 2015"
+date: "Thursday, May 5, 2016"
 ---
 
 Approximate time: 30 minutes
@@ -80,10 +80,10 @@ So, `ls` is an executable file that belong to user root and group root, and only
 
 > ### Necessary But Not Sufficient
 >
-> The fact that something is marked as executable doesn't actually mean it contains or is a program of some kind. We could easily mark the `~/unix_oct2015/raw_fastq/Irrel_kd_1.subset.fq` file as executable using the commands that are introduced below. Depending on the operating system we're using, trying to "run" it will fail (because it doesn't contain instructions the computer recognizes).
+> The fact that something is marked as executable doesn't actually mean it contains or is a program of some kind. We could easily mark the `~/unix_workshop/raw_fastq/Irrel_kd_1.subset.fq` file as executable using the commands that are introduced below. Depending on the operating system we're using, trying to "run" it will fail (because it doesn't contain instructions the computer recognizes).
 
 
-Now let's run the command `ls -l ~/unix_oct2015`, to list the files in that directory:
+Now let's run the command `ls -l ~/unix_workshop`, to list the files in that directory:
 
 ```
 $ ls -l
@@ -115,15 +115,15 @@ The final triplet shows us what everyone who isn't the file's owner, or in the f
 To change permissions, we use the `chmod` command (whose name stands for "change mode"). Let's make our README.txt file **inaccessible** to all users other than you and your group, currently they are able to read it:
 
 ```
-$ ls -l ~/unix_oct2015/README.txt
+$ ls -l ~/unix_workshop/README.txt
 
--rw-rw-r-- 1 rsk27 rsk27 377 Oct  6 10:28 /home/rsk27/unix_oct2015/README.txt
+-rw-rw-r-- 1 rsk27 rsk27 377 Oct  6 10:28 /home/rsk27/unix_workshop/README.txt
 
-$ chmod o-rw ~/unix_oct2015/README.txt         # the "-" after o denotes removing that permission
+$ chmod o-rw ~/unix_workshop/README.txt         # the "-" after o denotes removing that permission
 
-$ ls -l ~/unix_oct2015/README.txt
+$ ls -l ~/unix_workshop/README.txt
 
--rw-rw---- 1 rsk27 rsk27 377 Oct  6 10:28 /home/rsk27/unix_oct2015/README.txt
+-rw-rw---- 1 rsk27 rsk27 377 Oct  6 10:28 /home/rsk27/unix_workshop/README.txt
 ```
 
 The 'o' signals that we're changing the privileges of "others".
@@ -131,17 +131,17 @@ The 'o' signals that we're changing the privileges of "others".
 Let's change it back to allow it to be readable by others:
 
 ```
-$ chmod o+r ~/unix_oct2015/README.txt         # the "+" after o denotes adding/giving that permission
+$ chmod o+r ~/unix_workshop/README.txt         # the "+" after o denotes adding/giving that permission
 
-$ ls -l ~/unix_oct2015/README.txt
+$ ls -l ~/unix_workshop/README.txt
 
--rw-rw-r-- 1 rsk27 rsk27 377 Oct  6 10:28 /home/rsk27/unix_oct2015/README.txt
+-rw-rw-r-- 1 rsk27 rsk27 377 Oct  6 10:28 /home/rsk27/unix_workshop/README.txt
 ```
 
 If we wanted to make this an executable file for ourselves (the file's owners) we would say `chmod u+rwx`, where the 'u' signals that we are changing permission for the file's owner. To change permissions for a whole group, you'd use the letter "g" `chmod g-w`. 
 
 Before we go any further,
-let's run `ls -l` on the `~/unix_oct2015` directory to get a long-form listing:
+let's run `ls -l` on the `~/unix_workshop` directory to get a long-form listing:
 
 ```
 $ ls -l

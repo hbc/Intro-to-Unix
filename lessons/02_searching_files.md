@@ -1,7 +1,7 @@
 ---
 title: "The Shell: Searching and Redirection"
 author: "Sheldon  McKay, Bob Freeman, Mary Piper"
-date: "Wednesday, October 7, 2015"
+date: "Thursday, May 5, 2016"
 ---
 
 Adapted from the lesson by Tracy Teal.
@@ -25,7 +25,7 @@ Let's give it a try!
 Suppose we want to see how many reads in our file are really bad, with 10 consecutive Ns  
 Let's search for the string NNNNNNNNNN in file 
 
-`$ cd ~/unix_oct2015/raw_fastq`
+`$ cd ~/unix_workshop/raw_fastq`
 
 `$ grep NNNNNNNNNN Mov10_oe_1.subset.fq`
 
@@ -127,7 +127,7 @@ learn to become proficient with the pipe and redirection operators:
 
 Finally, let's use the new tools in our kit and a few new ones to examine our gene annotation file, **chr1-hg19_genes.gtf**, which we will be using later to find the genomic coordinates of all known exons on chromosome 1.
 
-`$ cd ~/unix_oct2015/reference_data/`
+`$ cd ~/unix_workshop/reference_data/`
 
 Let's explore our `chr1-hg19_genes.gtf` file a bit. What information does it contain?
 

@@ -1,7 +1,7 @@
 ---
 title: "RNA-Seq workflow"
 author: "Meeta Mistry, Bob Freeman"
-date: "Wednesday, October 7, 2015"
+date: "Thursday, May 5, 2016"
 ---
 
 Approximate time: 90 minutes
@@ -25,7 +25,7 @@ ssh username@orchestra.med.harvard.edu
 $ bsub -Is -n 6 -q interactive bash	
 ```
 
-Change directories into the `unix_oct2015` directory and copy the `reference_data` folder into your project directory:
+Change directories into the `unix_workshop` directory and copy the `reference_data` folder into your project directory:
 
 ```
 $ cp reference_data rnaseq_project/data
@@ -64,7 +64,7 @@ So let's get started.
 The first command is to change into our working directory:
 
 ```
-$ cd unix_oct2015/rnaseq-project
+$ cd unix_workshop/rnaseq-project
 
 ```
 
@@ -90,7 +90,7 @@ In the script, we will eventually loop over all of our files and have the cluste
 
 ```bash
 
-$ cp -r /groups/hbctraining/unix_oct2015_other/trimmed_fastq data/
+$ cp -r /groups/hbctraining/unix_workshop_other/trimmed_fastq data/
 
 ```
 
@@ -146,7 +146,7 @@ Advanced parameters:
 
 
 ```
-STAR --runThreadN 6 --genomeDir /groups/hbctraining/unix_oct2015_other/reference_STAR \
+STAR --runThreadN 6 --genomeDir /groups/hbctraining/unix_workshop_other/reference_STAR \
 --readFilesIn data/trimmed_fastq/Mov10_oe_1.qualtrim25.minlen35.fq \ 
 --outFileNamePrefix results/STAR/Mov10_oe_1_ \
 --outFilterMultimapNmax 10 \
@@ -203,7 +203,7 @@ The following 2 files need to be moved from Orchestra to your local machine,
 `results/STAR/Mov10_oe_1_Aligned.sortedByCoord.out.bam.bai` 
 
 ```
-$ scp user_name@orchestra.med.harvard.edu:/home/user_name/unix_oct2015/rnaseq_project/results/Mov10_oe_1_Aligned.sortedByCoord.out.bam* /path/to/directory_on_laptop
+$ scp user_name@orchestra.med.harvard.edu:/home/user_name/unix_workshop/rnaseq_project/results/Mov10_oe_1_Aligned.sortedByCoord.out.bam* /path/to/directory_on_laptop
 ```
 
 

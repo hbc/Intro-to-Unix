@@ -1,7 +1,7 @@
 ---
 title: "Automating an RNA-Seq workflow"
 author: "Bob Freeman, Meeta Mistry, Radhika Khetani"
-date: "Wednesday, October 7, 2015"
+date: "Thursday, May 5, 2016"
 ---
 
 ## Learning Objectives:
@@ -62,8 +62,8 @@ Next, we'll initialize variables that contain the paths to where the common file
 Let's add 2 variables named "genome" and "gtf", these will contain the locations of the genome indices and the annotation file respectively:
 
     # location of genome reference FASTA and index files + the gene annotation file
-    genome=/groups/hbctraining/unix_oct2015_other/reference_STAR/
-    gtf=~/unix_oct2015/rnaseq_project/data/reference_data/chr1-hg19_genes.gtf
+    genome=/groups/hbctraining/unix_workshop_other/reference_STAR/
+    gtf=~/unix_workshop/rnaseq_project/data/reference_data/chr1-hg19_genes.gtf
 
 Next, make sure you load all the modules for the script to run. This is important so your script can run independent of any "prep" steps that need to be run beforehand:
     
@@ -76,8 +76,8 @@ We'll keep the output directory creation, however, we will add the `-p` option t
     # make all of our output directories
     # The -p option means mkdir will create the whole path if it 
     # does not exist and refrain from complaining if it does exist
-    mkdir -p ~/unix_oct2015/rnaseq_project/results/STAR
-    mkdir -p ~/unix_oct2015/rnaseq_project/results/counts
+    mkdir -p ~/unix_workshop/rnaseq_project/results/STAR
+    mkdir -p ~/unix_workshop/rnaseq_project/results/counts
 ```
 
 In the script, it is a good idea to use echo for debugging/reporting to the screen (you can also use `set -x`):
@@ -93,7 +93,7 @@ We also need to use one special trick, to extract the base name of the file
 ```
 There are 2 new things of note above:
 
-1. the `basename` command: this command takes a path or a name and trims away all the information before the last `\` and if you specify the string to clear away at the end, it will do that as well. In this case, if the variable `$fq` contains the path *"unix_oct2015_other/trimmed_fastq/Mov10_oe_1.qualtrim25.minlen35.fq"*, `basename $fq .qualtrim25.minlen35.fq` will output "Mov10_oe_1".
+1. the `basename` command: this command takes a path or a name and trims away all the information before the last `\` and if you specify the string to clear away at the end, it will do that as well. In this case, if the variable `$fq` contains the path *"unix_workshop_other/trimmed_fastq/Mov10_oe_1.qualtrim25.minlen35.fq"*, `basename $fq .qualtrim25.minlen35.fq` will output "Mov10_oe_1".
 2. to assign this value to the `base` variable, we place the `basename...` command in parentheses and put a `$` outside. This syntax is necessary for assigning the output of a command to a variable.
 
 Since we've already created our output directories, we can now specify all of our
@@ -102,9 +102,9 @@ output files in their proper locations. We will assign various file names to
 is going on in the command below.
 ```
     # set up output filenames and locations
-    align_out=~/unix_oct2015/rnaseq_project/results/STAR/${base}_
-    counts_input_bam=~/unix_oct2015/rnaseq_project/results/STAR/${base}_Aligned.sortedByCoord.out.bam
-    counts=~/unix_oct2015/rnaseq_project/results/counts/${base}.counts
+    align_out=~/unix_workshop/rnaseq_project/results/STAR/${base}_
+    counts_input_bam=~/unix_workshop/rnaseq_project/results/STAR/${base}_Aligned.sortedByCoord.out.bam
+    counts=~/unix_workshop/rnaseq_project/results/counts/${base}.counts
 ```
 Our variables are now staged. We now need to modify the series of commands starting with STAR throught to counts (htseq-count)
 to use them so that it will run the steps of the analytical workflow with more flexibility:
@@ -162,7 +162,7 @@ The top of the file should look like with the LSF directives:
 
 	# this for loop, will take our trimmed fastq files as input and run the script for all of them one after the other. 
 
-    for fq in ~/unix_oct2015/rnaseq_project/data/trimmed_fastq/*.fq
+    for fq in ~/unix_workshop/rnaseq_project/data/trimmed_fastq/*.fq
     do
       rnaseq_analysis_on_input_file.sh $fq
     done
@@ -209,7 +209,7 @@ This file will loop through the same files as in the previous script, but the co
 
 	#! /bin/bash
 
-    for fq in ~/unix_oct2015/raw_fastq/*.fq
+    for fq in ~/unix_workshop/raw_fastq/*.fq
     do
       bsub -q priority -n 6 -W 1:30 -R "rusage[mem=4000]" -J rnaseq_mov10 -o %J.out -e %J.err "sh rnaseq_analysis_on_input_file.sh $fq"
       sleep 1

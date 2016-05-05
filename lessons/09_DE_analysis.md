@@ -46,7 +46,7 @@ Then login in "session" with `orchestra.med.harvard.edu`.
 Once you are in, start an interactive session and navigate to the `rnaseq_project` directory:
 
 	$ bsub -Is -q interactive bash
-	$ cd unix_oct2015/rnaseq_project
+	$ cd unix_workshop/rnaseq_project
 
 We will be running an R script that uses the R package [edgeR](https://www.bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf) to identify differentially expressed genes. This package is available through the [Bioconductor](https://www.bioconductor.org/), a repository of packages for the analysis of high-throughput genomic data. There are also a few other packages that are required to generate some additional figures.
 
@@ -67,7 +67,7 @@ To install the packages we need we have created an R script for you to run from 
 
 You should find yourself back at the shell command prompt. We will first need to copy over the installation script and setup some important _environment variables_. 
 
-	$ cp /groups/hbctraining/unix_oct2015_other/install_libraries.R .
+	$ cp /groups/hbctraining/unix_workshop_other/install_libraries.R .
 
 The next few lines will create a directory in your home folder for installing any R packages. Packages are bundles of code that perform functions and include detailed documentation on how to use those functions. Once installed, they are referred to as _libraries_. Setting the environment variable will let R know where the R libraries directory resides.
 
@@ -90,17 +90,17 @@ Now you should be able to run the installation script:
 
 First, let's copy over the script file:
 
-	$ cp /groups/hbctraining/unix_oct2015_other/DE_script.R diffexpression/
+	$ cp /groups/hbctraining/unix_workshop_other/DE_script.R diffexpression/
 
 The DE script will require as input **1) your count matrix file** and **2) a metadata file**. The count matrix we generated in the last lesson and is in the `counts` directory. The metadata file is a tab-delimited file which contains any information associated with our samples. Each row corresponds to a sample and each column contains some information about each sample.
 
 > If you _didn't generate this file in class_ we have a pre-computed count matrix generated that you can use:
 > 
-> 	$ cp /groups/hbctraining/unix_oct2015_other/counts_STAR/Mov10_rnaseq_counts_complete.txt diffexpression
+> 	$ cp /groups/hbctraining/unix_workshop_other/counts_STAR/Mov10_rnaseq_counts_complete.txt diffexpression
 
 
 
-	$ cp ~/unix_oct2015/other/Mov10_rnaseq_metadata.txt diffexpression
+	$ cp ~/unix_workshop/other/Mov10_rnaseq_metadata.txt diffexpression
 
 > Once you have the files copied, take a look at the metadata using `less`.
 
