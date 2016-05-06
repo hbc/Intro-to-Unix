@@ -19,7 +19,7 @@ Welcome to the beauty and purpose of shell scripts.
 
 ## Shell scripts
 
-Shell scripts are text files that contain commands we want to run. As with any file, you can give a shell script any name and usually have the extension `.sh`. For historical reasons, a bunch of commands saved in a file is usually called a shell script, but make no mistake, this is actually a small program. 
+Shell scripts are **text files that contain commands we want to run**. As with any file, you can give a shell script any name and usually have the extension `.sh`. For historical reasons, a bunch of commands saved in a file is usually called a shell script, but make no mistake, this is actually a small program. 
 
 
 We are finally ready to see what makes the shell such a powerful programming environment. We are going to take the commands we repeat frequently and save them into a file so that we can **re-run all those operations** again later by typing **one single command**. Let's write a shell script that will do two things:
@@ -54,7 +54,7 @@ A **variable** is a common concept shared by many programming languages. Variabl
 
 Extending the bucket analogy: the bucket has a name associated with it, i.e. the name of the variable, and when referring to the information in the bucket, we use the name of the bucket, and do not directly refer to the actual data stored in it.
 
-In the example below, we define a variable or a 'bucket' called `file`. We will put a filename `Mov10_oe_1.subset.fq` as the value inside the bucket.
+In the example below, we define a variable or a 'bucket' called `file`. We will put the filename `Mov10_oe_1.subset.fq` as the value inside the bucket.
 
 	$ file=Mov10_oe_1.subset.fq
 
@@ -102,7 +102,7 @@ Looping is a concept shared by several programming languages, and its implementa
 
 The structure or the syntax of (*for*) loops in bash is as follows:
 
-```bash
+```
 for (variable_name) in (list)
  do
    (commands $variable_name) 
@@ -113,9 +113,7 @@ where the ***variable_name*** defines (or initializes) a variable that takes the
 
 For example, we can run the same commands (`echo` and `wc -l`) used in the "Bash variables" section but this time run them sequentially on each file:
 
-```bash
-$ ls  *.fastq		# list all files ending in .fq
-
+```
 $ for var in *.fq
  do
    echo $var
@@ -124,6 +122,7 @@ $ for var in *.fq
 ```
 
 ####What does this loop do? 
+
 Most simply, it writes to the terminal (`echo`) the name of the file and the number of lines (`wc -l`) for each files that end in `.fq` in the current directory. The output is almost identical to what we had before.
 
 In this case the list of files is specified using the asterisk wildcard: `*.fq`, i.e. all files that end in `.fq`. Then, we execute 2 commands between the `do` and `done`. With a loop, we execute these commands for each file at a time. Once the commands are executed for one file, the loop then executes the same commands on the next file in the list. 
@@ -145,15 +144,15 @@ Pretty simple and cool, huh?
 
 ### The `basename` command
 
-Before we get started on creating more complex scripts, we want to introduce you to a command that will be useful for future scripting. The `basename` command is used for extracting the base name of a file, which is accomplished using string splitting. Let's try an example,by first moving back to your home directory:
+Before we get started on creating more complex scripts, we want to introduce you to a command that will be useful for future scripting. The `basename` command is used for extracting the base name of a file, which is accomplished using string splitting to strip the directory and any suffix from filenames. Let's try an example, by first moving back to your home directory:
 
 	$ cd
 	
-The we will run the `basename` command on one of the FASTQ files. Bes ure to specify the path to the file:
+The we will run the `basename` command on one of the FASTQ files. Be sure to specify the path to the file:
 
 	$ basename unix_workshop/raw_fastq/Mov10_oe_1.subset.fq
 	
-What is returned to you? The command has trimmed off the path, leaving only the filename. Now, suppose we wanted to also trim characters from the other end (i.e. remove `.fq` leaving only the file *base name*). We can do this by adding a parameter to the command to specify what string we want trimmed.
+What is returned to you? The filename was split into the path `unix_workshop/raw_fastq/` and the filename. The command returns only the filename. Now, suppose we wanted to also trim off the file extension (i.e. remove `.fq` leaving only the file *base name*). We can do this by adding a parameter to the command to specify what string of characters we want trimmed.
 
 	$ basename unix_workshop/raw_fastq/Mov10_oe_1.subset.fq .fq
 	
