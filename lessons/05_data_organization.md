@@ -147,8 +147,6 @@ This will make your analysis traversable by you and your collaborators, and writ
 
 **Exercise**
 
-As mentioned it can be useful to have README file within your project directory. This file will usually contain a quick one line summary about the project and any other lines that follow will describe the files/directories found within it. 
-
 1. Take a moment to create a README for `rnaseq_project` (hint: use nano to create the file). Give a short description of the project and brief descriptions of the types of file you would be storing within each of the sub-directories.
 
 ***
