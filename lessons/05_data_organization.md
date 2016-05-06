@@ -22,7 +22,7 @@ The dataset we are using is part of a larger study described in [Kenny PJ et al,
 
 ### Metadata
 
-From this study we are using the [RNA-Seq](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE50499) data which is publicly available in the [SRA](http://www.ncbi.nlm.nih.gov/sra). Using this data, we will evaluate transcriptional patterns associated with MOV10 overexpression. In addition to the raw sequence data we also need to collect *information about the data*, also known as *metadata*.
+From this study we are using the [RNA-Seq](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE50499) data which is publicly available in the [SRA](http://www.ncbi.nlm.nih.gov/sra). Using this data, we will evaluate transcriptional patterns associated with MOV10 overexpression. In addition to the raw sequence data we also need to collect **information about the data**, also known as metadata.
 
 > 1. What is your definition of metadata?
 > 2. What kinds of metadata might a sequencing project generate?
@@ -46,7 +46,7 @@ Here, we provide metadata for the data we are using today.
 
 Project organization is one of the most important parts of a sequencing project, but is often overlooked in the excitement to get a first look at new data. While it's best to get yourself organized before you begin analysis, it's never too late to start.
 
-In the most important ways, the methods and approaches we need in bioinformatics are the same ones we need at the bench or in the field - *planning, documenting, and organizing* will be the key to good reproducible science. 
+In the most important ways, the methods and approaches we need in bioinformatics are the same ones we need at the bench or in the field - **planning, documenting, and organizing** will be the key to good reproducible science. 
 
 ### Planning 
 
@@ -54,7 +54,7 @@ You should approach your sequencing project in a very similar way to how you do 
 
 ### Organizing
 
-Every computational analysis you do is going to spawn many files, and inevitability, you'll want to run some of those analysis again. Genomics projects can quickly accumulate hundreds of files across tens of folders. Before you start any analysis it is best to first get organized and create a planned storage space for the results of your workflow.
+Every computational analysis you do is going to spawn many files, and inevitability, you'll want to run some of those analysis again. Genomics projects can quickly accumulate hundreds of files across tens of folders. Before you start any analysis it is best to first get organized and **create a planned storage space for your workflow**.
 
 We will start by creating a directory that we can use for the rest of the workshop:
 
@@ -73,7 +73,7 @@ Now, make a directory for your project within the `unix_workshop` folder using t
 $ mkdir unix_workshop/rnaseq_project
 ```
 
-Next you want to set up the following directory structure within your project directory to keep files organized. 
+Next you want to set up the following **directory structure** within your project directory to keep files organized. 
 
 ```
 rnaseq_project/
@@ -129,7 +129,7 @@ to describe the analysis and the files that were generated.
 In your lab notebook, you likely keep track of the different reagents and kits used for a specific protocol. Similarly, recording information about the tools and and parameters is imporatant for documenting your computational experiments. 
 
 * Keep track of software versions used
-* Record information on parameters used and summary statistics, if relevant (e.g., how many adapters were removed, how many reads did not align)
+* Record information on parameters used and summary statistics at every step (e.g., how many adapters were removed, how many reads did not align)
 
 > Different tools have different ways of reporting log messages and you might have to experiment a bit to figure out what output to capture. You can redirect standard output with the `>` symbol which is equivalent to `1> (standard out)`; other tools might require you to use `2>` to re-direct the `standard error` instead. 
 
@@ -141,10 +141,6 @@ This will make your analysis traversable by you and your collaborators, and writ
 2. Have **unique sample names** and try to avoid names that look like dates (Dec14), times (AM1245) and other things that Excel might auto-convert. 
 3. **Remove spaces and punctuation.** When working on the command line, spaces in file names make everything exponentially more difficult. Replace all your spaces with under_scores and avoid the use of any special characters.
 
-2. README and comment liberally
-3. Tools and versions numebr
-
-Your future self will thank you.
 
 
 ***
