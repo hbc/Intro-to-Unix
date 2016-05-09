@@ -177,3 +177,7 @@ Take your gene list and paste it in the `Query' box.
 * [swirl](http://swirlstats.com/): learn R interactively from within the R console
 * The free "try R" class from [Code School](http://tryr.codeschool.com)
 * HarvardX course ["Statistics and R for the Life Sciences"](https://courses.edx.org/courses/HarvardX/PH525.1x/1T2015/info)
+
+***
+*To share or reuse these materials, please find the attribution and license details at [license.md](https://github.com/hbc/Intro-to-Unix/blob/master/license.md).*
+

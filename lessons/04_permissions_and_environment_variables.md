@@ -269,6 +269,4 @@ $ nano ~/.bashrc
 **In closing, permissions and environment variables, especially $PATH, are very useful and important concepts to understand in the context of UNIX and HPC.**
 
 ---
-*The materials used in this lesson was derived from work that is Copyright © Software Carpentry (http://software-carpentry.org/). 
-All Software Carpentry instructional material is made available under the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0).*
-
+*To share or reuse these materials, please find the attribution and license details at [license.md](https://github.com/hbc/Intro-to-Unix/blob/master/license.md).*

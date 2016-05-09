@@ -482,5 +482,4 @@ Let's use *FileZilla* to download the fastqc html for Mov10_oe_1. Has our read q
 ***
 
 ---
-*The materials used in this lesson was derived from work that is Copyright © Data Carpentry (http://datacarpentry.org/). 
-All Data Carpentry instructional material is made available under the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0).*
+*To share or reuse these materials, please find the attribution and license details at [license.md](https://github.com/hbc/Intro-to-Unix/blob/master/license.md).*

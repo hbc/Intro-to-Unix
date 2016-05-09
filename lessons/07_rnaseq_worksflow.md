@@ -256,10 +256,10 @@ Take a look at the end of the file using the `tail` command. You should see a su
 1. How many reads were assigned as no_feature? Why would they be classified this way?
 2. How many reads were found to map to multiple locations?
 
+***
 
 
-
-
+*To share or reuse these materials, please find the attribution and license details at [license.md](https://github.com/hbc/Intro-to-Unix/blob/master/license.md).*
 
 
 
