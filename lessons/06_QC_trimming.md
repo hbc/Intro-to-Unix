@@ -404,7 +404,7 @@ MINLEN:35
 ```
 Now, let's run it:
 
-`$ bsub < trimmomatic_mov10.sh`
+`$ bsub < trimmomatic_mov10.lsf`
 
 After the job finishes, you should receive an email with output: 
 
