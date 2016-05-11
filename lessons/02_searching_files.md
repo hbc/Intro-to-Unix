@@ -173,30 +173,30 @@ We will define an exon by it's genomic coordinates. Therefore, we only need the 
 	chr1	exon	16607	16765	-
 	chr1	exon	16858	17055	-
 
-The `cut` command assumes our data columns are separated by tabs (i.e. tab-delimited). The `chr1-hg19_genes.gtf` is a tab-delimited file, so the default 'cut' command works for us. However, data can be separated by other types of delimiters. Another common delimiter is the comma, which separates data in comma-separated value (csv) files. If your data is not tab delimited, there is a 'cut' command argument (-d) to specify the delimiter.
+The `cut` command assumes our data columns are separated by tabs (i.e. tab-delimited). The `chr1-hg19_genes.gtf` is a tab-delimited file, so the default `cut` command works for us. However, data can be separated by other types of delimiters. Another common delimiter is the comma, which separates data in comma-separated value (csv) files. If your data is not tab delimited, there is a `cut` command argument (-d) to specify the delimiter.
 
-Our output looks good, so let's cut these columns from the whole dataset (not just the first 5 lines) and save it as a file, '**chr1-hg19genes_cut**':
+Our output looks good, so let's cut these columns from the whole dataset (not just the first 5 lines) and save it as a file, `**chr1-hg19genes_cut**`:
 
 `$ cut -f1,3,4,5,7 chr1-hg19_genes.gtf > chr1-hg19genes_cut`
 
 Check the cut file to make sure that it looks good using `less`. 
 
 ####Extracting genomic coordinates of exon features
-We only want the exons (not CDS or start_codon features), so let's use 'grep' to only keep the exon lines and save to file, '**chr1_exons**:
+We only want the exons (not CDS or start_codon features), so let's use `grep` to only keep the exon lines and save to file, `**chr1_exons**`:
 
 `$ grep exon chr1-hg19genes_cut > chr1_exons`
 
 #### Removing duplicate exons
 Now, we need to remove those exons that show up multiple times for different genes or transcripts.    
 
-We can use some new tools `sort` and `uniq` to extract only those unique exons.  'uniq' is a command that will omit repeated adjacent lines of data if they are exactly the same. Therefore, we need to sort our data by genomic coordinates first to make sure that all matching exons are adjacent to each other. 
+We can use some new tools `sort` and `uniq` to extract only those unique exons.  `uniq` is a command that will omit repeated adjacent lines of data if they are exactly the same. Therefore, we need to sort our data by genomic coordinates first to make sure that all matching exons are adjacent to each other. 
 
 We can use the `sort` command with the `-k` option for sort to specify which column(s) to sort on.  Note that this does something similar to cut's '-f'.
 
 `$ sort -k3,4 chr1_exons | uniq`
 
 ####Counting the total number of exons
-Now, to count how many unique exons are on chromosome 1, we need to pipe the output to 'wc -l':
+Now, to count how many unique exons are on chromosome 1, we need to pipe the output to `wc -l`:
 
 `$ sort -k3,4 chr1_exons | uniq | wc -l`
     
