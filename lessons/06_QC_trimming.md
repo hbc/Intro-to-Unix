@@ -162,6 +162,8 @@ Exit the interactive session and start a new one with 6 cores, and use the multi
 `$ bsub -Is -n 6 -q interactive bash`      #start a new one with 6 cpus (-n 6)
 	
 `$ module load seq/fastqc/0.11.3`     #you'll have to reload the module for the new session
+
+`$ cd unix_workshop/rnaseq_project/data/untrimmed_fastq/` #change to the untrimmed_fastq directory
 	
 `$ fastqc -t 6 *.fq`      #note the extra parameter we specified for 6 threads
 
