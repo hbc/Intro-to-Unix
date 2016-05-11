@@ -175,14 +175,14 @@ We will define an exon by it's genomic coordinates. Therefore, we only need the 
 
 The `cut` command assumes our data columns are separated by tabs (i.e. tab-delimited). The `chr1-hg19_genes.gtf` is a tab-delimited file, so the default `cut` command works for us. However, data can be separated by other types of delimiters. Another common delimiter is the comma, which separates data in comma-separated value (csv) files. If your data is not tab delimited, there is a `cut` command argument (-d) to specify the delimiter.
 
-Our output looks good, so let's cut these columns from the whole dataset (not just the first 5 lines) and save it as a file, `**chr1-hg19genes_cut**`:
+Our output looks good, so let's cut these columns from the whole dataset (not just the first 5 lines) and save it as a file, **`chr1-hg19genes_cut`**:
 
 `$ cut -f1,3,4,5,7 chr1-hg19_genes.gtf > chr1-hg19genes_cut`
 
 Check the cut file to make sure that it looks good using `less`. 
 
 ####Extracting genomic coordinates of exon features
-We only want the exons (not CDS or start_codon features), so let's use `grep` to only keep the exon lines and save to file, `**chr1_exons**`:
+We only want the exons (not CDS or start_codon features), so let's use `grep` to only keep the exon lines and save to file, **`chr1_exons`**:
 
 `$ grep exon chr1-hg19genes_cut > chr1_exons`
 
