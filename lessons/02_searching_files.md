@@ -151,7 +151,7 @@ This search returns two different transcripts of the same gene, NM_001160184 and
 
 Now that we know what type of information is inside of our gtf file, let's explore our commands to answer a simple question about our data: **how many total exons are present on chromosome 1 using `chr1-hg19_genes.gtf`?**
 
-To determine the number of unique exons on chromosome 1, we are going to perform a series of steps:
+To determine the number of total exons on chromosome 1, we are going to perform a series of steps:
 	
 	1. Subset the dataset to only include the feature type and genomic location information
 	2. Extract only the genomic coordinates of exon features
