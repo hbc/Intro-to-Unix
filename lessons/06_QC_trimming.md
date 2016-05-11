@@ -494,7 +494,6 @@ Let's use *FileZilla* to download the fastqc html for Mov10_oe_1. Has our read q
 It is good practice to record the reads passing through each step of the workflow. For example, for each of our samples, we should record in a spreadsheet the number of input sequences and the number of surviving reads after trimming. Note that you can find all of that information in the `<job#>.err` file.
 
 `$ less <job#>.err`
-***
 
 ---
 *To share or reuse these materials, please find the attribution and license details at [license.md](https://github.com/hbc/Intro-to-Unix/blob/master/license.md).*
