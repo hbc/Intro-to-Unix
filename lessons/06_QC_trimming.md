@@ -169,7 +169,7 @@ Exit the interactive session and start a new one with 6 cores, and use the multi
 
 How did I know about the -t argument for FastQC?
 
-`$ fastqc -help`
+`$ fastqc --help`
 
 
 Now, let's create a home for our results
