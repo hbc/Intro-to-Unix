@@ -295,18 +295,26 @@ Let's load the *Trimmomatic* module:
 
 By loading the *Trimmomatic* module, the **trimmomatic-0.33.jar** file is now accessible to us in the **opt/** directory, allowing us to run the program. 
 
-Because *Trimmomatic* is java based, it is run using the command:
+Because *Trimmomatic* is java based, it is run using the `java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar` command:
 
-`$ java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar`
+```
+$ java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
+-threads 4 \
+inputfile \
+outputfile \
+OPTION:VALUE... # DO NOT RUN THIS
+```
 
+`java -jar` calls the Java program, which is needed to run *Trimmomatic*, which is a 'jar' file (`trimmomatic-0.33.jar`). A 'jar' file is a special kind of java archive that is often used for programs written in the Java programming language.  If you see a new program that ends in '.jar', you will know it is a java program that is executed `java -jar` <*location of program .jar file*>.
 
+The `SE` argument is a keyword that specifies we are working with single-end reads. We have to specify the `-threads` parameter because *Trimmomatic* uses 16 threads by default.
 
-What follows below are the specific commands that tells the *Trimmomatic* program exactly how you want it to operate. *Trimmomatic* has a variety of options and parameters:
+The next two arguments are input file and output file names.  These are then followed by a series of options that tell the program exactly how you want it to operate. *Trimmomatic* has a variety of options and parameters:
 
 * **_-threads_** How many processors do you want *Trimmomatic* to run with?
 * **_SE_** or **_PE_** Single End or Paired End reads?
 * **_-phred33_** or **_-phred64_** Which quality score do your reads have?
-* **_SLIDINGWINDOW_** Perform sliding window trimming, cutting once the average quality within the window falls below a threshold.
+* **_SLIDINGWINDOW_** Perform sliding window trimming from the 5' end of the read, cutting once the average quality within the window falls below a threshold.
 * **_LEADING_** Cut bases off the start of a read, if below a threshold quality.
 * **_TRAILING_** Cut bases off the end of a read, if below a threshold quality.
 * **_CROP_** Cut the read to a specified length.
@@ -339,9 +347,9 @@ Let's load the trimmomatic module:
 
 `$ module load seq/Trimmomatic/0.33`
 
-Since the *Timmomatic* command is complicated and we will be running it a number of times, let's draft the command in a text editor, such as Sublime, TextWrangler or Notepad++. When finished, we will copy and paste the command into the terminal.
+Since the *Timmomatic* command is complicated and we will be running it a number of times, let's draft the command in a **text editor**, such as Sublime, TextWrangler or Notepad++. When finished, we will copy and paste the command into the terminal.
 
-For the single fastq input file 'Mov10_oe_1.subset.fq', the command would be:
+For the single fastq input file `Mov10_oe_1.subset.fq`, we're going to run the following command:
 
 ```
 $ java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
@@ -353,9 +361,9 @@ ILLUMINACLIP:/opt/Trimmomatic-0.33/adapters/TruSeq3-SE.fa:2:30:10 \
 TRAILING:25 \
 MINLEN:35
 ```
-The backslashes at the end of the lines allow us to continue our script on new lines, which helps with readability of some long commands.
+*The backslashes at the end of the lines allow us to continue our script on new lines, which helps with readability of some long commands.*
 
-This command tells *Trimmomatic* to run on a fastq file containing Single-End reads (``Mov10_oe_1.subset.fq``, in this case) and to name the output file ``Mov10_oe_1.qualtrim25.minlen35.fq``. The program will remove Illumina adapter sequences given by the file, `TruSeq3-SE.fa` and will cut nucleotides from the 3' end of the sequence if their quality score is below 25. The entire read will be discarded if the length of the read after trimming drops below 35 nucleotides.
+This command tells *Trimmomatic* to run on a fastq file containing Single-End reads (`Mov10_oe_1.subset.fq`, in this case) and to name the output file ``Mov10_oe_1.qualtrim25.minlen35.fq``. The program will remove Illumina adapter sequences given by the file, `TruSeq3-SE.fa` and will cut nucleotides from the 3' end of the sequence if their quality score is below 25. The entire read will be discarded if the length of the read after trimming drops below 35 nucleotides.
 
 After the job finishes, you should see the *Trimmomatic* output in the terminal: 
 
@@ -442,22 +450,27 @@ We already know how to use a 'for loop' to deal with this situation. Let's modif
 ```
 #!/bin/bash
 
-#BSUB -q priority 		# queue name
+#BSUB -q priority 	# queue name
 #BSUB -W 2:00 		# hours:minutes runlimit after which job will be killed.
 #BSUB -n 6 		# number of cores requested
 #BSUB -J rnaseq_mov10_qc         # Job name
 #BSUB -o %J.out       # File to which standard out will be written
 #BSUB -e %J.err       # File to which standard err will be written
 
+# Change directories into the folder with the untrimmed fastq files
 cd ~/unix_workshop/rnaseq_project/data/untrimmed_fastq
 
+# Loading modules for tools
 module load seq/Trimmomatic/0.33
 module load seq/fastqc/0.11.3
 
+# Run Trimmomatic
 for infile in *.fq; do
-
+  
+  # Create names for the output trimmed files
   outfile=$infile.qualtrim25.minlen35.fq;
-
+  
+  # Run Trimmomatic command
   java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
   -threads 4 \
   -phred33 \
@@ -468,6 +481,7 @@ for infile in *.fq; do
   
 done
     
+# Run FastQC on all trimmed files
 fastqc -t 6 ../trimmed_fastq/*.fq
 ```
 `$ bsub < trimmomatic_mov10.sh`
