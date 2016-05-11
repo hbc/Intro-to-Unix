@@ -189,26 +189,21 @@ We only want the exons (not CDS or start_codon features), so let's use `grep` to
 #### Removing duplicate exons
 Now, we need to remove those exons that show up multiple times for different genes or transcripts.    
 
-We can use some new tools `sort` and `uniq` to extract only those unique exons.  `uniq` is a command that will omit repeated adjacent lines of data if they are exactly the same. Therefore, we need to sort our data by genomic coordinates first to make sure that all matching exons are adjacent to each other. 
+We can use a new tool, `sort`, to remove exons that show up more than once.  We can use the `sort` command with the `-u` option to return only unique lines and the `-k` option for sort to specify which column(s) to sort on. Note that this does something similar to cut's '-f'.
 
-We can use the `sort` command with the `-k` option for sort to specify which column(s) to sort on.  Note that this does something similar to cut's '-f'.
-
-`$ sort -k3,4 chr1_exons | uniq`
+`$ sort -uk3,4 chr1_exons`
 
 ####Counting the total number of exons
 Now, to count how many unique exons are on chromosome 1, we need to pipe the output to `wc -l`:
 
-`$ sort -k3,4 chr1_exons | uniq | wc -l`
+`$ sort -uk3,4 chr1_exons | wc -l`
     
 
 ****
 **Final Exercise**
 
-1) How could have you have determined the number of total exons by combining all of the previous commands (starting with the original chr1-hg19_genes.gtf), into a single command (no intermediate files) using pipes?
+How could have you have determined the number of total exons by combining all of the previous commands (starting with the original chr1-hg19_genes.gtf), into a single command (no intermediate files) using pipes?
 
-2) There is an argument for the 'sort' command that will only keep unique lines of data. Determine the number of unique exons without using the 'uniq' command.
-
-3) There is an argument for the 'uniq' command that will count the number of occurrences of non-unique exons. Use the uniq command to count the number of non-unique exons and determine the most occurrences of an exon in the dataset.
 ****
 
 
