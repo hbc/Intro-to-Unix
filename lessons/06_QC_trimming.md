@@ -326,19 +326,6 @@ The next two arguments are input file and output file names.  These are then fol
 * **_TOPHRED64_** Convert quality scores to Phred-64.
 
 
-A general command for *Trimmomatic* on this cluster will look something like this:
-
-```
-$ java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
--threads 4 \
-inputfile \
-outputfile \
-OPTION:VALUE... # DO NOT RUN THIS
-```
-`java -jar` calls the Java program, which is needed to run *Trimmomatic*, which is a 'jar' file (`trimmomatic-0.33.jar`). A 'jar' file is a special kind of java archive that is often used for programs written in the Java programming language.  If you see a new program that ends in '.jar', you will know it is a java program that is executed `java -jar` <*location of program .jar file*>.  The `SE` argument is a keyword that specifies we are working with single-end reads. We have to specify the `-threads` parameter because Trimmomatic uses 16 threads by default.
-
-The next two arguments are input file and output file names. These are then followed by a series of options. The specifics of how options are passed to a program are different depending on the program. You will always have to read the manual of a new program to learn which way it expects its command-line arguments to be composed.
-
 ###Running Trimmomatic
 
 Change directories to the untrimmed fastq data location:
