@@ -316,7 +316,7 @@ The next two arguments are input file and output file names.  These are then fol
 * **_-threads_** How many processors do you want *Trimmomatic* to run with?
 * **_SE_** or **_PE_** Single End or Paired End reads?
 * **_-phred33_** or **_-phred64_** Which quality score do your reads have?
-* **_SLIDINGWINDOW_** Perform sliding window trimming from the 5' end of the read, cutting once the average quality within the window falls below a threshold.
+* **_SLIDINGWINDOW_** Perform sliding window trimming from the start of the read, cutting once the average quality within the window falls below a threshold.
 * **_LEADING_** Cut bases off the start of a read, if below a threshold quality.
 * **_TRAILING_** Cut bases off the end of a read, if below a threshold quality.
 * **_CROP_** Cut the read to a specified length.
