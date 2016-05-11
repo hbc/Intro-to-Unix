@@ -616,6 +616,17 @@ a shell command are doing.
 * [http://explainshell.com](http://explainshell.com)
 * [http://www.commandlinefu.com](http://www.commandlinefu.com)
 
+Software Carpentry tutorial: [The Unix shell](http://software-carpentry.org/v4/shell/index.html)
+
+General help:
+- http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html
+- man bash
+- Google - if you don't know how to do something, try Googling it. Other people
+have probably had the same question.
+- Learn by doing. There's no real other way to learn this than by trying it
+out.  Write your next paper in nano (really emacs or vi), open pdfs from
+the command line, automate something you don't really need to automate.
+
 ---
 *To share or reuse these materials, please find the attribution and license details at [license.md](https://github.com/hbc/Intro-to-Unix/blob/master/license.md).*
 
