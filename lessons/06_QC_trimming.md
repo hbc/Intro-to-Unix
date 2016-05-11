@@ -16,9 +16,11 @@ Approximate time: 60 minutes
 * Use a For loop to automate operations on multiple files
 
 
-## Running a Workflow
+## Bioinformatics workflows
 
-Without getting into the details for each step of the workflow, we first describe a general overview of the steps involved in RNA-Seq analysis:
+When working with NGS data, the raw reads you get off of the sequencer will need to pass through a number of  different tools in order to generate your final desired output. The execution of this set of tools in a specified order is commonly referred to as a *workflow* or a *pipeline*. 
+
+An example of the workflow we will be using for our RNA-Seq analysis is provided below with a brief description of each step. 
 
 ![Workflow](../img/rnaseq_workflow.png)
 
@@ -29,18 +31,16 @@ Without getting into the details for each step of the workflow, we first describ
 5. Count the number of reads mapping to each gene using htseq-count
 6. Statistical analysis (count normalization, linear modeling using R-based tools)
 
-
-Assessing the quality of your data and performing any necessary quality control measures, such as trimming, is a critical first step in the analysis of your RNA-Seq data. 
-
-
-So let's get started.
+These workflows in bioinformatics adopt a plug-and-play approach in that the output of one tool can be easily used as input to another tool without any extensive configuration. Having standards for data formats is what makes this feasible. Standards ensure that data is stored in a way that is generally accepted and agreed upon within the community. The tools that are used to analyze data at different stages of the workflow are therefore built under the assumption that the data will be provided in a specific format.  
 
 ##Quality Control - FASTQC
 ![Workflow](../img/rnaseq_workflow_FASTQC.png)
 
+The first step in the RNA-Seq workflow is to take the FASTQ files received from the sequencing facility and assess the quality of the sequence reads. 
+
 ###Unmapped read data (FASTQ)
 
-NGS reads from a sequencing run are stored in fastq (fasta with qualities). Although it looks complicated  (and maybe it is), its easy to understand the [fastq](https://en.wikipedia.org/wiki/FASTQ_format) format with a little decoding. Some rules about the format include...
+The [FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) file format is the defacto file format for sequence reads generated from next-generation sequencing technologies. This file format evolved from FASTA in that it contains sequence data, but also contains quality information. Similar to FASTA, the FASTQ file begins with a header line. The difference is that the FASTQ header is denoted by a `@` character. For a single record (sequence read) there are four lines, each of which are described below:
 
 |Line|Description|
 |----|-----------|
@@ -49,7 +49,7 @@ NGS reads from a sequencing run are stored in fastq (fasta with qualities). Alth
 |3|Always begins with a '+' and sometimes the same info in line 1|
 |4|Has a string of characters which represent the quality scores; must have same number of characters as line 2|
 
-so for example in our data set, one complete read is:
+Let's use the following read as an example:
 
 ```
 @HWI-ST330:304:H045HADXX:1:1101:1111:61397
@@ -57,9 +57,8 @@ CACTTGTAAGGGCAGGCCCCCTTCACCCTCCCGCTCCTGGGGGANNNNNNNNNNANNNCGAGGCCCTGGGGTAGAGGGNN
 +
 @?@DDDDDDHHH?GH:?FCBGGB@C?DBEGIIIIAEF;FCGGI#########################################################
 ```
-This is one of our bad reads. 
 
-As mentioned previously, line 4 has characters encoding the quality of the nucleotide calls, with each character representing the probability that the corresponding nucleotide call is incorrect. The legend below provides the quality scores (Phred-33) associated with the quality encoding characters.
+As mentioned previously, line 4 has characters encoding the quality of each nucleotide in the read. The legend below provides the mapping of quality scores (Phred-33) to the quality encoding characters. ** *Different quality encoding scales exist (differing by offset in the ASCII table), but note the most commonly used one is fastqsanger* **
 
  ```
  Quality encoding: !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHI
@@ -67,7 +66,13 @@ As mentioned previously, line 4 has characters encoding the quality of the nucle
     Quality score: 0........10........20........30........40                                
 ```
  
-Using the quality encoding character legend, the first nucelotide in the read (C) is called with a quality score of 31 and our Ns are called with a score of 2.  This quality score is logarithmically based and the score values can be interpreted as follows:
+Using the quality encoding character legend, the first nucelotide in the read (C) is called with a quality score of 31 and our Ns are called with a score of 2. **As you can tell by now, this is a bad read.** 
+
+Each quality score represents the probability that the corresponding nucleotide call is incorrect. This quality score is logarithmically based and is calculated as:
+
+	Q = -10 x log10(P), where P is the probability that a base call is erroneous
+
+These probabaility values are the results from the base calling algorithm and dependent on how much signal was captured for the base incorporation. The score values can be interpreted as follows:
 
 |Phred Quality Score |Probability of incorrect base call |Base call accuracy|
 |:-------------------|:---------------------------------:|-----------------:|
@@ -78,21 +83,22 @@ Using the quality encoding character legend, the first nucelotide in the read (C
 |50	|1 in 100,000|	99.999%|
 |60	|1 in 1,000,000|	99.9999%|
 
-Therefore, for the first nucleotide in the read (C), there is less than a 1 in 1000 chance that the base was called incorrectly.
+Therefore, for the first nucleotide in the read (C), there is less than a 1 in 1000 chance that the base was called incorrectly. Whereas, for the the end of the read there is greater than 50% probabaility that the base is called incorrectly.
 
-### FastQC
-Now that we know about what information is stored in a FASTQ file, the next step is to assess that information to see if the data contained within are of good quality.
+### Assessing quality with FastQC
+The quality scores are useful in determining whether a sample is good or bad. Rather than looking at quality scores for each individual read, we use a tool called [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to looks at quality collectively across all reads within a sample. The image below is a plot that indicates a (very) good quality sample:
 
-FastQC (http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) provides a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines. It provides a modular set of analyses which you can use to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.
+![good_quality](../img/good_quality.png)
 
-The main functions of FastQC are:
+On the x-axis you have the base position in the read, and on the y-axis you have quality scores. In this example, the sample contains reads that are 40 bp long. For each position, there is a box plotted to illustrate the distribution of values (with the whiskers indicating the 90th and 10th percentile scores). For every position here, the quality values do not drop much lower than 32 -- which if you refer to the table above is a pretty good quality score. The plot background is also color-coded to identify good (green), acceptable (yellow), and bad (red) quality scores.  
 
-* Import of data from BAM, SAM or FastQ files (any variant)
-* Providing a quick overview to tell you in which areas there may be problems
-* Summary graphs and tables to quickly assess your data
-* Export of results to an HTML based permanent report
-* Offline operation to allow automated generation of reports without running the interactive application
+Now let's take a look at a quality plot on the other end of the spectrum. 
 
+![good_quality](../img/bad_quality.png)
+
+Here, we see positions within the read in which the boxes span a much wider range. Also, quality scores drop quite low into the 'bad' range, particularly on the tail end of the reads. When you encounter a quality plot such as this one, the first step is to troubleshoot. Why might we be seeing something like this? 
+
+The *FASTQC* tool produces several other diagnostic plots to assess sample quality, in addition to the one plotted above. 
 
 ### Running FASTQC
 ####A. Stage your data
@@ -101,13 +107,11 @@ To perform our quality checks, we will be working within our recently created `r
 
 `$ cd unix_workshop/rnaseq_project/data`
 
-`$ mkdir untrimmed_fastq`
-
-`$ mkdir trimmed_fastq`
+`$ mkdir untrimmed_fastq trimmed_fastq`
     
 The raw_fastq data we will be working with is currently in the `unix_workshop/raw_fastq` directory. We need to copy the raw fastq files to our `untrimmed_fastq` directory:
 
-`$ cp -r ~/unix_workshop/raw_fastq/*fq  ~/unix_workshop/rnaseq_project/data/untrimmed_fastq`
+`$ cp ~/unix_workshop/raw_fastq/*fq  ~/unix_workshop/rnaseq_project/data/untrimmed_fastq`
 
 ####B. Run FastQC  
 
@@ -205,7 +209,13 @@ Within the 'Site Manager' window, do the following:
 	
 ![FileZilla_step2](../img/Filezilla_step2.png)
 
+######Filezilla - Step 3
 
+In FileZilla, on the left side of the screen navigate to the location you would like to save the file, and on the right side of the screen navigate through your remote directory to the file `/home/ecommons_id/unix_workshop/rnaseq_project/results/fastqc_untrimmed_reads/Mov10_oe1.html`. Double click on the .html file to transfer a copy, or click and drag over to the right hand panel.
+
+Open the .html file to view the report.
+
+######FastQC report
 	
 ***FastQC is just an indicator of what's going on with your data, don't take the "PASS"es and "FAIL"s too seriously.***
 
@@ -239,8 +249,6 @@ We can save time by using a simple shell `for loop` to iterate through the list 
 
 After you type the first line, you will get a special '>' prompt to type next lines.  
 You start with 'do', then enter your commands, then end with 'done' to execute the loop.
-
-Note that in the first line, we create a variable named `zip`.  After that, we call that variable with the syntax `$zip`. `$zip` is assigned the value of each item (file) in the list *.zip, once for each iteration of the loop.
 
 This loop is basically a simple program. When it runs
 
