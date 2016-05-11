@@ -483,11 +483,11 @@ After we have created the trimmed fastq files, we wanted to make sure that the q
 
 Let's make a new directory for our fasqc files for the trimmed reads:
 
-`$ mkdir ~/unix_workshop/rnaseq_project/results/fastqc_trimmed_reads`
+`$ mkdir results/fastqc_trimmed_reads`
 
 Now move all fastqc files to the `fastqc_trimmed_reads` directory:
 
-`$ mv ~/unix_workshop/rnaseq_project/data/trimmed_fastq/*fastqc**`
+`$ mv data/trimmed_fastq/*fastqc* results/fastqc_trimmed_reads/`
 
 Let's use *FileZilla* to download the fastqc html for Mov10_oe_1. Has our read quality improved with trimming?
 ***
