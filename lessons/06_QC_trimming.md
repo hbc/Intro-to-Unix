@@ -332,7 +332,7 @@ Change directories to the untrimmed fastq data location:
 
 `$ cd ~/unix_workshop/rnaseq_project/data/untrimmed_fastq`
 
-Since the *Timmomatic* command is complicated and we will be running it a number of times, let's draft the command in a **text editor**, such as Sublime, TextWrangler or Notepad++. When finished, we will copy and paste the command into the terminal.
+Since the *Trimmomatic* command is complicated and we will be running it a number of times, let's draft the command in a **text editor**, such as Sublime, TextWrangler or Notepad++. When finished, we will copy and paste the command into the terminal.
 
 For the single fastq input file `Mov10_oe_1.subset.fq`, we're going to run the following command:
 
