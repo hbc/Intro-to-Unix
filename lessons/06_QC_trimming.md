@@ -279,7 +279,7 @@ What information is contained in the unzipped folder?
 To save a record, let's `cat` all `fastqc summary.txt` files into one `full_report.txt` and move this to `~/unix_workshop/rnaseq_project/docs`. 
 You can use wildcards in paths as well as file names.  Do you remember how we said `cat` is really meant for concatenating text files?
     
-`$ cat */summary.txt > ~/unix_workshop/rnaseq_project/docs/fastqc_summaries.txt`
+`$ cat */summary.txt > ~/unix_workshop/rnaseq_project/logs/fastqc_summaries.txt`
 
 
 ##Quality Control - Trimming
