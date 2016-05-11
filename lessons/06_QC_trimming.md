@@ -427,6 +427,10 @@ We now have a new fastq file with our trimmed and cleaned up data:
 
 **Run *Trimmomatic* on all the fastq files**
 
+Before we run Trimmomatic on all of the fastq files, let's remove the trimmed files for `Mov10_oe_1` that we already created:
+
+`$ rm data/trimmed_fastq/*`
+
 Now we know how to run *Trimmomatic*, but there is some good news and bad news.  
 One should always ask for the bad news first.  *Trimmomatic* only operates on 
 one input file at a time and we have more than one input file.  The good news?
