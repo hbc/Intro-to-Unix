@@ -86,7 +86,7 @@ Copy our example data folder to your home directory using the following command:
 
 ```$ cp -r /groups/hbctraining/unix_workshop/ .```
 
->'cp' is the command for copy. This command required you to specify the location of the item you want to copy (/groups/hbctraining/unix_workshop/) and the location of the destination (.) please note the space between the 2 in the command. The "-r" is an option that modifies the copy command to do something slightly different than usual. The "." means "here", i.e. the destination location is where you currently are.
+>'cp' is the command for copy. This command required you to specify the location of the item you want to copy (/groups/hbctraining/unix_workshop/) and the location of the destination (.); please note the space between the 2 in the command. The "-r" is an option that modifies the copy command to do something slightly different than usual. The "." means "here", i.e. the destination location is where you currently are.
 
 ## Starting with the shell
 
@@ -151,7 +151,7 @@ manual using the `man` command. Try entering:
 
 This will open the manual page for `ls`. Use the space key to go forward and b to go backwards. When you are done reading, just hit `q` to quit.
 
-commands that are run from the shell can get extremely complicated. To see an example, open up the manual page for the `find` command. No one can possibly learn all of these arguments, of course. So you will probably find yourself referring to the manual page frequently.
+Commands that are run from the shell can get extremely complicated. To see an example, open up the manual page for the `find` command. No one can possibly learn all of these arguments, of course. So you will probably find yourself referring to the manual page frequently.
 
 > If the manual page within the terminal is hard to read and traverse, the manual exists online, use your web searching powers to get it! In addition to the arguments, you can also find good examples online; Google is your friend.
 
@@ -181,7 +181,7 @@ When you log in to a remote computer you are on one of the branches of that tree
 
 Now let's go do that same navigation at the command line.
 
-Type
+Type:
 
 ```$ cd```
 
@@ -200,7 +200,7 @@ What if we want to move back up and out of the `raw_fastq` directory? Can we jus
 
 To go 'back up a level' we can use `..`
 
-Type
+Type:
 
 ```$ cd ..```
 
