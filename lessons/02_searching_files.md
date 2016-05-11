@@ -210,8 +210,9 @@ How could have you have determined the number of total exons by combining all of
 
 ```bash
 grep
-> (output redirection)
->> (output redirection, append)
+> (output redirection, write to file)
+>> (output redirection, append to file)
+| (output redirection, take output from previous command as input to the next command)
 wc
 cut
 sort
