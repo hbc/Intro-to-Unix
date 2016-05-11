@@ -374,7 +374,7 @@ To run the *Trimmomatic* command on a worker node via the job scheduler, we need
 
 To make a *Trimmomatic* job submission script for Orchestra LSF scheduler:
 
-`$ cd ~/unix_workshop`
+`$ cd ~/unix_workshop/rnaseq_project/`
 
 `$ nano trimmomatic_mov10.lsf`
 
@@ -419,7 +419,7 @@ TrimmomaticSE: Completed successfully
 
 We now have a new fastq file with our trimmed and cleaned up data:
 
-`$ ls ../trimmed_fastq/`    
+`$ ls data/trimmed_fastq/`    
 
 
 ***
@@ -469,7 +469,7 @@ done
 # Run FastQC on all trimmed files
 fastqc -t 6 ../trimmed_fastq/*.fq
 ```
-`$ bsub < trimmomatic_mov10.sh`
+`$ bsub < trimmomatic_mov10.lsf`
 
 It is good practice to load the modules we plan to use at the beginning of the script. Therefore, if we run this script in the future, we don't have to worry about whether we have loaded all of the necessary modules prior to executing the script. 
 
