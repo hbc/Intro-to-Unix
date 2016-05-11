@@ -223,11 +223,7 @@ the command line, automate something you don't really need to automate.
 
 ## Bonus:
 
-**backtick, xargs**: Example find all files with certain text
-
 **alias** -> rm -i
-
-**variables** -> use a path example
 
 **.bashrc**
 
@@ -238,11 +234,6 @@ the command line, automate something you don't really need to automate.
 **ssh and scp**
 
 **Regular Expressions**
-
-**Permissions**
-
-**Chaining commands together**
-
 
 **Commands, options, and keystrokes covered in this lesson**
 
