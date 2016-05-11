@@ -193,12 +193,12 @@ We can use some new tools `sort` and `uniq` to extract only those unique exons. 
 
 We can use the `sort` command with the `-k` option for sort to specify which column(s) to sort on.  Note that this does something similar to cut's '-f'.
 
-`$ sort -k1,3,4 chr1_exons | uniq`
+`$ sort -k3,4 chr1_exons | uniq`
 
 ####Counting the total number of exons
 Now, to count how many unique exons are on chromosome 1, we need to pipe the output to `wc -l`:
 
-`$ sort -k1,3,4 chr1_exons | uniq | wc -l`
+`$ sort -k3,4 chr1_exons | uniq | wc -l`
     
 
 ****
