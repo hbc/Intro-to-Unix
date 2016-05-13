@@ -28,8 +28,7 @@ The easiest way for you to be able to repeat this process (from running STAR thr
 you've performed for `Mov10_oe_1` in a bash script. And you've already learned how to do this in previous
 lessons. So here's a challenge...
 
-- Using the nano text editor, create a script file called `rnaseq_analysis_on_file.sh` that will repeat these commands
-for you. [Note: You can use your command history to retrieve the commands for each step, and don't forget the "shebang line".] 
+- Using the nano text editor (or your laptop's text editor), create a script called `rnaseq_analysis_on_file.sh` that will repeat these commands for you. [Note: You can use your command history to retrieve the commands for each step, and don't forget the "shebang line".] 
 - What would you have to do to run this? [Don't run it yet.]
 - In order run the workflow in this script on another fastq file, you'll need to make changes. _What would have to modify to get this workflow to work with a different file?_
 
