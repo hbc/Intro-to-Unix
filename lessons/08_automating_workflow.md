@@ -103,7 +103,7 @@ is going on in the command below.
     counts_input_bam=~/unix_workshop/rnaseq_project/results/STAR/${base}_Aligned.sortedByCoord.out.bam
     counts=~/unix_workshop/rnaseq_project/results/counts/${base}.counts
 ```
-Our variables are now staged. We now need to modify the series of commands starting with STAR throught to counts (htseq-count)
+Our variables are now staged. We now need to modify the series of commands starting with STAR through to counts (htseq-count)
 to use them so that it will run the steps of the analytical workflow with more flexibility:
 
     # Run STAR
