@@ -25,17 +25,15 @@ you do to help yourself out in this regard?
 #### Automating this Workflow with a Bash Script
 
 The easiest way for you to be able to repeat this process (from running STAR through to getting counts) is to capture the steps that
-you've performed in a bash script. And you've already learned how to do this in previous
+you've performed for `Mov10_oe_1` in a bash script. And you've already learned how to do this in previous
 lessons. So here's a challenge...
 
 - Using the nano text editor, create a script file called `rnaseq_analysis_on_file.sh` that will repeat these commands
 for you. [Note: You can use your command history to retrieve the commands for each step, and don't forget the "shebang line".] 
-- Delete your results directories, and run your script. Do you get all the proper output files?
+- What would you have to do to run this? [Don't run it yet.]
+- In order run the workflow in this script on another fastq file, you'll need to make changes. _What would have to modify to get this workflow to work with a different file?_
 
-One additional command we can put at the top of the script to allow you to see what is going on is the `set -x` bash command. This debugging tool will display the command being executed, before the results of the command. In case of an issue with the commands in the shell script, this type of debugging lets you quickly pinpoint the step that is throwing an error. Often, tools will display the error that caused the program to stop running, so keep this in mind for times when you are running into issues where this is not availble.
-
-> In order run the workflow in this script on another fastq file, you'll need to make changes. _What would have to modify to get this workflow to work with a different file?_
-
+>One additional command we can put at the top of the script to allow you to see what is going on is the `set -x` bash command. This debugging tool will display the command being executed, before the results of the command. In case of an issue with the commands in the shell script, this type of debugging lets you quickly pinpoint the step that is throwing an error. Often, tools will display the error that caused the program to stop running, so keep this in mind for times when you are running into issues where this is not availble.
 
 #### Granting our Workflow More Flexibility
 
