@@ -6,14 +6,14 @@
 fq=$1
 
 # location to genome reference FASTA file
-     genome=/groups/hbctraining/unix_oct2015_other/reference_STAR/
-     gtf=~/unix_oct2015/rnaseq_project/data/reference_data/chr1-hg19_genes.gtf
+     genome=/groups/hbctraining/unix_workshop_other/reference_STAR/
+     gtf=~/unix_workshop/rnaseq_project/data/reference_data/chr1-hg19_genes.gtf
 
 # make all of our output directories
 # The -p option means mkdir will create the whole path if it
 # does not exist and refrain from complaining if it does exist
-     mkdir -p ~/unix_oct2015/rnaseq_project/results/STAR
-     mkdir -p ~/unix_oct2015/rnaseq_project/results/counts
+     mkdir -p ~/unix_workshop/rnaseq_project/results/STAR
+     mkdir -p ~/unix_workshop/rnaseq_project/results/counts
 
 # set up our software environment...
     module load seq/STAR/2.4.0j
@@ -28,9 +28,9 @@ echo "Processing file $fq ..."
 
 
 # set up output filenames and locations
-    align_out=~/unix_oct2015/rnaseq_project/results/STAR/${base}_
-    align_in=~/unix_oct2015/rnaseq_project/results/STAR/${base}_Aligned.sortedByCoord.out.bam
-    counts=~/unix_oct2015/rnaseq_project/results/counts/${base}.counts
+    align_out=~/unix_workshop/rnaseq_project/results/STAR/${base}_
+    align_in=~/unix_workshop/rnaseq_project/results/STAR/${base}_Aligned.sortedByCoord.out.bam
+    counts=~/unix_workshop/rnaseq_project/results/counts/${base}.counts
 
 # Run STAR
 STAR --runThreadN 6 --genomeDir $genome --readFilesIn $fq --outFileNamePrefix $align_out --outFilterMultimapNmax 10 --outSAMstrandField intronMotif --outReadsUnmapped Fastx --outSAMtype BAM SortedByCoordinate --outSAMunmapped Within --outSAMattributes NH HI NM MD AS

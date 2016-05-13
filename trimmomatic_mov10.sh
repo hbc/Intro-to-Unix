@@ -7,7 +7,7 @@
 #BSUB -o %J.out       # File to which standard out will be written
 #BSUB -e %J.err       # File to which standard err will be written
 
-cd ~/unix_oct2015/rnaseq_project/data/untrimmed_fastq
+cd ~/unix_workshop/rnaseq_project/data/untrimmed_fastq
 
 java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
 	-threads 4 \
