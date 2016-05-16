@@ -27,7 +27,7 @@ you do to help yourself out in this regard?
 The easiest way for you to be able to repeat this process (from running STAR through to getting counts) is to capture the steps that
 you've performed for `Mov10_oe_1` in a bash script. And you've already learned how to do this in previous
 lessons. So here's a short exercise...
-***
+
 ***
 - Using the text editor on your laptop, start creating a script with the commands you used to do the alignment and counting. 
 
@@ -43,7 +43,6 @@ lessons. So here's a short exercise...
 - If this was a script on Orchestra, what would you have to do to run it? 
 - In order to run the workflow in this script on another fastq file, you'll need to make changes. _What would have to modify to get this workflow to work with a different file?_
 
-***
 ***
 
 #### Granting our Workflow More Flexibility
