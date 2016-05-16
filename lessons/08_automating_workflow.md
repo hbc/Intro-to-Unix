@@ -31,10 +31,7 @@ lessons. So here's a short exercise...
 ***
 - Using the text editor on your laptop, start creating a script with the commands you used to do the alignment and counting. 
 
-> Note: 
-> 1. You can use your command history to retrieve the commands for each step
-> 2. Don't forget the "shebang line".
-> 3. Make sure you include the `mkdir` commands you used to create new directories
+> Note: You can use your command history to retrieve the commands for each step. Don't forget the "shebang line". Make sure you include the `mkdir` commands you used to create new directories.
 
 ***
 - If this was a script on Orchestra, what would you have to do to run it? 
