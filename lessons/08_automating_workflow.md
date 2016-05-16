@@ -32,12 +32,17 @@ lessons. So here's a short exercise...
 - Using the text editor on your laptop, start creating a script with the commands you used to do the alignment and counting. 
 
 > Note: 
+>
 > You can use your command history to retrieve the commands for each step
+>
 > Don't forget the "shebang line".
+>
 > Make sure you include the `mkdir` commands you used to create new directories
+
 ***
 - If this was a script on Orchestra, what would you have to do to run it? 
 - In order to run the workflow in this script on another fastq file, you'll need to make changes. _What would have to modify to get this workflow to work with a different file?_
+
 ***
 ***
 
