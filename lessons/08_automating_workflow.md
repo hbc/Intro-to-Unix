@@ -128,7 +128,9 @@ It is always nice to have comments at the top of a more complex script to make s
 
 Use `pwd` to check what your current directory is, and make sure that you are in the `~/unix_workshop/rnaseq_project/` directory. Once you save this script (`rnaseq_analysis_on_input_file.sh`) in the `~/unix_workshop/rnaseq_project/` directory, and it is ready for running. 
 > **To transfer the saved file to Orchestra, you can either copy and paste the script as a new `nano` file, or use Filezilla.**
+> 
 > `$ pwd`
+>
 > `$ nano rnaseq_analysis_on_input_file.sh`
 
 Once the script has been saved, make it executable before running it. This is good to do even if your script runs fine without it; it will help avoid any future problems, and will enable your future self to know that it's an executable shell script.
