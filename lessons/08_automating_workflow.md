@@ -30,6 +30,7 @@ lessons. So here's a short exercise...
 ***
 ***
 - Using the text editor on your laptop, start creating a script with the commands you used to do the alignment and counting. 
+
 > Note: 
 > You can use your command history to retrieve the commands for each step
 > Don't forget the "shebang line".
