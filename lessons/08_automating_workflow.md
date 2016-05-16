@@ -26,20 +26,23 @@ you do to help yourself out in this regard?
 
 The easiest way for you to be able to repeat this process (from running STAR through to getting counts) is to capture the steps that
 you've performed for `Mov10_oe_1` in a bash script. And you've already learned how to do this in previous
-lessons. So here's a challenge...
-
-- Using the nano text editor (or your laptop's text editor), create a script called `rnaseq_analysis_on_file.sh` that will repeat these commands for you. [Note: You can use your command history to retrieve the commands for each step, and don't forget the "shebang line".] 
-- What would you have to do to run this? [Don't run it yet.]
-- In order run the workflow in this script on another fastq file, you'll need to make changes. _What would have to modify to get this workflow to work with a different file?_
-
->One additional command we can put at the top of the script to allow you to see what is going on is the `set -x` bash command. This debugging tool will display the command being executed, before the results of the command. In case of an issue with the commands in the shell script, this type of debugging lets you quickly pinpoint the step that is throwing an error. Often, tools will display the error that caused the program to stop running, so keep this in mind for times when you are running into issues where this is not availble.
+lessons. So here's a short exercise...
+***
+***
+- Using the text editor on your laptop, start creating a script with the commands you used to do the alignment and counting. 
+> Note: 
+> You can use your command history to retrieve the commands for each step
+> Don't forget the "shebang line".
+> Make sure you include the `mkdir` commands you used to create new directories
+***
+- If this was a script on Orchestra, what would you have to do to run it? 
+- In order to run the workflow in this script on another fastq file, you'll need to make changes. _What would have to modify to get this workflow to work with a different file?_
+***
+***
 
 #### Granting our Workflow More Flexibility
 
-A couple of changes need to be made to make this script more friendly to both changes in files and changes in the workflow. Let's copy over the `rnaseq_analysis_on_file.sh` to a new file called `rnaseq_analysis_on_input_file.sh`, and open it using nano to start making some changes:
-
-	$ cp rnaseq_analysis_on_file.sh rnaseq_analysis_on_input_file.sh
-	$ nano rnaseq_analysis_on_input_file.sh
+A couple of changes need to be made to make this script more friendly to both changes in files and changes in the workflow. Let's continue to work on this file on our laptops for now.
 
 ##### More variables
 
@@ -81,17 +84,19 @@ In the script, it is a good idea to use echo for debugging/reporting to the scre
 ```
     echo "Processing file $fq ..."
 ```
-We also need to use one special trick, to extract the base name of the file
-(without the path and .fastq extension). We'll assign it to the $base variable using the basename command:
+> `set -x` debugging tool will display the command being executed, before the results of the command. In case of an issue with the commands in the shell script, this type of debugging lets you quickly pinpoint the step that is throwing an error. Often, tools will display the error that caused the program to stop running, so keep this in mind for times when you are running into issues where this is not availble.
+> The command to turn it off is `set +x`
+
+We also need to extract the "base name" of the file.
 ```
     # grab base of filename for future naming
     base=$(basename $fq .qualtrim25.minlen35.fq)
     echo "basename is $base"
 ```
-There are 2 new things of note above:
-
-1. the `basename` command: this command takes a path or a name and trims away all the information before the last `\` and if you specify the string to clear away at the end, it will do that as well. In this case, if the variable `$fq` contains the path *"unix_workshop_other/trimmed_fastq/Mov10_oe_1.qualtrim25.minlen35.fq"*, `basename $fq .qualtrim25.minlen35.fq` will output "Mov10_oe_1".
-2. to assign this value to the `base` variable, we place the `basename...` command in parentheses and put a `$` outside. This syntax is necessary for assigning the output of a command to a variable.
+> #### Remember `basename`?
+>
+> 1. the `basename` command: this command takes a path or a name and trims away all the information before the last `\` and if you specify the string to clear away at the end, it will do that as well. In this case, if the variable `$fq` contains the path *"unix_workshop_other/trimmed_fastq/Mov10_oe_1.qualtrim25.minlen35.fq"*, `basename $fq .qualtrim25.minlen35.fq` will output "Mov10_oe_1".
+> 2. to assign this value to the `base` variable, we place the `basename...` command in parentheses and put a `$` outside. This syntax is necessary for assigning the output of a command to a variable.
 
 Since we've already created our output directories, we can now specify all of our
 output files in their proper locations. We will assign various file names to
@@ -104,7 +109,7 @@ is going on in the command below.
     counts=~/unix_workshop/rnaseq_project/results/counts/${base}.counts
 ```
 Our variables are now staged. We now need to modify the series of commands starting with STAR through to counts (htseq-count)
-to use them so that it will run the steps of the analytical workflow with more flexibility:
+to use these variables so that it will run the steps of the analytical workflow with more flexibility:
 
     # Run STAR
     STAR --runThreadN 6 --genomeDir $genome --readFilesIn $fq --outFileNamePrefix $align_out --outFilterMultimapNmax 10 --outSAMstrandField intronMotif --outReadsUnmapped Fastx --outSAMtype BAM SortedByCoordinate --outSAMunmapped Within --outSAMattributes NH HI NM MD AS
@@ -115,29 +120,34 @@ to use them so that it will run the steps of the analytical workflow with more f
     # Count mapped reads
     htseq-count --stranded reverse --format bam $counts_input_bam $gtf  >  $counts
 
+It is always nice to have comments at the top of a more complex script to make sure that when your future self, or a co-worker, uses it they know exactly how to run it and what the script will do. So for our script, we can have the following lines of comments right at the top after `#!/bin/bash/`:
 
-Once you save this new script, it is ready for running:
 ```
-$ chmod u+rwx rnaseq_analysis_on_input_file.sh      # make it executable, this is good to do, even if your script runs fine without it to ensure that it always does and you are able to tell that it's an executable shell script.
+# This script takes a trimmed fastq file of RNA-Seq data and outputs a counts file for it.
+# USAGE: sh rnaseq_analysis_on_allfiles.sh <name of fastq file>
+```
+
+Use `pwd` to check what your current directory is, and make sure that you are in the `~/unix_workshop/rnaseq_project/` directory. Once you save this script (`rnaseq_analysis_on_input_file.sh`) in the `~/unix_workshop/rnaseq_project/` directory, and it is ready for running. 
+> **To transfer the saved file to Orchestra, you can either copy and paste the script as a new `nano` file, or use Filezilla.**
+> `$ pwd`
+> `$ nano rnaseq_analysis_on_input_file.sh`
+
+Once the script has been saved, make it executable before running it. This is good to do even if your script runs fine without it; it will help avoid any future problems, and will enable your future self to know that it's an executable shell script.
+
+```
+$ chmod u+rwx rnaseq_analysis_on_input_file.sh 
 
 $ sh rnaseq_analysis_on_input_file.sh <name of fastq>
 ```
 
-It is always nice to have comments at the top of a more complex script to make sure that when your future self, or a co-worker, uses it they know exactly how to run it and what the script will do. So for our script, we can have the following lines of comments right at the top after `#!/bin/bash/`:
-> 
-> ```
-> # This script takes a trimmed fastq file of RNA-Seq data and outputs a counts file for it.
-> # USAGE: sh rnaseq_analysis_on_allfiles.sh <name of fastq file>
-> ```
-
 #### Running our script iteratively as a job submission to the LSF scheduler
 
-**The above script will run in an interactive session for one file at a time. If we wanted to run this script as a job submission to LSF, and with only one command have LSF run through the analysis for all your input fastq files?**
+**The above script will run in an interactive session one file at a time. If we wanted to run this script as a job submission to LSF, and with only one command have LSF run through the analysis for all your input fastq files?**
 
 To run the above script iteratively for all of the files on a worker node via the job scheduler, we need to create a **new submission script** that will need 2 important components:
 
 1. our **LSF directives** at the **beginning** of the script. This is so that the scheduler knows what resources we need in order to run our job on the compute node(s).
-2.  a for loop that iterates through and runs the above script for all the fastq files.
+2. a for loop that iterates through and runs the above script for all the fastq files.
 
 Let's create a new file with nano and call it `rnaseq_analysis_on_allfiles.lsf`:
 
@@ -157,14 +167,14 @@ The top of the file should look like with the LSF directives:
     #BSUB -o %J.out       # File to which standard out will be written
     #BSUB -e %J.err       # File to which standard err will be written
 
-	# this for loop, will take our trimmed fastq files as input and run the script for all of them one after the other. 
+	# this `for` loop, will take our trimmed fastq files as input and run the script for all of them one after the other. 
 
     for fq in ~/unix_workshop/rnaseq_project/data/trimmed_fastq/*.fq
     do
       rnaseq_analysis_on_input_file.sh $fq
     done
 
-Before you run this script, let's add a few more commands after the for loop for creating a count matrix. These commands will be executed after all the files have been processed *serially* through the `rnaseq_analysis_on_input_file.sh` script:
+Before you run this script, let's add a few more commands after the `for` loop for creating a count matrix. These commands will be executed after all the files have been processed *serially* through the `rnaseq_analysis_on_input_file.sh` script:
 
     # define a variable that has the name of the file and path to the final count matrix
     countmatrix=results/counts/Mov10_rnaseq_counts.txt
@@ -173,7 +183,7 @@ Before you run this script, let's add a few more commands after the for loop for
     paste results/counts/Mov10_oe_1.counts results/counts/Mov10_oe_2.counts results/counts/Mov10_oe_3.counts results/counts/Irrel_kd_1.counts results/counts/Irrel_kd_2.counts results/counts/Irrel_kd_3.counts | awk '{print$1"\t"$2"\t"$4"\t"$6"\t"$8"\t"$10"\t"$12}' | grep -v "^__" > $countmatrix
 
 
-Our submission script is now complete and ready for submission; save and exit out of nano and submit away (note the `<` between the command and the script name):
+Our submission script is now complete; save and exit out of nano and submit away (note the `<` between the command and the script name):
 ```
 $ bsub < rnaseq_analysis_on_allfiles.lsf
 ```
@@ -182,7 +192,7 @@ Now we have a count matrix for our dataset, the only thing we are missing is a h
 
 	$ nano header.txt
 
- Type in the following with tab separators "ID OE.1 OE.2 OE.3 IR.1 IR.2 IR.3"
+Type in the following with tab separators "ID OE.1 OE.2 OE.3 IR.1 IR.2 IR.3"
 
 Now join the header to the file using `cat` with the `header.txt` file as the first argument:
 	
@@ -203,15 +213,13 @@ Let's make a new file called `rnaseq_analysis_on_allfiles-for_lsf.sh`. Note this
 
 This file will loop through the same files as in the previous script, but the command it submits will be the actual bsub command:
 
-
 	#! /bin/bash
 
-    for fq in ~/unix_workshop/raw_fastq/*.fq
-    do
-      bsub -q priority -n 6 -W 1:30 -R "rusage[mem=4000]" -J rnaseq_mov10 -o %J.out -e %J.err "sh rnaseq_analysis_on_input_file.sh $fq"
-      sleep 1
-    done
-
+    	for fq in ~/unix_workshop/raw_fastq/*.fq
+	do
+      	bsub -q priority -n 6 -W 1:30 -R "rusage[mem=4000]" -J rnaseq_mov10 -o %J.out -e %J.err "sh rnaseq_analysis_on_input_file.sh $fq"
+      	sleep 1
+    	done
 
 **In the above for loop please note that after the bsub directives the `sh rnaseq_analysis_on_input_file.sh $fq` command is in quotes!**
 
