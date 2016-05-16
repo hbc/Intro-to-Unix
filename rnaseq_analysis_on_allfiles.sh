@@ -1,44 +1,55 @@
-#! /bin/bash    
+#! /bin/bash
 
-# Usage: sh <name of script> <fastq file>
-# This script accepts a trimmed fastq file on the command line and processes through the alignment workflow and returns a count file.
+# This script runs through STAR and htseq-count on a fastq file specified on the command prompt
+# USAGE sh rnaseq_analysis_on_input_file.sh <name of fastq file>
 
+# Run this file from the rnaseq_project directory
+cd ~/unix_workshop/rnaseq_project/
+
+# Make directory
+mkdir -p results/STAR
+
+#accept information from positional parameter into a variable
 fq=$1
 
-# location to genome reference FASTA file
-     genome=/groups/hbctraining/unix_workshop_other/reference_STAR/
-     gtf=~/unix_workshop/rnaseq_project/data/reference_data/chr1-hg19_genes.gtf
+#location of genome reference and gtf as variables
+genome=~/unix_workshop/rnaseq_project/data/reference_STAR/
+gtf=~/unix_workshop/rnaseq_project/data/reference_STAR/chr1-hg19_genes.gtf
 
-# make all of our output directories
-# The -p option means mkdir will create the whole path if it
-# does not exist and refrain from complaining if it does exist
-     mkdir -p ~/unix_workshop/rnaseq_project/results/STAR
-     mkdir -p ~/unix_workshop/rnaseq_project/results/counts
+#Load modules
+module load seq/STAR/2.4.0j
+module load seq/samtools/1.3
+module load seq/htseq/0.6.1
 
-# set up our software environment...
-    module load seq/STAR/2.4.0j
-    module load seq/samtools/1.2
-    module load seq/htseq/0.6.1p1
-
-echo "Processing file $fq ..."
+#create output directories
+mkdir -p ~/unix_workshop/rnaseq_project/results/STAR
+mkdir -p ~/unix_workshop/rnaseq_project/results/counts
 
 # grab base of filename for future naming
-    base=$(basename $fq .qualtrim25.minlen35.fq)
-    echo "basename is $base"
+base=$(basename $fq .subset.fq.qualtrim25.minlen35.fq)
 
+echo "basename is $base"
 
 # set up output filenames and locations
-    align_out=~/unix_workshop/rnaseq_project/results/STAR/${base}_
-    align_in=~/unix_workshop/rnaseq_project/results/STAR/${base}_Aligned.sortedByCoord.out.bam
-    counts=~/unix_workshop/rnaseq_project/results/counts/${base}.counts
+align_out=~/unix_workshop/rnaseq_project/results/STAR/${base}_
+counts_input_bam=~/unix_workshop/rnaseq_project/results/STAR/${base}_Aligned.sortedByCoord.out.bam
+counts=~/unix_workshop/rnaseq_project/results/counts/${base}.counts
 
-# Run STAR
-STAR --runThreadN 6 --genomeDir $genome --readFilesIn $fq --outFileNamePrefix $align_out --outFilterMultimapNmax 10 --outSAMstrandField intronMotif --outReadsUnmapped Fastx --outSAMtype BAM SortedByCoordinate --outSAMunmapped Within --outSAMattributes NH HI NM MD AS
+
+echo "starting STAR run"
+
+# Run STAR on Mov10_oe_1
+STAR --runThreadN 6 --genomeDir $genome \
+--readFilesIn $fq  \
+--outFileNamePrefix $align_out \
+--outSAMtype BAM SortedByCoordinate \
+--outSAMunmapped Within \
+--outSAMattributes NH HI NM MD AS
+
+echo "completed STAR run"
 
 # Create BAM index
-samtools index $align_in
+samtools index $counts_input_bam
 
 # Count mapped reads
-htseq-count --stranded reverse --format bam $align_in $gtf  >  $counts
-
-
+htseq-count --stranded reverse --format bam $counts_input_bam $gtf > $counts
