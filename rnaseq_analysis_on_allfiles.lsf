@@ -11,7 +11,7 @@
 
 for fq in ~/unix_workshop/rnaseq_project/data/trimmed_fastq/*.fq
 do
-  sh ~/unix_workshop/rnaseq_project/rnaseq_analysis_on_allfiles.sh $fq
+  sh ~/unix_workshop/rnaseq_project/rnaseq_analysis_on_input_file.sh $fq
 done
 
 countmatrix=results/counts/Mov10_rnaseq_counts.txt
