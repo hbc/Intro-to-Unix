@@ -454,10 +454,11 @@ module load seq/Trimmomatic/0.33
 module load seq/fastqc/0.11.3
 
 # Run Trimmomatic
-for infile in *.fq; do
+for infile in *.fq
+do
   
   # Create names for the output trimmed files
-  outfile=$infile.qualtrim25.minlen35.fq;
+  outfile=$infile.qualtrim25.minlen35.fq
   
   # Run Trimmomatic command
   java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
@@ -466,7 +467,7 @@ for infile in *.fq; do
   $infile ../trimmed_fastq/$outfile \
   ILLUMINACLIP:/opt/Trimmomatic-0.33/adapters/TruSeq3-SE.fa:2:30:10 \
   TRAILING:25 \
-  MINLEN:35;
+  MINLEN:35
   
 done
     
