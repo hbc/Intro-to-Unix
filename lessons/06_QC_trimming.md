@@ -96,22 +96,32 @@ Now let's take a look at a quality plot on the other end of the spectrum.
 
 ![bad_quality](../img/bad_quality.png)
 
-Here, we see positions within the read in which the boxes span a much wider range. Also, quality scores drop quite low into the 'bad' range, particularly on the tail end of the reads. When you encounter a quality plot such as this one, the first step is to troubleshoot. Why might we be seeing something like this? 
+Here, we see positions within the read in which the boxes span a much wider range. Also, quality scores drop quite low into the 'bad' range, particularly on the tail end of the reads. 
+
+Poor quality sequence data can result from several different causes. **We don't have time to discuss the various error profiles and potential causes in this workshop, but if you would like to learn more, please see our [slides provided here](https://github.com/hbc/NGS_Data_Analysis_Course/blob/master/sessionI/slides/error_profiles_mm.pdf).**
+
+When you encounter a quality plot such as this one, the first step is to troubleshoot. Why might we be seeing something like this? 
 
 The *FASTQC* tool produces several other diagnostic plots to assess sample quality, in addition to the one plotted above. 
+
+
 
 ### Running FASTQC
 ####A. Stage your data
 
 To perform our quality checks, we will be working within our recently created `rnaseq_project` directory. We need to create two directories within the `data` directory for this quality control step. 
 
-`$ cd unix_workshop/rnaseq_project/data`
+```bash
+$ cd unix_workshop/rnaseq_project/data
 
-`$ mkdir untrimmed_fastq trimmed_fastq`
+$ mkdir untrimmed_fastq trimmed_fastq
+```
     
 The raw_fastq data we will be working with is currently in the `unix_workshop/raw_fastq` directory. We need to copy the raw fastq files to our `untrimmed_fastq` directory:
 
-`$ cp ~/unix_workshop/raw_fastq/*fq  ~/unix_workshop/rnaseq_project/data/untrimmed_fastq`
+```bash 
+$ cp ~/unix_workshop/raw_fastq/*fq  ~/unix_workshop/rnaseq_project/data/untrimmed_fastq
+```
 
 ####B. Run FastQC  
 
@@ -123,7 +133,9 @@ Before we run FastQC, let's start an interactive session on the cluster:
 
 Once your interactive job starts, notice that the command prompt has changed; this is because we are working on a compute node now, not on a login node.
 
-`$ cd ~/unix_workshop/rnaseq_project/data/untrimmed_fastq/`  
+```bash
+$ cd ~/unix_workshop/rnaseq_project/data/untrimmed_fastq/
+```  
 
 Before we start using software, we have to load the environments for each software package. On clusters, this is typically done using a **module** system. 
 
@@ -137,7 +149,9 @@ If we try to run FastQC on one of our fastq files, Orchestra won't be able to fi
 
 This is because the FastQC program is not in our $PATH (i.e. its not in a directory that unix will automatically check to run commands/programs).
 
-`$ $PATH`
+```bash
+$ $PATH
+```
 
 To run the FastQC program, we first need to load the appropriate module, so it puts the program into our path:
 
@@ -147,7 +161,9 @@ Once a module for a tool is loaded, you have essentially made it directly availa
 
 `$ module list`
 
-`$ $PATH`
+```bash
+$ $PATH
+```
 
 FastQC will accept multiple file names as input, so we can use the *.fq wildcard.
 
@@ -174,13 +190,17 @@ How did I know about the -t argument for FastQC?
 
 Now, let's create a home for our results
 
-`$ mkdir ~/unix_workshop/rnaseq_project/results/fastqc_untrimmed_reads`
+```bash
+$ mkdir ~/unix_workshop/rnaseq_project/results/fastqc_untrimmed_reads
+```
 
 ...and move them there (recall, we are still in `~/unix_workshop/rnaseq_project/data/untrimmed_fastq/`)
 
-`$ mv *.zip ~/unix_workshop/rnaseq_project/results/fastqc_untrimmed_reads/`
+```bash
+$ mv *.zip ~/unix_workshop/rnaseq_project/results/fastqc_untrimmed_reads/
 
-`$ mv *.html ~/unix_workshop/rnaseq_project/results/fastqc_untrimmed_reads/`
+$ mv *.html ~/unix_workshop/rnaseq_project/results/fastqc_untrimmed_reads/
+```
 
 ####C. Results
    
@@ -239,9 +259,11 @@ The "Overrepresented sequences" table displays the sequences (at least 20 bp) th
 
 Let's go back to the terminal now. The other output of FastQC is a .zip file. These .zip files need to be unpacked with the `unzip` program. If we try to `unzip` them all at once:
 
-`$ cd ~/unix_workshop/rnaseq_project/results/fastqc_untrimmed_reads/`
+```bash
+$ cd ~/unix_workshop/rnaseq_project/results/fastqc_untrimmed_reads/
     
-`$ unzip *.zip`
+$ unzip *.zip
+```
 
 Did it work? 
 
@@ -256,9 +278,9 @@ This loop is basically a simple program. When it runs
 
 ```bash
 $ for zip in *.zip
-> do
-> unzip $zip
-> done
+do
+unzip $zip
+done
 ```
 it will run unzip once for each file (whose name is stored in the $zip variable). The contents of each file will be unpacked into a separate directory by the unzip program.
 
@@ -272,14 +294,18 @@ When you check your history later, it will help you remember what you did!
 
 What information is contained in the unzipped folder?
 
-`$ ls -lh *fastqc`
+```bash
+$ ls -lh *fastqc
 
-`$ head *fastqc/summary.txt`
+$ head *fastqc/summary.txt
+```
 
-To save a record, let's `cat` all `fastqc summary.txt` files into one `full_report.txt` and move this to `~/unix_workshop/rnaseq_project/docs`. 
+To save a record, let's `cat` all `fastqc summary.txt` files into one `fastqc_summaries.txt` and move this to `~/unix_workshop/rnaseq_project/docs`. 
 You can use wildcards in paths as well as file names.  Do you remember how we said `cat` is really meant for concatenating text files?
     
-`$ cat */summary.txt > ~/unix_workshop/rnaseq_project/logs/fastqc_summaries.txt`
+```bash
+$ cat */summary.txt > ~/unix_workshop/rnaseq_project/logs/fastqc_summaries.txt
+```
 
 
 ##Quality Control - Trimming
@@ -299,7 +325,7 @@ By loading the *Trimmomatic* module, the **trimmomatic-0.33.jar** file is now ac
 
 Because *Trimmomatic* is java based, it is run using the `java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar` command:
 
-```
+```bash
 $ java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
 -threads 4 \
 inputfile \
@@ -330,13 +356,15 @@ The next two arguments are input file and output file names.  These are then fol
 
 Change directories to the untrimmed fastq data location:
 
-`$ cd ~/unix_workshop/rnaseq_project/data/untrimmed_fastq`
+```bash
+$ cd ~/unix_workshop/rnaseq_project/data/untrimmed_fastq
+```
 
 Since the *Trimmomatic* command is complicated and we will be running it a number of times, let's draft the command in a **text editor**, such as Sublime, TextWrangler or Notepad++. When finished, we will copy and paste the command into the terminal.
 
 For the single fastq input file `Mov10_oe_1.subset.fq`, we're going to run the following command:
 
-```
+```bash
 $ java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
 -threads 4 \
 -phred33 \
@@ -346,7 +374,7 @@ ILLUMINACLIP:/opt/Trimmomatic-0.33/adapters/TruSeq3-SE.fa:2:30:10 \
 TRAILING:25 \
 MINLEN:35
 ```
-*The backslashes at the end of the lines allow us to continue our script on new lines, which helps with readability of some long commands.*
+*The backslashes at the end of the lines allow us to continue our script on new lines, which helps with readability of some long commands.* ***Immediately `return` to the next line after adding the backslash. Spaces after the backslash will make the command fail to run.***
 
 This command tells *Trimmomatic* to run on a fastq file containing Single-End reads (`Mov10_oe_1.subset.fq`, in this case) and to name the output file ``Mov10_oe_1.qualtrim25.minlen35.fq``. The program will remove Illumina adapter sequences given by the file, `TruSeq3-SE.fa` and will cut nucleotides from the 3' end of the sequence if their quality score is below 25. The entire read will be discarded if the length of the read after trimming drops below 35 nucleotides.
 
@@ -361,9 +389,58 @@ Input Reads: 305900 Surviving: 300423 (98.21%) Dropped: 5477 (1.79%)
 TrimmomaticSE: Completed successfully
 ```
 
-Now that we know the command successfully runs, let's make the *Trimmomatic* command into a submission script. A submission script is oftentimes preferable to executing commands on the terminal. We can use it to store the parameters we used for a command(s) inside a file. If we need to run the program on other files, we can easily change the script. Also, using scripts to store your commands helps with reproducibility. In the future, if we forget which parameters we used during our analysis, we can just check our script.
+The *Trimmomatic* command successfully ran and generated a new fastq file:
 
-#### Running our *Trimmomatic* command as a job submission to the LSF scheduler
+```bash
+$ ls Mov10_oe_1*
+Mov10_oe_1.subset.fq  Mov10_oe_1.qualtrim25.minlen35.fq
+```
+
+Now that we know how to run *Trimmomatic*, let's run it on all of our files. Unfortunately, there is some good news and bad news.  One should always ask for the bad news first.  *Trimmomatic* only operates on one input file at a time and we have more than one input file.  The good news? We already know how to use a `for` loop to deal with this situation.
+
+Before we run our `for` loop, let's remove the file that we just created:
+
+```bash
+$ rm *qualtrim25.minlen35.fq
+```
+Now, run the `for` loop to run *Trimmomatic* on all files:
+
+```bash
+$ for infile in *fq
+  do
+    outfile=$infile.qualtrim25.minlen35.fq
+	java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
+	-threads 4 \
+	-phred33 \
+	$infile \
+	$outfile \
+	ILLUMINACLIP:/opt/Trimmomatic-0.33/adapters/TruSeq3-SE.fa:2:30:10 \
+	TRAILING:25 \
+	MINLEN:35
+  done
+```
+
+In the 'for loop', do you remember how a variable is assigned the value of each item in the list in turn?  We can call it whatever we like.  This time it is called 'infile'.  Note that the third line of this for loop is creating a second variable called 'outfile'.  We assign it the value of $infile with '_trim.fastq' appended to it.  The variable is wrapped in curly brackets '{}' so the shell knows that whatever follows is not part of the variable name $infile.  There are no spaces before or after the '='.
+
+Now let's keep our directory organized. Make a directory for the trimmed fastq files: 
+
+```bash
+$ mkdir ../trimmed_fastq
+```
+
+Move the trimmed fastq files to the new directory:
+
+```bash
+$ mv *qualtrim25.minlen35.fq ../trimmed_fastq/
+```
+After trimming, we would generally want to run FastQC on our trimmed fastq files, then transfer the files to our machine to make sure the trimming improved the quality of our reads without removing too many of them. 
+
+
+#### Automating the QC workflow
+
+Now that we know how to use the tools to perform the QC, let's automate the process of using *Trimmomatic* and running *FastQC* using a complete shell script (e.g. LSF submission script). We will use the same commands, with a few extra "echo" statements to give us feedback. 
+
+A submission script is oftentimes preferable to executing commands on the terminal. We can use it to store the parameters we used for a command(s) inside a file. If we need to run the program on other files, we can easily change the script. Also, using scripts to store your commands helps with reproducibility. In the future, if we forget which parameters we used during our analysis, we can just check our script.
 
 To run the *Trimmomatic* command on a worker node via the job scheduler, we need to create a submission script with two important components:
 
@@ -371,70 +448,50 @@ To run the *Trimmomatic* command on a worker node via the job scheduler, we need
 
 2. the commands to be run in order
 
+Create the script called `trimmomatic_mov10.lsf`:
 
-To make a *Trimmomatic* job submission script for Orchestra LSF scheduler:
+```bash
+$ cd ~/unix_workshop/rnaseq_project/
 
-`$ cd ~/unix_workshop/rnaseq_project/`
-
-`$ nano trimmomatic_mov10.lsf`
-
-Within nano we will add our shebang line, the Orchestra job submission commands, and our Trimmomatic command. Remember that you can find the submission commands in the [Orchestra New User Guide](https://wiki.med.harvard.edu/Orchestra/NewUserGuide).
-
-
+$ nano trimmomatic_mov10.lsf
 ```
-#!/bin/bash
 
-#BSUB -q priority # queue name
-#BSUB -W 2:00 # hours:minutes runlimit after which job will be killed.
-#BSUB -n 4 # number of cores requested
-#BSUB -J rnaseq_mov10_trim         # Job name
-#BSUB -o %J.out       # File to which standard out will be written
-#BSUB -e %J.err       # File to which standard err will be written
+Within `nano` let's first add our commands, then we will come back to add our *LSF directives* (remember to comment liberally). Also, let's use the `basename` function to name our trimmed file more succinctly:
 
+```bash
+# Change directories into the folder with the untrimmed fastq files
 cd ~/unix_workshop/rnaseq_project/data/untrimmed_fastq
 
-java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
--threads 4 \
--phred33 \
-Mov10_oe_1.subset.fq \
-../trimmed_fastq/Mov10_oe_1.qualtrim25.minlen35.fq \
-ILLUMINACLIP:/opt/Trimmomatic-0.33/adapters/TruSeq3-SE.fa:2:30:10 \
-TRAILING:25 \
-MINLEN:35
+# Loading modules for tools
+module load seq/Trimmomatic/0.33
+module load seq/fastqc/0.11.3
+
+# Run Trimmomatic
+echo "Running Trimmomatic..."
+for infile in *.fq
+do
+  
+  # Create names for the output trimmed files
+  base=`basename .subset.fq $infile`
+  outfile=$base.qualtrim25.minlen35.fq
+ 
+  # Run Trimmomatic command
+  java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
+  -threads 4 \
+  -phred33 \
+  $infile \
+  ../trimmed_fastq/$outfile \
+  ILLUMINACLIP:/opt/Trimmomatic-0.33/adapters/TruSeq3-SE.fa:2:30:10 \
+  TRAILING:25 \
+  MINLEN:35
+  
+done
+    
+# Run FastQC on all trimmed files
+echo "Running FastQC..."
+fastqc -t 6 ../trimmed_fastq/*.fq
 ```
-Now, let's run it:
-
-`$ bsub < trimmomatic_mov10.lsf`
-
-After the job finishes, you should receive an email with output: 
-
-```
-TrimmomaticSE: Started with arguments: -threads 4 -phred33 Mov10_oe_1.subset.fq ../trimmed_fastq/Mov10_oe_1.qualtrim25.minlen35.fq ILLUMINACLIP:/opt/Trimmomatic-0.33/adapters/TruSeq3-SE.fa:2:30:10 TRAILING:25 MINLEN:35
-Using Long Clipping Sequence: 'AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA'
-Using Long Clipping Sequence: 'AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC'
-ILLUMINACLIP: Using 0 prefix pairs, 2 forward/reverse sequences, 0 forward only sequences, 0 reverse only sequences
-Input Reads: 305900 Surviving: 300423 (98.21%) Dropped: 5477 (1.79%)
-TrimmomaticSE: Completed successfully
-```
-
-We now have a new fastq file with our trimmed and cleaned up data:
-
-`$ ls data/trimmed_fastq/`    
-
-
-***
-**Exercise**
-
-**Run *Trimmomatic* on all the fastq files**
-
-Before we run Trimmomatic on all of the fastq files, let's remove the trimmed files for `Mov10_oe_1` that we already created:
-
-`$ rm data/trimmed_fastq/*`
-
-Now we know how to run *Trimmomatic*, but there is some good news and bad news.  
-One should always ask for the bad news first.  *Trimmomatic* only operates on 
-one input file at a time and we have more than one input file.  The good news?
-We already know how to use a 'for loop' to deal with this situation. Let's modify our script to run the *Trimmomatic* command for every raw fastq file. Let's also run *FastQC* on each of our trimmed fastq files to evaluate the quality of our reads post-trimming:
+Now that we have our commands complete, add the shebang line and LSF directives to the top of the script:
 
 ```
 #!/bin/bash
@@ -445,40 +502,13 @@ We already know how to use a 'for loop' to deal with this situation. Let's modif
 #BSUB -J rnaseq_mov10_qc         # Job name
 #BSUB -o %J.out       # File to which standard out will be written
 #BSUB -e %J.err       # File to which standard err will be written
-
-# Change directories into the folder with the untrimmed fastq files
-cd ~/unix_workshop/rnaseq_project/data/untrimmed_fastq
-
-# Loading modules for tools
-module load seq/Trimmomatic/0.33
-module load seq/fastqc/0.11.3
-
-# Run Trimmomatic
-for infile in *.fq
-do
-  
-  # Create names for the output trimmed files
-  outfile=$infile.qualtrim25.minlen35.fq
-  
-  # Run Trimmomatic command
-  java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
-  -threads 4 \
-  -phred33 \
-  $infile ../trimmed_fastq/$outfile \
-  ILLUMINACLIP:/opt/Trimmomatic-0.33/adapters/TruSeq3-SE.fa:2:30:10 \
-  TRAILING:25 \
-  MINLEN:35
-  
-done
-    
-# Run FastQC on all trimmed files
-fastqc -t 6 ../trimmed_fastq/*.fq
 ```
+
 `$ bsub < trimmomatic_mov10.lsf`
 
 It is good practice to load the modules we plan to use at the beginning of the script. Therefore, if we run this script in the future, we don't have to worry about whether we have loaded all of the necessary modules prior to executing the script. 
 
-Do you remember how the variable name in the first line of a 'for loop' specifies a variable that is assigned the value of each item in the list in turn?  We can call it whatever we like.  This time it is called `infile`.  Note that the fifth line of this 'for loop' is creating a second variable called `outfile`.  We assign it the value of `$infile` with `'.qualtrim25.minlen35.fq'` appended to it. **There are no spaces before or after the '='.**
+Do you remember how the variable name in the first line of a 'for loop' specifies a variable that is assigned the value of each item in the list in turn?  We can call it whatever we like.  This time it is called `infile`.  Note that the fifth and sixth line of this 'for loop' creates the variables called `base` and `outfile`.  We assign `base` the value of `$infile` with the `.subset.fq`, and we assign `outfile` the value of `base` with `'.qualtrim25.minlen35.fq'` appended to it. **There are no spaces before or after the '='.**
 
 After we have created the trimmed fastq files, we wanted to make sure that the quality of our reads look good, so we ran a *FASTQC* on our `$outfile`, which is located in the ../trimmed_fastq directory.
 
