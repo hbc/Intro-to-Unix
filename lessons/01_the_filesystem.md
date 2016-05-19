@@ -238,7 +238,7 @@ You should now be in `raw_fastq` and you got there without having to go through 
 ****
 **Exercise**
 
-List the `Mov10_oe_1.subset.fq` file from your home directory without changing directories
+From your home directory, list the `Mov10_oe_1.subset.fq` (in the raw_fastq directory), without using `cd`.
 ****
 
 ## Full vs. Relative Paths
