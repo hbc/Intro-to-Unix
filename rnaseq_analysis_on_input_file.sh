@@ -13,7 +13,7 @@ mkdir -p results/STAR
 fq=$1
 
 #location of genome reference and gtf as variables
-genome=~/unix_workshop/rnaseq_project/data/reference_STAR/
+genome=/groups/hbctraining/unix_workshop_other/reference_STAR/
 gtf=~/unix_workshop/rnaseq_project/data/reference_STAR/chr1-hg19_genes.gtf
 
 #Load modules
