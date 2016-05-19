@@ -349,7 +349,7 @@ Then enter the command:
 
 This prints the contents of your home directory, without you having to type the full path because the tilde "~" is equivalent to "/home/username".
 
-Another shortcut that you are already familiar with = is the "..":
+Another shortcut that you are already familiar with is the "..":
 
 ```$ ls ..```
 
