@@ -67,7 +67,7 @@ $* = List of all the positional parameters used
 
 $# = Number of positional parameters
 
-> [This is an example](http://steve-parker.org/sh/eg/var3.sh.txt) of a simple script that used the concept of positional parameters and the associated variables. Try writing this script and running it to get a better idea of how these variables are assigned and to bettter understand the concet of "positional parameters".
+> [This is an example](http://steve-parker.org/sh/eg/var3.sh.txt) of a simple script that used the concept of positional parameters and the associated variables. Try writing this script and running it to get a better idea of how these variables are assigned and to bettter understand positional parameters.
 
 Next, we'll initialize variables that contain the paths to where the common files are stored and then use the variable names (with a `$`) in the actual commands later in the script. This is a shortcut for when you want to use this script for a dataset that used a different genome, e.g. mouse; you'll just have to change the contents of these variable at the beginning of the script.
 
