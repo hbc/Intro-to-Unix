@@ -563,7 +563,8 @@ Now you've written a file. You can take a look at it with less or cat, or open i
 ****
 **Exercise**
 
-Open 'awesome.txt' and on a new line add the following `echo "This is my first file written in nano"`, and save the file.
+1. Open 'awesome.txt' and on a new line add the following `echo "This is my first file written in nano"`, and save the file.
+2. Move 'awesome.txt' to the `other` directory in `unix_workshop`.
 ****
 
 ****
