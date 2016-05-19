@@ -237,10 +237,10 @@ Save and exit `nano`, and voila! You now have a script you can use to assess the
 #!/bin/bash 
 
 # enter directory with raw FASTQs
-cd ~/dc_sample_data/untrimmed_fastq
+cd ~/unix_workshop/raw_fastq
 
 # count bad reads for each FASTQ file in our directory
-for filename in *.fastq 
+for filename in *.fq 
 do 
 
   # create a prefix for all output files
@@ -266,12 +266,14 @@ To run this script, we simply enter the following command:
 	$ sh generate_bad_reads_summary.sh
 
 
-To keep your data organized, let's move all of the bad read files out of our `raw_fastq` directory into a new directory called `other`.
+To keep your data organized, let's move all of the bad read files out of our `raw_fastq` directory into the directory `~/unix_workshop/other`.
 
-	$ mkdir other
 
 	$ mv raw_fastq/*bad* other/
 
+Let's also move the log file that we created into the `other` directory:
+
+	$ mv runlog.txt other/
 
 ---
 *To share or reuse these materials, please find the attribution and license details at [license.md](https://github.com/hbc/Intro-to-Unix/blob/master/license.md).*
