@@ -102,13 +102,11 @@ In the script, it is a good idea to use echo for debugging/reporting to the scre
 We also need to extract the "base name" of the file.
 ```
     # grab base of filename for future naming
-    base=$(basename $fq .qualtrim25.minlen35.fq)
+    base=`basename $fq .qualtrim25.minlen35.fq`
     echo "basename is $base"
 ```
 > #### Remember `basename`?
->
-> 1. the `basename` command: this command takes a path or a name and trims away all the information before the last `\` and if you specify the string to clear away at the end, it will do that as well. In this case, if the variable `$fq` contains the path *"unix_workshop_other/trimmed_fastq/Mov10_oe_1.qualtrim25.minlen35.fq"*, `basename $fq .qualtrim25.minlen35.fq` will output "Mov10_oe_1".
-> 2. to assign this value to the `base` variable, we place the `basename...` command in parentheses and put a `$` outside. This syntax is necessary for assigning the output of a command to a variable.
+> The `basename` command: this command takes a path or a name and trims away all the information before the last `\` and if you specify the string to clear away at the end, it will do that as well. 
 
 Since we've already created our output directories, we can now specify all of our
 output files in their proper locations. We will assign various file names to
@@ -202,15 +200,17 @@ Our submission script is now complete; save and exit out of nano and submit away
 $ bsub < rnaseq_analysis_on_allfiles.lsf
 ```
 
-Now we have a count matrix for our dataset, the only thing we are missing is a header to indicate which columns correspond to which sample. We can add that in by creating a file with the header information in it:
-
-	$ nano header.txt
-
-Type in the following with tab separators "ID OE.1 OE.2 OE.3 IR.1 IR.2 IR.3"
-
-Now join the header to the file using `cat` with the `header.txt` file as the first argument:
-	
-	$ cat header.txt Mov10_rnaseq_counts.txt > Mov10_rnaseq_counts_complete.txt
+> #### Processing the count matrix for downstream applications
+>
+> Now we have a count matrix for our dataset, the only thing we are missing is a header to indicate which columns correspond to which sample. We can add that in by creating a file with the header information in it:
+>
+>	$ nano header.txt
+>
+> Type in the following with tab separators "ID OE.1 OE.2 OE.3 IR.1 IR.2 IR.3"
+>
+> Now join the header to the file using `cat` with the `header.txt` file as the first argument:
+>	
+>	$ cat header.txt Mov10_rnaseq_counts.txt > Mov10_rnaseq_counts_complete.txt
 
 
 #### Parallelizing workflow for efficiency
