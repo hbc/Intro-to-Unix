@@ -420,7 +420,7 @@ $ for infile in *fq
   done
 ```
 
-In the 'for loop', do you remember how a variable is assigned the value of each item in the list in turn?  We can call it whatever we like.  This time it is called 'infile'.  Note that the third line of this for loop is creating a second variable called 'outfile'.  We assign it the value of $infile with '_trim.fastq' appended to it.  The variable is wrapped in curly brackets '{}' so the shell knows that whatever follows is not part of the variable name $infile.  There are no spaces before or after the '='.
+In the 'for loop', do you remember how a variable is assigned the value of each item in the list in turn?  We can call it whatever we like. This time it is called `infile`.  Note that the third line of this 'for loop' is creating a second variable called `outfile`. We assign it the value of `$infile` with `.qualtrim25.minlen35.fq` appended to it. There are no spaces before or after the '=' when assigning a variable.
 
 Now let's keep our directory organized. Make a directory for the trimmed fastq files: 
 
@@ -438,9 +438,9 @@ After trimming, we would generally want to run FastQC on our trimmed fastq files
 
 #### Automating the QC workflow
 
-Now that we know how to use the tools to perform the QC, let's automate the process of using *Trimmomatic* and running *FastQC* using a complete shell script (e.g. LSF submission script). We will use the same commands, with a few extra "echo" statements to give us feedback. 
+Now that we know how to use the tools to perform the QC, let's automate the process of using *Trimmomatic* and running *FastQC* using a complete shell script (i.e. a LSF submission script). We will use the same commands, with a few extra "echo" statements to give us feedback, and add the LSF directives at the beginning. 
 
-A submission script is oftentimes preferable to executing commands on the terminal. We can use it to store the parameters we used for a command(s) inside a file. If we need to run the program on other files, we can easily change the script. Also, using scripts to store your commands helps with reproducibility. In the future, if we forget which parameters we used during our analysis, we can just check our script.
+A submission script is preferable to executing commands on the terminal interactively. We can use it to store the parameters we used for a command(s) inside a file. If we need to run the program on other files, we can easily change the script. Also, using scripts to store your commands helps with reproducibility. In the future, if we forget which parameters we used during our analysis, we can just check our script.
 
 To run the *Trimmomatic* command on a worker node via the job scheduler, we need to create a submission script with two important components:
 
@@ -456,7 +456,7 @@ $ cd ~/unix_workshop/rnaseq_project/
 $ nano trimmomatic_mov10.lsf
 ```
 
-Within `nano` let's first add our commands, then we will come back to add our *LSF directives* (remember to comment liberally). Also, let's use the `basename` function to name our trimmed file more succinctly:
+Within `nano` let's first add our commands, then we will come back to add our *LSF directives* (remember to comment liberally).
 
 ```bash
 # Change directories into the folder with the untrimmed fastq files
@@ -491,14 +491,14 @@ do
 done
 ```
 
-Note that the fifth and sixth line of this 'for loop' creates the variables called `base` and `outfile`.  We assign `base` the value of `$infile` with the `.subset.fq`, and we assign `outfile` the value of `base` with `'.qualtrim25.minlen35.fq'` appended to it. **Once again, there should be no spaces before or after the '=' when assigning variables.**
+We want to use the `basename` command to name our trimmed file more succinctly. Note that the fifth and sixth line in this 'for loop' creates the variables called `base` and `outfile`.  We assign `base` the value of `$infile` without `.subset.fq`, and we assign `outfile` the value of `base` with `'.qualtrim25.minlen35.fq'` appended to it. **Once again, there should be no spaces before or after the '=' when assigning variables.**
 
 ```
 # Run FastQC on all trimmed files
 echo "Running FastQC..."
 fastqc -t 6 ../trimmed_fastq/*.fq
 ```
-After we have created the trimmed fastq files, we wanted to make sure that the quality of our reads look good, so we want to run a *FASTQC* on all the trimmed files located in the `../trimmed_fastq/` directory.
+After we have created the trimmed fastq files, we wanted to make sure that the quality of our reads look good. So we want to add a *FASTQC* run on all the trimmed files located in the `../trimmed_fastq/` directory.
 
 Now that we have our commands written, let's add the shebang line and LSF directives to the top of the script:
 
