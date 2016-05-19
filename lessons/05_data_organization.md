@@ -22,24 +22,31 @@ The dataset we are using is part of a larger study described in [Kenny PJ et al,
 
 ### Metadata
 
-From this study we are using the [RNA-Seq](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE50499) data which is publicly available in the [SRA](http://www.ncbi.nlm.nih.gov/sra). Using this data, we will evaluate transcriptional patterns associated with MOV10 overexpression. In addition to the raw sequence data we also need to collect **information about the data**, also known as metadata.
+From this study we are using the sequencing data from the[RNA-Seq](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE50499) experiment which is publicly available in the [SRA](http://www.ncbi.nlm.nih.gov/sra). Using this data, we will evaluate transcriptional patterns associated with MOV10 overexpression. In addition to the raw sequence data we also need to collect **information about the data**, also known as **metadata**.
 
-> 1. What is your definition of metadata?
-> 2. What kinds of metadata might a sequencing project generate?
-> 3. Why is this type of information important?
->
+Data sharing is important in the biological sciences to promote scientific integrity, and disseminate scientific discovery; but it can be difficult if all of the required information is not provided. From the SRA we can retrieve the sequence data (FASTQ files), but how useful is it if we know nothing about the samples that this sequence data originated from? **Metadata is a broadly used term which encompasses any kind of information that relates to our data, whether it is about the experimental design (i.e genotype) or metrics related to the sequence data (i.e sequencing depth).**
+
 
 Here, we provide metadata for the data we are using today.
 
-* The RNA was extracted from HEK293F cells that were transfected with a MOV10 transgene and normal control cells.  
-* The libraries for this dataset are stranded and were generated using the dUTP method. 
-* Sequencing was carried out on the Illumina HiSeq-2500 for 100bp single end reads. 
-* The full dataset was sequenced to ~40 million reads per sample, but for this workshop we will be looking at a small subset on chr1 (~300,000 reads/sample).
+* The RNA was extracted from **HEK293F cells** that were transfected with a MOV10 transgene and normal control cells.  
+* The libraries for this dataset are **stranded** and were generated using the **dUTP method**. 
+* Sequencing was carried out on the **Illumina HiSeq-2500 for 100bp single end** reads. 
+* The full dataset was sequenced to **~40 million reads** per sample, but for this workshop we will be looking at a small subset on chr1 (~300,000 reads/sample).
 * For each group we have three replicates as described in the figure below.
 
 
 ![Automation](../img/exp_design.png)
 
+***
+
+**Exercise**
+
+1. What types of metadata are used in your experimental design?
+2. What kinds of metadata might a sequencing project generate?
+3. Why is this type of information important?
+
+***
  
 
 ## Project organization
