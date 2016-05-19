@@ -266,6 +266,7 @@ Which of the following statements is true?
 2. caro (the owner) cannot write to myfile.php
 3. members of caro (a group) can read, write, and execute myfile.php
 4. members of zoo (a group) cannot execute myfile.php
+
 ****
 
 **In closing, permissions and environment variables, especially $PATH, are very useful and important concepts to understand in the context of UNIX and HPC.**
