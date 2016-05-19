@@ -51,16 +51,23 @@ This input parameter will be the name of the file we want to work on:
 
     fq=$1
 
-> "*The command-line arguments $1, $2, $3,...$9 are positional parameters, with $0 pointing to the actual command, program or shell script, and $1, $2, $3, ...$9 as the arguments to the command.*" This basically means:
-> $0 = name of command/script
-> $1 = First argument of the command/script
-> $2 = Second argument of the command/script
-> $3 = Third argument of the command/script
-> $* = List of all the positional parameters used
-> $# = Number of positional parameters
->
-> [This is an example of a simple script that used the concept of positional parameters and the associated variables.](http://steve-parker.org/sh/eg/var3.sh.txt)
+"*The command-line arguments $1, $2, $3,...$9 are positional parameters, with $0 pointing to the actual command, program or shell script, and $1, $2, $3, ...$9 as the arguments to the command.*." 
 
+This basically means:
+
+$0 = name of command/script
+
+$1 = First argument of the command/script
+
+$2 = Second argument of the command/script
+
+$3 = Third argument of the command/script
+
+$* = List of all the positional parameters used
+
+$# = Number of positional parameters
+
+> [This is an example of a simple script that used the concept of positional parameters and the associated variables.](http://steve-parker.org/sh/eg/var3.sh.txt)
 
 Next, we'll initialize variables that contain the paths to where the common files are stored and then use the variable names (with a `$`) in the actual commands later in the script. This is a shortcut for when you want to use this script for a dataset that used a different genome, e.g. mouse; you'll just have to change the contents of these variable at the beginning of the script.
 
