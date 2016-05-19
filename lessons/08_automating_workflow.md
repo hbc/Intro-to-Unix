@@ -84,26 +84,26 @@ Next, make sure you load all the modules for the script to run. This is importan
     module load seq/htseq
 
 We'll keep the output directory creation, however, we will add the `-p` option this will make sure that `mkdir` will create the directory only if it does not exist, and it won't throw an error if it does exist.
-```
+
     # make all of our output directories
     # The -p option means mkdir will create the whole path if it 
     # does not exist and refrain from complaining if it does exist
     mkdir -p ~/unix_workshop/rnaseq_project/results/STAR
     mkdir -p ~/unix_workshop/rnaseq_project/results/counts
-```
+
 
 In the script, it is a good idea to use echo for debugging/reporting to the screen (you can also use `set -x`):
-```
+
     echo "Processing file $fq ..."
-```
+
 > `set -x` debugging tool will display the command being executed, before the results of the command. In case of an issue with the commands in the shell script, this type of debugging lets you quickly pinpoint the step that is throwing an error. Often, tools will display the error that caused the program to stop running, so keep this in mind for times when you are running into issues where this is not availble.
 > The command to turn it off is `set +x`
 
 We also need to extract the "base name" of the file.
 ```
-    # grab base of filename for future naming
-    base=`basename $fq .qualtrim25.minlen35.fq`
-    echo "basename is $base"
+# grab base of filename for future naming
+base=`basename $fq .qualtrim25.minlen35.fq`
+echo "basename is $base"
 ```
 > #### Remember `basename`?
 > The `basename` command: this command takes a path or a name and trims away all the information before the last `\` and if you specify the string to clear away at the end, it will do that as well. 
@@ -113,10 +113,10 @@ output files in their proper locations. We will assign various file names to
  variables both for convenience but also to make it easier to see what 
 is going on in the command below.
 ```
-    # set up output filenames and locations
-    align_out=~/unix_workshop/rnaseq_project/results/STAR/${base}_
-    counts_input_bam=~/unix_workshop/rnaseq_project/results/STAR/${base}_Aligned.sortedByCoord.out.bam
-    counts=~/unix_workshop/rnaseq_project/results/counts/${base}.counts
+# set up output filenames and locations
+align_out=~/unix_workshop/rnaseq_project/results/STAR/${base}_
+counts_input_bam=~/unix_workshop/rnaseq_project/results/STAR/${base}_Aligned.sortedByCoord.out.bam
+counts=~/unix_workshop/rnaseq_project/results/counts/${base}.counts
 ```
 Our variables are now staged. We now need to modify the series of commands starting with STAR through to counts (htseq-count)
 to use these variables so that it will run the steps of the analytical workflow with more flexibility:
