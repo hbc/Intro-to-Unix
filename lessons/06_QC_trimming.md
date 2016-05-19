@@ -396,7 +396,7 @@ $ ls Mov10_oe_1*
 Mov10_oe_1.subset.fq  Mov10_oe_1.qualtrim25.minlen35.fq
 ```
 
-Now that we know how to run *Trimmomatic*, let's run it on all of our files. Unfortunately, there is some good news and bad news.  One should always ask for the bad news first.  *Trimmomatic* only operates on one input file at a time and we have more than one input file.  The good news? We already know how to use a `for` loop to deal with this situation.
+Now that we know how to run *Trimmomatic*, let's run it on all of our files. Unfortunately, there is some good news and bad news.  One should always ask for the bad news first. *Trimmomatic* only operates on one input file at a time and we have more than one input file.  The good news? We already know how to use a `for` loop to deal with this situation.
 
 Before we run our `for` loop, let's remove the file that we just created:
 
@@ -504,6 +504,8 @@ Now that we have our commands complete, add the shebang line and LSF directives 
 #BSUB -e %J.err       # File to which standard err will be written
 ```
 
+We are ready to run this script now:
+
 `$ bsub < trimmomatic_mov10.lsf`
 
 It is good practice to load the modules we plan to use at the beginning of the script. Therefore, if we run this script in the future, we don't have to worry about whether we have loaded all of the necessary modules prior to executing the script. 
@@ -512,7 +514,7 @@ Do you remember how the variable name in the first line of a 'for loop' specifie
 
 After we have created the trimmed fastq files, we wanted to make sure that the quality of our reads look good, so we ran a *FASTQC* on our `$outfile`, which is located in the ../trimmed_fastq directory.
 
-Let's make a new directory for our fasqc files for the trimmed reads:
+Let's make a new directory for our fastqc files for the trimmed reads:
 
 `$ mkdir results/fastqc_trimmed_reads`
 
