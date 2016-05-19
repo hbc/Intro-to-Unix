@@ -264,6 +264,7 @@ $ nano ~/.bashrc
 
 # at the end of the file type in the following - "export PATH=/opt/bcbio/local/bin:$PATH"
 # Don't forget the ":" between!
+# Make sure there are no spaces in PATH=/opt/bcbio/local/bin:$PATH!
 ```
 
 **In closing, permissions and environment variables, especially $PATH, are very useful and important concepts to understand in the context of UNIX and HPC.**
