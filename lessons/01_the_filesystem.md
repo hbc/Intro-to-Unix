@@ -277,40 +277,23 @@ Over time, it will become easier for you to keep a mental note of the structure 
 * List the contents of the `/bin` directory. Do you see anything familiar in there? How can you tell these are programs rather than plain files?
 ***
 
-## Saving time with shortcuts, wild cards, and tab completion
+## Saving time with tab completion, wildcards and other shortcuts
 
-#### Shortcuts
+#### Tab Completion
 
-There are some shortcuts which you should know about. Dealing with the
-home directory is very common. So, in the shell the tilde character,
-"~", is a shortcut for your home directory. Navigate to the `raw_fastq`
-directory:
+Navigate to the home directory. Typing out directory names can waste a lot of time. When you start typing out the name of a directory, then hit the tab key, the shell will try to fill in the rest of the directory name. For example, type `cd` to get back to your home directly, then enter:
 
-```$ cd```
+```$ cd uni<tab>```
 
-```$ cd unix_workshop/raw_fastq```
+The shell will fill in the rest of the directory name for `unix_workshop`. Now go to `unix_workshop/raw_fastq` and 
 
-Then enter the command:
+```$ ls Mov10_oe_<tab><tab>```
 
-```$ ls ~```
+When you hit the first tab, nothing happens. The reason is that there are multiple directories in the home directory which start with `Mov10_oe_`. Thus, the shell does not know which one to fill in. When you hit tab again, the shell will list the possible choices.
 
-This prints the contents of your home directory, without you having to type the full path because the tilde "~" is equivalent to "/home/username".
+Tab completion can also fill in the names of commands. For example, enter `e<tab><tab>`. You will see the name of every command that starts with an `e`. One of those is `echo`. If you enter `ec<tab>` you will see that tab completion works. 
 
-Another shortcut is the "..":
-
-```$ ls ..```
-
-The shortcut `..` always refers to the directory above your current directory. So, it prints the contents of the `unix_workshop`. You can chain these together, so:
-
-```$ ls ../..```
-
-prints the contents of `/home/username` which is your home directory. 
-
-Finally, the special directory `.` always refers to your current directory. So, `ls`, `ls .`, and `ls ././././.` all do the same thing, they print the contents of the current directory. This may seem like a useless shortcut right now, but we used it earlier when we copied over the data to our home directory.
-
-
-To summarize, while you are in your home directory, the commands `ls ~`, `ls ~/.`, and `ls /home/username` all do exactly the same thing. These shortcuts are not necessary, but they are really convenient!
-
+> **Tab completion is your friend!** It helps prevent spelling mistakes, and speeds up the process of typing in the full command.
 
 #### Wild cards
 
@@ -349,22 +332,36 @@ BONUS: List all of the files in `/bin` that contain the letter 'a' or 'c'.
 
 ****
 
-#### Tab Completion
+#### Other shortcuts
 
-Navigate to the home directory. Typing out directory names can waste a lot of time. When you start typing out the name of a directory, then hit the tab key, the shell will try to fill in the rest of the directory name. For example, type `cd` to get back to your home directly, then enter:
+There are some more shortcuts which you should know about. Dealing with the
+home directory is very common. So, in the shell the tilde character,
+"~", is a shortcut for your home directory. Navigate to the `raw_fastq`
+directory:
 
-```$ cd uni<tab>```
+```$ cd```
 
-The shell will fill in the rest of the directory name for `unix_workshop`. Now go to `unix_workshop/raw_fastq` and 
+```$ cd unix_workshop/raw_fastq```
 
-```$ ls Mov10_oe_<tab><tab>```
+Then enter the command:
 
-When you hit the first tab, nothing happens. The reason is that there are multiple directories in the home directory which start with `Mov10_oe_`. Thus, the shell does not know which one to fill in. When you hit tab again, the shell will list the possible choices.
+```$ ls ~```
 
-Tab completion can also fill in the names of commands. For example, enter `e<tab><tab>`. You will see the name of every command that starts with an `e`. One of those is `echo`. If you enter `ec<tab>` you will see that tab completion works. 
+This prints the contents of your home directory, without you having to type the full path because the tilde "~" is equivalent to "/home/username".
 
-> **Tab completion is your friend!** It helps prevent spelling mistakes, and speeds up the process of typing in the full command.
+Another shortcut that you are already familiar with = is the "..":
 
+```$ ls ..```
+
+The shortcut `..` always refers to the directory above your current directory. So, it prints the contents of the `unix_workshop`. You can chain these together, so:
+
+```$ ls ../..```
+
+prints the contents of `/home/username` which is your home directory. 
+
+Finally, the special character `.` always refers to your current directory. So, `ls`, `ls .`, and `ls ././././.` all do the same thing, they print the contents of the current directory. This may seem like a useless shortcut right now, but we used it earlier when we copied over the data to our home directory, and it is very useful for specifying a destination when copying or moving files/folders.
+
+To summarize, while you are in your home directory, the commands `ls ~`, `ls ~/.`, and `ls /home/username` all do exactly the same thing. These shortcuts are not necessary, but they are really convenient!
 
 #### Command History
 
