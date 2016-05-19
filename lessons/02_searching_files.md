@@ -189,14 +189,14 @@ We only want the exons (not CDS or start_codon features), so let's use `grep` to
 #### Removing duplicate exons
 Now, we need to remove those exons that show up multiple times for different genes or transcripts.    
 
-We can use a new tool, `sort`, to remove exons that show up more than once.  We can use the `sort` command with the `-u` option to return only unique lines and the `-k` option for sort to specify which column(s) to sort on. Note that this does something similar to cut's '-f'.
+We can use a new tool, `sort`, to remove exons that show up more than once.  We can use the `sort` command with the `-u` option to return only unique lines.
 
-`$ sort -uk3,4 chr1_exons`
+`$ sort -u chr1_exons`
 
 ####Counting the total number of exons
 Now, to count how many unique exons are on chromosome 1, we need to pipe the output to `wc -l`:
 
-`$ sort -uk3,4 chr1_exons | wc -l`
+`$ sort -u chr1_exons | wc -l`
     
 
 ****
