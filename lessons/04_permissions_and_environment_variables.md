@@ -240,7 +240,7 @@ Well, 'x' means something different for directories. It gives someone the right 
 
 Dr. Vlad Smith's home directory has three subdirectories called `venus`, `mars`, and `pluto`:
 
-![execute](../img/permission-directory.png "Execute Permission for Directories")
+<img src="../img/permission-directory.png" width="400">
 
 Each of these has a subdirectory in turn called `notes`, and those sub-subdirectories contain various files.
 If a user's permissions on `venus` are 'r-x', then if she tries to see the contents of `venus` and `venus/notes` using `ls`, the computer lets her see both.
