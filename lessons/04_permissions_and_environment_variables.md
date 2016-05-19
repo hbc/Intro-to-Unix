@@ -8,9 +8,91 @@ Approximate time: 30 minutes
 
 ## Learning Objectives
  
-* How to grant or restrict access to files on a multi-user UNIX system
 * What is an "Environment Variable" in a shell.
 * What is $PATH, and why I should care.
+* How to grant or restrict access to files on a multi-user UNIX system
+
+
+## **Environment Variables**
+
+Environment variables are, in short, variables that describe the environment in which programs run in. Two commonly encountered variables are HOME and PATH.
+
+* HOME defines the home directory for a user.
+* PATH defines a list of directories to search through when looking for a command to execute.
+
+In the context of the shell the Environment variables are usually all upper case.
+
+First, let's see our list of environmental variables:
+```
+$ env
+```
+
+Let's see what is stored in these variables:
+
+```
+$ echo $HOME
+
+/home/rsk27
+```
+
+Variables, in most systems, are called/denoted with a "$" before the variable name
+
+```
+$ echo $PATH
+
+/opt/lsf/7.0/linux2.6-glibc2.3-x86_64/bin:/groups/bcbio/bcbio/anaconda/bin:/opt/bcbio/local/bin:/opt/lsf/7.0/linux2.6-glibc2.3-x86_64/etc:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
+```
+I have a lot of full/absolute paths in my $PATH variable, which are separated from each other by a ":"; here is the list in a more readable format:
+
+* /opt/lsf/7.0/linux2.6-glibc2.3-x86_64/bin
+* /groups/bcbio/bcbio/anaconda/bin
+* /opt/bcbio/local/bin
+* /opt/lsf/7.0/linux2.6-glibc2.3-x86_64/etc
+* /usr/local/bin
+* /bin
+* /usr/bin
+* /usr/local/sbin
+* /usr/sbin
+* /sbin
+
+These are the directories that the shell will look in (in the same order as they are listed) for an executable file that you type on the command prompt. 
+
+When someone says a command or an executable file is "in you path", they mean that the parent directory for that command/file is contained in the list in the PATH variable. 
+
+For any command you execute on the command prompt, you can find out where they are located using the which command.
+
+Try it on a few of the basic commands we have learned so far:
+```
+$ which ls
+$ which <your favorite command>
+$ which <your favorite command>
+```
+
+> #### Modifying Environment Variables
+>
+> If you are interested in adding a new entry to the path variable, the command to use is `export`. This command is usually executed as follows: 
+`export PATH=$PATH:~/opt/bin`, which tells the shell to add the ~/opt/bin directory to the end of the preexisiting list within $PATH. Alternatively, if you use `export PATH=~/opt/bin:$PATH`, the same directory will be added to the beginning of the list. The order determines where the shell will look first.
+
+#### Closer look at the inner workings of the shell, in the context of $PATH
+ 
+The $PATH variable is reset to a set of defaults (/bin:/usr/bin and so on), each time you start a new shell terminal. To make sure that a command/program you need is always at your fingertips, you have to put it in one of 2 special shell scripts that are always run when you start a new terminal. These are hidden files in your home directory called `.bashrc` and `.bash_profile`. You can create them if they don't exist, and shell will use them.
+
+Check what hidden files exist in our home directory:
+ ```
+$ ls -al ~/
+```
+
+Open the .bashrc file and at the end of the file add the export command that adds a specific location to the list in $PATH. This way when you start a new shell, that location will always be in your path. 
+
+The location we want to add to the beginning of the list is `/opt/bcbio/local/bin`, we need this for when we run the RNA-Seq workflow tomorrow.
+
+```
+$ nano ~/.bashrc
+
+# at the end of the file type in the following - "export PATH=/opt/bcbio/local/bin:$PATH"
+# Don't forget the ":" between!
+# Make sure there are no spaces in PATH=/opt/bcbio/local/bin:$PATH!
+```
 
 ## **Permissions**
 
@@ -185,87 +267,6 @@ Which of the following statements is true?
 3. members of caro (a group) can read, write, and execute myfile.php
 4. members of zoo (a group) cannot execute myfile.php
 ****
-
-## **Environment Variables**
-
-Environment variables are, in short, variables that describe the environment in which programs run in. Two commonly encountered variables are HOME and PATH.
-
-* HOME defines the home directory for a user.
-* PATH defines a list of directories to search through when looking for a command to execute.
-
-In the context of the shell the Environment variables are usually all upper case.
-
-First, let's see our list of environmental variables:
-```
-$ env
-```
-
-Let's see what is stored in these variables:
-
-```
-$ echo $HOME
-
-/home/rsk27
-```
-
-Variables, in most systems, are called/denoted with a "$" before the variable name
-
-```
-$ echo $PATH
-
-/opt/lsf/7.0/linux2.6-glibc2.3-x86_64/bin:/groups/bcbio/bcbio/anaconda/bin:/opt/bcbio/local/bin:/opt/lsf/7.0/linux2.6-glibc2.3-x86_64/etc:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
-```
-I have a lot of full/absolute paths in my $PATH variable, which are separated from each other by a ":"; here is the list in a more readable format:
-
-* /opt/lsf/7.0/linux2.6-glibc2.3-x86_64/bin
-* /groups/bcbio/bcbio/anaconda/bin
-* /opt/bcbio/local/bin
-* /opt/lsf/7.0/linux2.6-glibc2.3-x86_64/etc
-* /usr/local/bin
-* /bin
-* /usr/bin
-* /usr/local/sbin
-* /usr/sbin
-* /sbin
-
-These are the directories that the shell will look in (in the same order as they are listed) for an executable file that you type on the command prompt. 
-
-When someone says a command or an executable file is "in you path", they mean that the parent directory for that command/file is contained in the list in the PATH variable. 
-
-For any command you execute on the command prompt, you can find out where they are located using the which command.
-
-Try it on a few of the basic commands we have learned so far:
-```
-$ which ls
-$ which <your favorite command>
-$ which <your favorite command>
-```
-
-> #### Modifying Environment Variables
->
-> If you are interested in adding a new entry to the path variable, the command to use is `export`. This command is usually executed as follows: 
-`export PATH=$PATH:~/opt/bin`, which tells the shell to add the ~/opt/bin directory to the end of the preexisiting list within $PATH. Alternatively, if you use `export PATH=~/opt/bin:$PATH`, the same directory will be added to the beginning of the list. The order determines where the shell will look first.
-
-#### Closer look at the inner workings of the shell, in the context of $PATH
- 
-The $PATH variable is reset to a set of defaults (/bin:/usr/bin and so on), each time you start a new shell terminal. To make sure that a command/program you need is always at your fingertips, you have to put it in one of 2 special shell scripts that are always run when you start a new terminal. These are hidden files in your home directory called `.bashrc` and `.bash_profile`. You can create them if they don't exist, and shell will use them.
-
-Check what hidden files exist in our home directory:
- ```
-$ ls -al ~/
-```
-
-Open the .bashrc file and at the end of the file add the export command that adds a specific location to the list in $PATH. This way when you start a new shell, that location will always be in your path. 
-
-The location we want to add to the beginning of the list is `/opt/bcbio/local/bin`, we need this for when we run the RNA-Seq workflow tomorrow.
-
-```
-$ nano ~/.bashrc
-
-# at the end of the file type in the following - "export PATH=/opt/bcbio/local/bin:$PATH"
-# Don't forget the ":" between!
-# Make sure there are no spaces in PATH=/opt/bcbio/local/bin:$PATH!
-```
 
 **In closing, permissions and environment variables, especially $PATH, are very useful and important concepts to understand in the context of UNIX and HPC.**
 
