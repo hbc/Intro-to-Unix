@@ -512,7 +512,7 @@ important, let's rename it:
 
 	Mov10_oe_1.subset-copy.fq_DO_NOT_TOUCH!
 
-> Both `mv` and `cp` require that you specify 2 things: one is the object being copied, moved or renamed, and the second is the destination it's being moved or copied to, or the new name!
+> Both `mv` and `cp` require that you specify 2 things after the command on the command line: first is the object being copied, moved or renamed, and the second is the destination it's being moved or copied to, or the new name!
 
 Finally, we decided this was silly and want to start over.
 
