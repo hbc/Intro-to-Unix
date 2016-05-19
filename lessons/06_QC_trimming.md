@@ -465,14 +465,17 @@ cd ~/unix_workshop/rnaseq_project/data/untrimmed_fastq
 # Loading modules for tools
 module load seq/Trimmomatic/0.33
 module load seq/fastqc/0.11.3
+```
+It is good practice to load the modules we plan to use at the beginning of the script. Therefore, if we run this script in the future, we don't have to worry about whether we have loaded all of the necessary modules prior to executing the script. 
 
+```
 # Run Trimmomatic
 echo "Running Trimmomatic..."
 for infile in *.fq
 do
   
   # Create names for the output trimmed files
-  base=`basename .subset.fq $infile`
+  base=`basename $infile .subset.fq`
   outfile=$base.qualtrim25.minlen35.fq
  
   # Run Trimmomatic command
@@ -486,12 +489,18 @@ do
   MINLEN:35
   
 done
-    
+```
+
+Note that the fifth and sixth line of this 'for loop' creates the variables called `base` and `outfile`.  We assign `base` the value of `$infile` with the `.subset.fq`, and we assign `outfile` the value of `base` with `'.qualtrim25.minlen35.fq'` appended to it. **Once again, there should be no spaces before or after the '=' when assigning variables.**
+
+```
 # Run FastQC on all trimmed files
 echo "Running FastQC..."
 fastqc -t 6 ../trimmed_fastq/*.fq
 ```
-Now that we have our commands complete, add the shebang line and LSF directives to the top of the script:
+After we have created the trimmed fastq files, we wanted to make sure that the quality of our reads look good, so we want to run a *FASTQC* on all the trimmed files located in the `../trimmed_fastq/` directory.
+
+Now that we have our commands written, let's add the shebang line and LSF directives to the top of the script:
 
 ```
 #!/bin/bash
@@ -504,23 +513,20 @@ Now that we have our commands complete, add the shebang line and LSF directives 
 #BSUB -e %J.err       # File to which standard err will be written
 ```
 
-We are ready to run this script now:
+We are now ready to run this script!
 
 `$ bsub < trimmomatic_mov10.lsf`
 
-It is good practice to load the modules we plan to use at the beginning of the script. Therefore, if we run this script in the future, we don't have to worry about whether we have loaded all of the necessary modules prior to executing the script. 
-
-Do you remember how the variable name in the first line of a 'for loop' specifies a variable that is assigned the value of each item in the list in turn?  We can call it whatever we like.  This time it is called `infile`.  Note that the fifth and sixth line of this 'for loop' creates the variables called `base` and `outfile`.  We assign `base` the value of `$infile` with the `.subset.fq`, and we assign `outfile` the value of `base` with `'.qualtrim25.minlen35.fq'` appended to it. **There are no spaces before or after the '='.**
-
-After we have created the trimmed fastq files, we wanted to make sure that the quality of our reads look good, so we ran a *FASTQC* on our `$outfile`, which is located in the ../trimmed_fastq directory.
 
 Let's make a new directory for our fastqc files for the trimmed reads:
 
 `$ mkdir results/fastqc_trimmed_reads`
 
+
 Now move all fastqc files to the `fastqc_trimmed_reads` directory:
 
 `$ mv data/trimmed_fastq/*fastqc* results/fastqc_trimmed_reads/`
+
 
 Let's use *FileZilla* to download the fastqc html for Mov10_oe_1. Has our read quality improved with trimming?
 
