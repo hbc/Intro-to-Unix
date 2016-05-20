@@ -144,7 +144,7 @@ Now let's put it all together! The full STAR command is provided below.
 
 ```
 $ STAR --runThreadN 6 --genomeDir /groups/hbctraining/unix_workshop_other/reference_STAR \
---readFilesIn data/trimmed_fastq/Mov10_oe_1.qualtrim25.minlen35.fq \ 
+--readFilesIn data/trimmed_fastq/Mov10_oe_1.qualtrim25.minlen35.fq \
 --outFileNamePrefix results/STAR/Mov10_oe_1_ \
 --outSAMtype BAM SortedByCoordinate \
 --outSAMunmapped Within \
@@ -152,13 +152,17 @@ $ STAR --runThreadN 6 --genomeDir /groups/hbctraining/unix_workshop_other/refere
 ```
 
 
-#### Exercise
+***
+
+**Exercise**
+
 How many files do you see in your output directory? Using the `less` command take a look at `Mov10_oe_1_Log.final.out` and answer the following questions:  
 
 1. How many reads are uniquely mapped?
 2. How many reads map to more than 10 locations on the genome?
 3. How many reads are unmapped due to read length?
 
+***
 
 ### SAM/BAM
 The output we requested from STAR is a BAM file, and by default returns a file in SAM format. **BAM is a binary version of the SAM file, also known as Sequence Alignment Map format.** The SAM file is a tab-delimited text file that contains information for each individual read and its alignment to the genome. The file begins with an optional header (which starts with '@'), followed by an alignment section in which each line corresponds to alignment information for a single read. **Each alignment line has 11 mandatory fields** for essential mapping information and a variable number of fields for aligner specific information.
@@ -210,25 +214,33 @@ $ scp user_name@orchestra.med.harvard.edu:/home/user_name/unix_workshop/rnaseq_p
 
 ![IGV screenshot](../img/igv_screenshot.png)
 
-#### Exercise
+***
+
+**Exercise**
+
 Now that we have done this for one sample, let's try using the same commands to perform alignment on one of the control samples. Using `Irrel_kd_1_qualtrim25.minlen35.fq` walk through the alignment commands above. Copy over the resulting BAM and index file to your laptop and upload into IGV for visualization. 
 
 1. How does the MOV10 gene look in the control sample in comparison to the overexpression sample?
 2. Take a look at a few other genes by typing into the search bar. For example, PPM1J and PTPN22. How do these genes compare? 
 
-
+***
 
 ### Counting reads
-Once we have our reads aligned to the genome, the next step is to count how many reads have been mapped to each gene. Counting is done with a tool called [`htseq-count`](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html). The input files required for counting include the BAM file and an associated gene annotation file in GTF format. `htseq-count` works by **taking the alignment coordinates for each read and cross-referencing that to the coordinates for features described in the GTF**. Most commonly a feature is considered to be a gene, which is the union of all exons (which is a feature type) that map to that gene. There is no minimum overlap to determine whether or not a read is counted for a particular gene, rather it is the mode that the user chooses. 
+Once we have our reads aligned to the genome, the next step is to count how many reads have been mapped to each gene. Counting is done with a tool called [`htseq-count`](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html). The input files required for counting include the BAM file and an associated gene annotation file in GTF format. `htseq-count` works by **taking the alignment coordinates for each read and cross-referencing that to the coordinates for features described in the GTF**. 
 
-There are three modes available and are listed below in order of stringency, with most conservative at the top:
+<img src="../img/count-fig2.png", width=700>
+
+
+Most commonly a **feature is considered to be a gene**, which is the union of all exons (which is a feature type) that map to that gene. There is no minimum overlap to determine whether or not a read is counted for a particular gene, rather it is the mode that the user chooses. 
+
+There are **three modes** available and are listed below in order of stringency, with most conservative at the top:
 
 1. intersection-strict
 2. union
 3. intersection non-empty
 
 
-We will be using the 'union' mode as it is default and most commonly used. To find out more on the different modes and how they affect your output, take a look at the [manual](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html)
+We will be using the **'union' mode as it is default** and most commonly used. To find out more on the different modes and how they affect your output, take a look at the [manual](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html)
 
 
 Let's start by creating a directory for the output:
@@ -237,7 +249,7 @@ Let's start by creating a directory for the output:
 $ mkdir results/counts
 ```
 
-In it's most basic form the `htseq` command requires only the BAM file and the GTF file. We will add in a few additional parameters including `--format` to indicate BAM file, and `--stranded reverse` to specify that we have a stranded library created via the dUTP method. By default htseq-count will _ignore any reads that map to multiple locations_ on the genome. This results in undercounting but also helps reduce false positives. While multi-mappers are a feature that cannot be modified, there is a parameter that allows the user to filter reads by specifying a minimum alignment quality. 
+In it's most basic form the `htseq` command requires only the BAM file and the GTF file. We will add in a few additional parameters including `--format` to indicate BAM file, and `--stranded reverse` to specify that we have a stranded library created via the dUTP method. By default htseq-count will **ignore any reads that map to multiple locations** on the genome. This results in undercounting but also helps reduce false positives. While multi-mappers are a feature that cannot be modified, there is a parameter that allows the user to filter reads by specifying a minimum alignment quality. 
 
 You will notice at the end of the command we have added a redirection symbol. Since htseq-count outputs results to screen, we need to re-direct it to file.
 
@@ -245,7 +257,10 @@ You will notice at the end of the command we have added a redirection symbol. Si
 $ htseq-count --stranded reverse --format bam results/STAR/Mov10_oe_1_Aligned.sortedByCoord.out.bam data/reference_data/chr1-hg19_genes.gtf  >  results/counts/Mov10_oe_1.counts
 ```
 
-#### Exercise
+***
+
+**Exercise**
+
 Take a look at the end of the file using the `tail` command. You should see a summary of how the reads were classified. 
 
 1. How many reads were assigned as no_feature? Why would they be classified this way?
