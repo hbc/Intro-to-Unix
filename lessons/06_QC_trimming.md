@@ -120,7 +120,7 @@ $ mkdir untrimmed_fastq trimmed_fastq
 The raw_fastq data we will be working with is currently in the `unix_workshop/raw_fastq` directory. We need to copy the raw fastq files to our `untrimmed_fastq` directory:
 
 ```bash 
-$ cp ~/unix_workshop/raw_fastq/*fq  ~/unix_workshop/rnaseq_project/data/untrimmed_fastq
+$ cp ~/unix_workshop/raw_fastq/*fq  untrimmed_fastq
 ```
 
 ####B. Run FastQC  
@@ -134,7 +134,7 @@ Before we run FastQC, let's start an interactive session on the cluster:
 Once your interactive job starts, notice that the command prompt has changed; this is because we are working on a compute node now, not on a login node.
 
 ```bash
-$ cd ~/unix_workshop/rnaseq_project/data/untrimmed_fastq/
+$ cd untrimmed_fastq
 ```  
 
 Before we start using software, we have to load the environments for each software package. On clusters, this is typically done using a **module** system. 
