@@ -85,6 +85,8 @@ These probabaility values are the results from the base calling algorithm and de
 
 Therefore, for the first nucleotide in the read (C), there is less than a 1 in 1000 chance that the base was called incorrectly. Whereas, for the the end of the read there is greater than 50% probabaility that the base is called incorrectly.
 
+Poor quality sequence data can result from several different causes. **We don't have time to discuss the various error profiles and potential causes in this workshop, but if you would like to learn more, please see our [slides provided here](https://github.com/hbc/NGS_Data_Analysis_Course/blob/master/sessionI/slides/error_profiles_mm.pdf).**
+
 ### Assessing quality with FastQC
 The quality scores are useful in determining whether a sample is good or bad. Rather than looking at quality scores for each individual read, we use a tool called [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to looks at quality collectively across all reads within a sample. The image below is a plot that indicates a (very) good quality sample:
 
@@ -97,8 +99,6 @@ Now let's take a look at a quality plot on the other end of the spectrum.
 ![bad_quality](../img/bad_quality.png)
 
 Here, we see positions within the read in which the boxes span a much wider range. Also, quality scores drop quite low into the 'bad' range, particularly on the tail end of the reads. 
-
-Poor quality sequence data can result from several different causes. **We don't have time to discuss the various error profiles and potential causes in this workshop, but if you would like to learn more, please see our [slides provided here](https://github.com/hbc/NGS_Data_Analysis_Course/blob/master/sessionI/slides/error_profiles_mm.pdf).**
 
 When you encounter a quality plot such as this one, the first step is to troubleshoot. Why might we be seeing something like this? 
 
