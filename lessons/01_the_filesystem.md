@@ -528,9 +528,9 @@ just nicely put the files in the Trash. They're really gone.
 
 Do the following:
 
-2. Create a new directory called `backup_ref_data` in `~/unix_workshop/` (bonus points for doing this when you are in the `backup` directory!)
+1. Create a new directory called `backup_ref_data` in `~/unix_workshop/` (bonus points for doing this when you are in the `backup` directory!)
 2. Copy over the contents of the `~/unix_workshop/reference_data/` into `backup_ref_data` after changing directories to `~/unix_workshop` (if you are not already there).
-2. *Using just one command*, **move** the `raw_fastq/backup/` directory to your current working directory, `unix_workshop/`, and **rename** it `backup_fastq`
+3. *Using just one command*, **move** the `raw_fastq/backup/` directory to your current working directory (which is `unix_workshop/`) and **rename** it `backup_fastq`.
 
 ***
 
