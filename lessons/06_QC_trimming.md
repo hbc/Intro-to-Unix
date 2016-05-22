@@ -475,7 +475,8 @@ Let's alter the script to use the `basename`command to name our trimmed files mo
 Note that we assign `base` the value of `$infile` without `.subset.fq`, and we assign `outfile` the value of `base` with `'.qualtrim25.minlen35.fq'` appended to it. **Once again, there should be no spaces before or after the '=' when assigning variables.**
 
 After we have created the trimmed fastq files, we need to make sure that the quality of our reads look good. So, we run *FASTQC* on all the trimmed files located in the `../trimmed_fastq/` directory. 
-```
+
+```bash
 # Run FastQC on all trimmed files
 echo "Running FastQC..."
 
@@ -506,21 +507,29 @@ To submit a job submission script to the LSF scheduler, we use the format:
 
 So to run our script, we can use the following command:
 
-`$ bsub < trimmomatic_mov10.lsf`
+```bash
+$ bsub < trimmomatic_mov10.lsf
+```
 
 Let's make a new directory for our fastqc files for the trimmed reads:		
   		  
-`$ mkdir results/fastqc_trimmed_reads`		 
+```bash
+$ mkdir results/fastqc_trimmed_reads
+```		 
   		  
 Now move all fastqc files to the `fastqc_trimmed_reads` directory:		 
 
-`$ mv data/trimmed_fastq/*fastqc* results/fastqc_trimmed_reads/`
+```bash
+$ mv data/trimmed_fastq/*fastqc* results/fastqc_trimmed_reads/
+```
 
 Let's use *FileZilla* to download the fastqc html for Mov10_oe_1. Has our read quality improved with trimming?
 
 It is good practice to record the reads passing through each step of the workflow. For example, for each of our samples, we should record in a spreadsheet the number of input sequences and the number of surviving reads after trimming. Note that you can find all of that information in the `<job#>.err` file.
 
-`$ less <job#>.err`
+```bash
+$ less <job#>.err
+```
 
 ---
 *To share or reuse these materials, please find the attribution and license details at [license.md](https://github.com/hbc/Intro-to-Unix/blob/master/license.md).*
