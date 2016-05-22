@@ -297,7 +297,7 @@ Tab completion can also fill in the names of commands. For example, enter `e<tab
 
 #### Wild cards
 
-Navigate to the `~/unix_workshop/raw_fastq` directory. This
+Navigate to the `/home/username/unix_workshop/raw_fastq` directory. This
 directory contains FASTQ files from our RNA-Seq experiment. 
 
 The '*' character is a shortcut for "everything". Thus, if you enter `ls *`, you will see all of the contents of a given directory. Now try this command:
@@ -495,7 +495,7 @@ We can now move our backed up file in to this directory. We can move files aroun
 
 ```$ mv *copy.fq backup```
 
-```$ ls -l backup```
+```$ ls -al backup```
 
 	drwxrwsr-x 2 mp298 mp298       43 Sep 30 13:59 .
 	drwxrwsr-x 8 mp298 mp298      203 Sep 30 13:58 ..
@@ -530,15 +530,17 @@ just nicely put the files in the Trash. They're really gone.
 
 Do the following:
 
-1.  Create a backup of your fastq files
-2.  Create a backup directory called `new_backup`
-3.  Copy your backup files there
+1. Create a new directory called `backup_ref_data` in `/home/username/unix_workshop/`
+2. Copy over the contents of the `/home/username/unix_workshop/reference_data/` into `backup_ref_data`
+2. *Using just one command*, **move** the `backup/` directory from the `raw_fastq/` directory to the parent `unix_workshop/` directory and **rename** it `backup_fastq`
 
 ***
 
-By default, `rm`, will NOT delete directories. You can tell `rm` to delete a directory using the `-r` option. Let's delete both backup directories, `backup` and `new_backup`. Enter the following command:
+We really don't need these backup directories, so, let's delete both. Make sure you have navigated to `/home/username/unix_workshop/`, and now we will use the `rm` command to delete. By default, `rm`, will NOT delete directories, but you use the `-r` option if you are sure that you want to delete the directories and everything within them. 
 
-```$ rm -r new_backup/ backup/```
+	$ rm -r backup_ref_data/ backup_fastq/ 
+	
+> `-r` stands for recursive. 
 
 ## Writing files
 
