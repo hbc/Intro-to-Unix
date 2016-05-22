@@ -514,11 +514,9 @@ important, let's rename it:
 
 > Both `mv` and `cp` require that you specify 2 things after the command on the command line: first is the object being copied, moved or renamed, and the second is the destination it's being moved or copied to, or the new name!
 
-Finally, we decided this was silly and want to start over.
+Finally, we decided this was not what we needed to do, and we want to start over with an empty backup directory.
 
-```$ cd ..```
-
-```$ rm backup/Mov*```
+	$ rm Mov10_oe_1.subset-copy.fq_DO_NOT_TOUCH!
 
 > The `rm` file permanently removes the file. Be careful with this command. The shell doesn't
 just nicely put the files in the Trash. They're really gone.
@@ -530,13 +528,13 @@ just nicely put the files in the Trash. They're really gone.
 
 Do the following:
 
-1. Create a new directory called `backup_ref_data` in `/home/username/unix_workshop/`
-2. Copy over the contents of the `/home/username/unix_workshop/reference_data/` into `backup_ref_data`
-2. *Using just one command*, **move** the `backup/` directory from the `raw_fastq/` directory to the parent `unix_workshop/` directory and **rename** it `backup_fastq`
+2. Create a new directory called `backup_ref_data` in `~/unix_workshop/` (bonus points for doing this when you are in the `backup` directory!)
+2. Copy over the contents of the `~/unix_workshop/reference_data/` into `backup_ref_data` after changing directories to `~/unix_workshop` (if you are not already there).
+2. *Using just one command*, **move** the `raw_fastq/backup/` directory to your current working directory, `unix_workshop/`, and **rename** it `backup_fastq`
 
 ***
 
-We really don't need these backup directories, so, let's delete both. Make sure you have navigated to `/home/username/unix_workshop/`, and now we will use the `rm` command to delete. By default, `rm`, will NOT delete directories, but you use the `-r` option if you are sure that you want to delete the directories and everything within them. 
+We really don't need these backup directories, so, let's delete both. Make sure you have navigated to `~/unix_workshop/`, and now we will use the `rm` command to delete. By default, `rm`, will NOT delete directories, but you use the `-r` option if you are sure that you want to delete the directories and everything within them. 
 
 	$ rm -r backup_ref_data/ backup_fastq/ 
 	
