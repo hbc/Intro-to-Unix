@@ -27,8 +27,9 @@ We are finally ready to see what makes the shell such a powerful programming env
 1. Tell us what is our current working directory
 2. Lists the contents of the directory 
 
-First open a new file using `nano`:
+First move into `unix_workshop` and open a new file using `nano`:
 
+	$ cd unix_workshop
 	$ nano listing.sh
 	
 Then type in the following lines in the `listing.sh` file:
