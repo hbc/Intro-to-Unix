@@ -82,16 +82,18 @@ Check what hidden files exist in our home directory:
 $ ls -al ~/
 ```
 
-Open the .bashrc file and at the end of the file add the export command that adds a specific location to the list in $PATH. This way when you start a new shell, that location will always be in your path. 
+Open the .bashrc file and add the `export` command at the end of the file. The `export` command adds a specific location to the list in $PATH. This way when you start a new shell, that location will always be in your path. 
 
-The location we want to add to the beginning of the list is `/opt/bcbio/local/bin`, we need this for when we run the RNA-Seq workflow tomorrow.
+The location we want to add to the beginning of the list is `/opt/bcbio/centos/bin`. 
+
+> `/opt/bcbio/centos/bin` is a directory with the bioinformatics tools required to run an RNA-Seq workflow. Although we won't be using any of the tools in that directory today, it demonstrates how the `PATH` environment variable works very nicely.
 
 ```
 $ nano ~/.bashrc
 
-# at the end of the file type in the following - "export PATH=/opt/bcbio/local/bin:$PATH"
+# at the end of the file type in the following - "export PATH=/opt/bcbio/centos/bin:$PATH"
 # Don't forget the ":" between!
-# Make sure there are no spaces in PATH=/opt/bcbio/local/bin:$PATH!
+# Make sure there are no spaces in PATH=/opt/bcbio/centos/bin:$PATH!
 ```
 
 ## **Permissions**
