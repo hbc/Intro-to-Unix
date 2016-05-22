@@ -164,7 +164,7 @@ Before we get started on creating more complex scripts, we want to introduce you
 
 	$ cd
 	
-The we will run the `basename` command on one of the FASTQ files. Be sure to specify the path to the file:
+Then we will run the `basename` command on one of the FASTQ files. Be sure to specify the path to the file:
 
 	$ basename unix_workshop/raw_fastq/Mov10_oe_1.subset.fq
 	
