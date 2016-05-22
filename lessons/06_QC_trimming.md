@@ -22,7 +22,7 @@ When working with NGS data, the raw reads you get off of the sequencer will need
 
 The workflow we will be using for our RNA-Seq analysis is provided below with a brief description of each step. 
 
-![Workflow](../img/rnaseq_workflow.png)
+![Workflow](../img/QC_rnaseq_workflow.png)
 
 1. Quality control - Assessing quality using FastQC
 2. Quality control - Trimming and/or filtering reads (if necessary)
@@ -109,7 +109,7 @@ The *FASTQC* tool produces several other diagnostic plots to assess sample quali
 ### Running FASTQC
 ####A. Stage your data
 
-To perform our quality checks, we will be working within our recently created `rnaseq_project` directory. We need to create two directories within the `data` directory for this quality control step. 
+To perform our quality checks, we will be working within our recently created `rnaseq_project` directory. We need to create a few directories within the `data` directory for this quality control step. 
 
 ```bash
 $ cd unix_workshop/rnaseq_project/data
@@ -354,13 +354,15 @@ The next two arguments are input file and output file names.  These are then fol
 
 ###Running Trimmomatic
 
+#### Testing the Trimmomatic command in the interactive queue
+
 Change directories to the untrimmed fastq data location:
 
 ```bash
 $ cd ~/unix_workshop/rnaseq_project/data/untrimmed_fastq
 ```
 
-Since the *Trimmomatic* command is complicated and we will be running it a number of times, let's draft the command in a **text editor**, such as Sublime, TextWrangler or Notepad++. When finished, we will copy and paste the command into the terminal.
+Since the *Trimmomatic* command is complicated, so let's draft the command in a **text editor**, such as *Sublime*, *TextWrangler* or *Notepad++*. When finished, we will transfer the script to Orchestra using *FileZilla*.
 
 For the single fastq input file `Mov10_oe_1.subset.fq`, we're going to run the following command:
 
@@ -396,59 +398,18 @@ $ ls Mov10_oe_1*
 Mov10_oe_1.subset.fq  Mov10_oe_1.qualtrim25.minlen35.fq
 ```
 
-Now that we know how to run *Trimmomatic*, let's run it on all of our files. Unfortunately, there is some good news and bad news.  One should always ask for the bad news first. *Trimmomatic* only operates on one input file at a time and we have more than one input file.  The good news? We already know how to use a `for` loop to deal with this situation.
+#### Trimming all files and checking the quality using the LSF scheduler
+Now that we know how to run *Trimmomatic* and *FastQC*, let's create an LSF job submission script to run *Trimmomatic* on all of our files, then check the quality of our trimmed files using *FastQC*. 
 
-Before we run our `for` loop, let's remove the file that we just created:
+A submission script is preferable to executing commands on the terminal interactively. We can use it to **store the parameters** we used for a command(s) inside a file. If we need to run the program on other files, we can easily change the script. Also, using scripts to store your commands helps with reproducibility. In the future, if we forget which parameters we used during our analysis, we can just check our script.
 
-```bash
-$ rm *qualtrim25.minlen35.fq
-```
-Now, run the `for` loop to run *Trimmomatic* on all files:
+To run the tools using a queue other than the `interactive` queue, we need to create a submission script with two important components:
 
-```bash
-$ for infile in *fq
-  do
-    outfile=$infile.qualtrim25.minlen35.fq
-	java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
-	-threads 4 \
-	-phred33 \
-	$infile \
-	$outfile \
-	ILLUMINACLIP:/opt/Trimmomatic-0.33/adapters/TruSeq3-SE.fa:2:30:10 \
-	TRAILING:25 \
-	MINLEN:35
-  done
-```
+1. the commands to be run in order 
 
-In the 'for loop', do you remember how a variable is assigned the value of each item in the list in turn?  We can call it whatever we like. This time it is called `infile`.  Note that the third line of this 'for loop' is creating a second variable called `outfile`. We assign it the value of `$infile` with `.qualtrim25.minlen35.fq` appended to it. There are no spaces before or after the '=' when assigning a variable.
+2. our **LSF directives** at the **beginning** of the script. This is so that the scheduler knows what resources we need in order to run our job on the compute node(s)
 
-Now let's keep our directory organized. Make a directory for the trimmed fastq files: 
-
-```bash
-$ mkdir ../trimmed_fastq
-```
-
-Move the trimmed fastq files to the new directory:
-
-```bash
-$ mv *qualtrim25.minlen35.fq ../trimmed_fastq/
-```
-After trimming, we would generally want to run FastQC on our trimmed fastq files, then transfer the files to our machine to make sure the trimming improved the quality of our reads without removing too many of them. 
-
-
-#### Automating the QC workflow
-
-Now that we know how to use the tools to perform the QC, let's automate the process of using *Trimmomatic* and running *FastQC* using a complete shell script (i.e. a LSF submission script). We will use the same commands, with a few extra "echo" statements to give us feedback, and add the LSF directives at the beginning. 
-
-A submission script is preferable to executing commands on the terminal interactively. We can use it to store the parameters we used for a command(s) inside a file. If we need to run the program on other files, we can easily change the script. Also, using scripts to store your commands helps with reproducibility. In the future, if we forget which parameters we used during our analysis, we can just check our script.
-
-To run the *Trimmomatic* command on a worker node via the job scheduler, we need to create a submission script with two important components:
-
-1. our **LSF directives** at the **beginning** of the script. This is so that the scheduler knows what resources we need in order to run our job on the compute node(s).
-
-2. the commands to be run in order
-
-Create the script called `trimmomatic_mov10.lsf`:
+Now, create a script called `trimmomatic_mov10.lsf`. The `.lsf` extension is so we know this script is for submitting jobs to the LSF scheduler and contains the LSF directives:
 
 ```bash
 $ cd ~/unix_workshop/rnaseq_project/
@@ -456,17 +417,26 @@ $ cd ~/unix_workshop/rnaseq_project/
 $ nano trimmomatic_mov10.lsf
 ```
 
-Within `nano` let's first add our commands, then we will come back to add our *LSF directives* (remember to comment liberally).
+Now we are ready to start writing our job submission script. Within `nano` let's first add our commands, then we will come back to add our *LSF directives* (remember to comment liberally).
+
+##### Writing the commands
+Within the script, let's prepare for running the *Trimmomatic* and *FastQC* tools by changing to the directory where the untrimmed fastq files are located and loading the modules for the tools.
 
 ```bash
+#!/bin/bash
+
 # Change directories into the folder with the untrimmed fastq files
 cd ~/unix_workshop/rnaseq_project/data/untrimmed_fastq
 
 # Loading modules for tools
+echo "Loading modules"
 module load seq/Trimmomatic/0.33
 module load seq/fastqc/0.11.3
 ```
+
 It is good practice to load the modules we plan to use at the beginning of the script. Therefore, if we run this script in the future, we don't have to worry about whether we have loaded all of the necessary modules prior to executing the script. 
+
+Now write the command to run *Trimmomatic* on all of our files. Unfortunately, *Trimmomatic* only operates on one input file at a time and we have more than one input file.  The good news? We already know how to use a `for` loop to deal with this situation.
 
 ```
 # Run Trimmomatic
@@ -475,8 +445,7 @@ for infile in *.fq
 do
   
   # Create names for the output trimmed files
-  base=`basename $infile .subset.fq`
-  outfile=$base.qualtrim25.minlen35.fq
+  outfile=$infile.qualtrim25.minlen35.fq
  
   # Run Trimmomatic command
   java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
@@ -491,20 +460,39 @@ do
 done
 ```
 
-We want to use the `basename` command to name our trimmed file more succinctly. Note that the fifth and sixth line in this 'for loop' creates the variables called `base` and `outfile`.  We assign `base` the value of `$infile` without `.subset.fq`, and we assign `outfile` the value of `base` with `'.qualtrim25.minlen35.fq'` appended to it. **Once again, there should be no spaces before or after the '=' when assigning variables.**
+In the 'for loop', do you remember how a variable is assigned the value of each item in the list in turn?  We can call it whatever we like. This time it is called `infile`.  Note that a second variable called `outfile` is created and assigned the value of `$infile` with `.qualtrim25.minlen35.fq` appended to it. There are no spaces before or after the '=' when assigning a variable.
 
+In this case all of our trimmed output files will be named something like: `Mov10_oe_1.subset.fq.qualtrim25.minlen35.fq`. This is a rather long and complicated name, but what if we only wanted to keep the `Mov10_oe_1` part of the input file name before appending `.qualtrim25.minlen35.fq`?
+
+Let's alter the script to use the `basename`command to name our trimmed files more succinctly:
+
+```bash
+  # Create names for the output trimmed files
+  base=`basename $infile .subset.fq`
+  outfile=$base.qualtrim25.minlen35.fq
+```
+
+Note that we assign `base` the value of `$infile` without `.subset.fq`, and we assign `outfile` the value of `base` with `'.qualtrim25.minlen35.fq'` appended to it. **Once again, there should be no spaces before or after the '=' when assigning variables.**
+
+After we have created the trimmed fastq files, we need to make sure that the quality of our reads look good. So, we run *FASTQC* on all the trimmed files located in the `../trimmed_fastq/` directory. 
 ```
 # Run FastQC on all trimmed files
 echo "Running FastQC..."
+
+mkdir -p ../results/fastqc_trimmed_reads
 fastqc -t 6 ../trimmed_fastq/*.fq
-```
-After we have created the trimmed fastq files, we wanted to make sure that the quality of our reads look good. So we want to add a *FASTQC* run on all the trimmed files located in the `../trimmed_fastq/` directory.
-
-Now that we have our commands written, let's add the shebang line and LSF directives to the top of the script:
 
 ```
-#!/bin/bash
 
+We slipped in a new argument in the `mkdir` command. The argument `-p` essentially means to create the directory if it does not already exist but do not overwrite it if it does exist.
+
+We can transfer the FastQC reports to our machine to make sure the trimming improved the quality of our reads without removing too many of them. 
+
+
+##### The LSF directives
+Now our script is complete. We could run this script, as is, by submitting it to the interactive queue with the command, `sh trimmomatic_mov10.lsf`, but we want to run it in the `priority` queue. Therefore, we need to add the *LSF directives* to the top of the script, underneath the shebang line:
+
+```bash
 #BSUB -q priority 	# queue name
 #BSUB -W 2:00 		# hours:minutes runlimit after which job will be killed.
 #BSUB -n 6 		# number of cores requested
@@ -513,19 +501,15 @@ Now that we have our commands written, let's add the shebang line and LSF direct
 #BSUB -e %J.err       # File to which standard err will be written
 ```
 
-We are now ready to run this script!
+We are now ready to run this script! To submit jobs to the LSF scheduler, we use the `bsub` command, similar to when we asked the LSF scheduler for a job in the interactive queue (`bsub -Is -q interactive bash`). 
+
+To submit a job submission script to the LSF scheduler, we use the format:
+
+`bsub < name_of_script`
+
+So to run our script, we can use the following command:
 
 `$ bsub < trimmomatic_mov10.lsf`
-
-
-Let's make a new directory for our fastqc files for the trimmed reads:
-
-`$ mkdir results/fastqc_trimmed_reads`
-
-
-Now move all fastqc files to the `fastqc_trimmed_reads` directory:
-
-`$ mv data/trimmed_fastq/*fastqc* results/fastqc_trimmed_reads/`
 
 
 Let's use *FileZilla* to download the fastqc html for Mov10_oe_1. Has our read quality improved with trimming?
