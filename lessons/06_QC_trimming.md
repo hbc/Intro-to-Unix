@@ -479,9 +479,7 @@ After we have created the trimmed fastq files, we need to make sure that the qua
 ```bash
 # Run FastQC on all trimmed files
 echo "Running FastQC..."
-
 fastqc -t 6 ../trimmed_fastq/*.fq
-
 ```
 
 We can transfer the FastQC reports to our machine to make sure the trimming improved the quality of our reads without removing too many of them. 
