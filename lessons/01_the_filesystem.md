@@ -525,7 +525,7 @@ just nicely put the files in the Trash. They're really gone.
 >
 > Same with moving and renaming files. It will **not** ask you if you are sure that you want to "replace existing file".
 
-* * * *
+*** 
 **Exercise**
 
 Do the following:
@@ -534,7 +534,7 @@ Do the following:
 2.  Create a backup directory called `new_backup`
 3.  Copy your backup files there
 
-* * * *
+***
 
 By default, `rm`, will NOT delete directories. You can tell `rm` to delete a directory using the `-r` option. Let's delete both backup directories, `backup` and `new_backup`. Enter the following command:
 
@@ -565,7 +565,8 @@ Now you've written a file. You can take a look at it with less or cat, or open i
 
 1. Open 'awesome.txt' and on a new line add the following `echo "This is my first file written in nano"`, and save the file.
 2. Move 'awesome.txt' to the `other` directory in `unix_workshop`.
-****
+
+***
 
 ****
 **Exercise-extra**
