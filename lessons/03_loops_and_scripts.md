@@ -273,7 +273,7 @@ To keep your data organized, let's move all of the bad read files out of our `ra
 
 Let's also move the log file that we created into the `other` directory:
 
-	$ mv runlog.txt other/
+	$ mv raw_fastq/runlog.txt other/
 
 ---
 *To share or reuse these materials, please find the attribution and license details at [license.md](https://github.com/hbc/Intro-to-Unix/blob/master/license.md).*
