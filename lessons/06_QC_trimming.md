@@ -429,7 +429,7 @@ Within the script, let's prepare for running the *Trimmomatic* and *FastQC* tool
 cd ~/unix_workshop/rnaseq_project/data/untrimmed_fastq
 
 # Loading modules for tools
-echo "Loading modules"
+echo "Loading modules..."
 module load seq/Trimmomatic/0.33
 module load seq/fastqc/0.11.3
 ```
