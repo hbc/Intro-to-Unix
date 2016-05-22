@@ -1,6 +1,6 @@
 ---
 title: "The Shell: Loops & Scripts"
-author: "Bob Freeman, Mary Piper, Radhika Khetani"
+author: "Bob Freeman, Mary Piper, Radhika Khetani, Meeta Mistry"
 date: "Thursday, May 5, 2016"
 ---
 
@@ -34,6 +34,12 @@ First move into `unix_workshop` and open a new file using `nano`:
 	$ cd unix_workshop
 	$ nano listing.sh
 
+We will start our script with a shebang line: 
+
+`#!/bin/bash`
+
+The shebang `#!` is used to determine whether the file to be executed is a script or a binary. When the shebang is present, the exec() function will run the executable specified after the shebang instead. In our case, the executable is the Bash interpreter and so we provide the path to the that file `/bin/bash`. The shebang line ensures that the bash shell interprets the script even if it is executed using a different shell. 
+
 Then type in the following lines in the `listing.sh` file:
 
 	echo "Your current working directory is:"
@@ -41,7 +47,12 @@ Then type in the following lines in the `listing.sh` file:
 	echo "These are the contents of this directory:"
 	ls -l 
 
-Close nano and save the file. Now let's run the new script we have created. To run a shell script you usually use the `bash` or `sh` command.
+Close nano and save the file. Now let's run the new script we have created. To run a shell script you can do this in one of two ways. 
+
+1. You can use the `bash` or `sh` command. This means that you are specifying the interpreter on the command line, and so shell won't even look at the shebang line in the script.
+2. You can use `./listing.sh` if you want to invoke the interpreter specified on the shebang line. To do this the script must have the executable permissions set.
+
+We will using the first command even though we have the shebang line in our script. This is considered best practice as specifying an interpreter is important for anyone else running the script down the road. 
 
 	$ sh listing.sh
 	
@@ -185,7 +196,6 @@ We always want to start our scripts with a shebang line:
 
 `#!/bin/bash`
 
-This line is the absolute path to the Bash interpreter. The shebang line ensures that the bash shell interprets the script even if it is executed using a different shell.
 
 After the shebang line, we enter the commands we want to execute. First we want to move into our `raw_fastq` directory:
 
