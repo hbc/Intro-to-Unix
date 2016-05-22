@@ -47,10 +47,10 @@ Then type in the following lines in the `listing.sh` file:
 	echo "These are the contents of this directory:"
 	ls -l 
 
-Close nano and save the file. Now let's run the new script we have created. To run a shell script you can do this in one of two ways. 
+Close nano and save the file. Now let's **run the new script** we have created. To run a shell script you can do this in one of two ways. 
 
 1. You can use the `bash` or `sh` command. This means that you are specifying the interpreter on the command line, and so shell won't even look at the shebang line in the script.
-2. You can use `./listing.sh` if you want to invoke the interpreter specified on the shebang line. To do this the script must have the executable permissions set.
+2. You can use `./listing.sh` if you want to invoke the interpreter specified on the shebang line. To do this the script must have the executable permissions set on our script (*NOTE: we will discuss permissions in more detail in a later lesson*).
 
 We will using the first command even though we have the shebang line in our script. This is considered best practice as specifying an interpreter is important for anyone else running the script down the road. 
 
