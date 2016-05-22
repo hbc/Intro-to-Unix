@@ -94,6 +94,7 @@ $ nano ~/.bashrc
 # at the end of the file type in the following - "export PATH=/opt/bcbio/centos/bin:$PATH"
 # Don't forget the ":" between!
 # Make sure there are no spaces in PATH=/opt/bcbio/centos/bin:$PATH!
+# Make sure there is no "/" after "bin" and ":"
 ```
 
 ## **Permissions**
