@@ -95,7 +95,7 @@ Now we want to *assign* the output of `ls` to the variable. We will give that va
 
 	$ filenames=`ls *.fq`
 
-> Note we are using *backticks* to encapsulate the comman. This lets the shell know that we want to save the output from the command into the variable. The backtick key can usually be found underneath the ESC key. An alternative notation is using parentheses (i.e. `filenames=$(ls *.fq)`.
+> Note we are using *backticks* to encapsulate the comman. This lets the shell know that we want to save the output from the command into the variable. The backtick key can usually be found underneath the ESC key. An alternative notation is using parentheses (i.e. `filenames=$(ls *.fq)`).
 
 Check and see what's stored inside our newly created variable using `echo`:
 	
