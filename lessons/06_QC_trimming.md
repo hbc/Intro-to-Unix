@@ -479,12 +479,9 @@ After we have created the trimmed fastq files, we need to make sure that the qua
 # Run FastQC on all trimmed files
 echo "Running FastQC..."
 
-mkdir -p ../results/fastqc_trimmed_reads
 fastqc -t 6 ../trimmed_fastq/*.fq
 
 ```
-
-We slipped in a new argument in the `mkdir` command. The argument `-p` essentially means to create the directory if it does not already exist but do not overwrite it if it does exist.
 
 We can transfer the FastQC reports to our machine to make sure the trimming improved the quality of our reads without removing too many of them. 
 
@@ -511,6 +508,13 @@ So to run our script, we can use the following command:
 
 `$ bsub < trimmomatic_mov10.lsf`
 
+Let's make a new directory for our fastqc files for the trimmed reads:		
+  		  
+`$ mkdir results/fastqc_trimmed_reads`		 
+  		  
+Now move all fastqc files to the `fastqc_trimmed_reads` directory:		 
+
+`$ mv data/trimmed_fastq/*fastqc* results/fastqc_trimmed_reads/`
 
 Let's use *FileZilla* to download the fastqc html for Mov10_oe_1. Has our read quality improved with trimming?
 
