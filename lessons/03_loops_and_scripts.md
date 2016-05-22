@@ -31,7 +31,9 @@ First move into `unix_workshop` and open a new file using `nano`:
 
 	$ cd unix_workshop
 	$ nano listing.sh
-	
+
+> If you have not already done so, login to Orchestra and start an interactive session using `bsub -Is -q interactive bash`.
+
 Then type in the following lines in the `listing.sh` file:
 
 	echo "Your current working directory is:"
