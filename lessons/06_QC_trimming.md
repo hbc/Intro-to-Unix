@@ -438,7 +438,7 @@ It is good practice to load the modules we plan to use at the beginning of the s
 
 Now write the command to run *Trimmomatic* on all of our files. Unfortunately, *Trimmomatic* only operates on one input file at a time and we have more than one input file.  The good news? We already know how to use a `for` loop to deal with this situation.
 
-```
+```bash
 # Run Trimmomatic
 echo "Running Trimmomatic..."
 for infile in *.fq
