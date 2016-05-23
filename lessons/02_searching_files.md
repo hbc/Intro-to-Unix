@@ -165,7 +165,7 @@ We will define an exon by it's genomic coordinates. Therefore, we only need the 
 
 'cut' is a program that will extract columns from files.  It is a very good command to know.  Let's first try out the 'cut' command on a small dataset (just the first 5 lines of chr1-hg19_genes.gtf) to make sure we have the command correct:
 
-`$ head -n 5 chr1-hg19_genes.gtf | cut -f1,3,4,5,7`
+`$ cut -f1,3,4,5,7 chr1-hg19_genes.gtf | head -n 5`
    
 '-f1,3,4,5,7' means to cut these fields (columns) from the dataset.  
 
