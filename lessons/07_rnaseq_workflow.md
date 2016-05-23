@@ -33,7 +33,11 @@ $ cp -r reference_data rnaseq_project/data
 
 ```
 
-Now move into the `rnaseq_project` directory. You should have a directory tree setup similar to that shown below. it is best practice to have all files you intend on using for your workflow present within the same directory. In our case, we have our original FASTQ files and post-trimming data generated in the previous section. We also have all reference data files that will be used in downstream analyses.
+Now move into the `rnaseq_project` directory. 
+
+	$ cd rnaseq_project
+
+You should have a directory tree setup similar to that shown below. it is best practice to have all files you intend on using for your workflow present within the same directory. In our case, we have our original FASTQ files and post-trimming data generated in the previous section. We also have all reference data files that will be used in downstream analyses.
 
 ```
 rnaseq_project
