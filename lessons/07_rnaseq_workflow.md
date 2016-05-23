@@ -28,6 +28,7 @@ $ bsub -Is -n 6 -q interactive bash
 Change directories into the `unix_workshop` directory and copy the `reference_data` folder into your project directory:
 
 ```
+$ cd unix_workshop
 $ cp -r reference_data rnaseq_project/data
 
 ```
