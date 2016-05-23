@@ -78,13 +78,14 @@ $ mkdir results/STAR
 In the script, we will eventually loop over all of our files and have the cluster work on each one in serial, then in parallel. For now, we're going to work on just one to set up our workflow.  To start we will use the trimmed first replicate in the Mov10 overexpression group, `Mov10_oe_1.qualtrim25.minlen35.fq` 
 
 
-**NOTE: if you did not follow the last section, please execute the following command:** (this will copy over the required files into your home directory.)
-
-```bash
-
-$ cp -r /groups/hbctraining/unix_workshop_other/trimmed_fastq data/
-
-```
+> **NOTE: if you did not follow the last section, please execute the following command:** (this will copy over the required files into your home directory.)
+> 
+> ```bash
+> # ONLY run this if you did not follow the last section
+> $ cp -r /groups/hbctraining/unix_workshop_other/trimmed_fastq data/
+> 
+> ```
+> 
 
 ### Alignment to genome
 The alignment process consists of choosing an appropriate reference genome to map our reads against, and performing the read alignment using one of several splice-aware alignment tools such as [STAR](https://github.com/alexdobin/STAR) or [TopHat2](https://ccb.jhu.edu/software/tophat/index.shtml). The choice of aligner is a personal preference and also dependent on the computational resources that are available to you.
