@@ -116,7 +116,7 @@ $ ls -F
 if you have created these directories, you should get the following output from that command:
 
 ```
-/data  /docs  /meta  /results
+/data  /logs  /meta  /results
 
 ```
 
