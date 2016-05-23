@@ -528,6 +528,14 @@ It is good practice to record the reads passing through each step of the workflo
 
 ```bash
 $ less <job#>.err
+
+$ less <job#>.out
+```
+
+Let's move both files to our `logs` directory:
+
+```bash
+mv <job#>.* logs/
 ```
 
 ---
