@@ -412,7 +412,7 @@ To run the tools using a queue other than the `interactive` queue, we need to cr
 Now, create a script called `trimmomatic_mov10.lsf`. The `.lsf` extension is so we know this script is for submitting jobs to the LSF scheduler and contains the LSF directives:
 
 ```bash
-$ rm Mov10_oe_1.qualtrim25.minlen35.fq
+$ rm ../trimmed_fastq/Mov10_oe_1.qualtrim25.minlen35.fq
 
 $ cd ~/unix_workshop/rnaseq_project/
 
