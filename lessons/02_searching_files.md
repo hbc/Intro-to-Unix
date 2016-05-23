@@ -202,7 +202,7 @@ Now, to count how many unique exons are on chromosome 1, we need to pipe the out
     
 
 ****
-**Final Exercise**
+**Exercise**
 
 How could have you have determined the number of total exons by combining all of the previous commands (starting with the original chr1-hg19_genes.gtf), into a single command (no intermediate files) using pipes?
 
