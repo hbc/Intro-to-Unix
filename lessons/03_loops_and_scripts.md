@@ -202,26 +202,30 @@ We always want to start our scripts with a shebang line:
 After the shebang line, we enter the commands we want to execute. First we want to move into our `raw_fastq` directory:
 
 ``` bash
+# enter directory with raw FASTQs
 cd ~/unix_workshop/raw_fastq
 ```
 
 And now we loop over all the FASTQs:
 
 ```bash
+# count bad reads for each FASTQ file in our directory
 for filename in *.fq
 ```
 
-For each file that we process we can use `basename` to create a variable that will uniquely identify our output file based on where it originated from:
+We begin to `do` or execute the commands for each loop. For each file that we process we can use `basename` to create a variable that will uniquely identify our output file based on where it originated from:
 
 ```bash
-# create a prefix for all output files
-base=`basename $filename .subset.fq`
+do 
+
+   # create a prefix for all output files
+   base=`basename $filename .subset.fq`
 ```
 
-and then we execute the commands for each loop:
+We then want to grab all the bad read records into new file:
 
 ```bash
-do
+
   # tell us what file we're working on
   echo $filename
   
