@@ -535,7 +535,7 @@ $ less <job#>.out
 Let's move both files to our `logs` directory:
 
 ```bash
-mv <job#>.* logs/
+$ mv <job#>.* logs/
 ```
 
 ---
