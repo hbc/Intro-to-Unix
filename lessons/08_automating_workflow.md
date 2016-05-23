@@ -183,7 +183,7 @@ The top of the file should look like with the LSF directives:
 
     for fq in ~/unix_workshop/rnaseq_project/data/trimmed_fastq/*.fq
     do
-      rnaseq_analysis_on_input_file.sh $fq
+      sh rnaseq_analysis_on_input_file.sh $fq
     done
 
 Before you run this script, let's add a few more commands after the `for` loop for creating a count matrix. These commands will be executed after all the files have been processed *serially* through the `rnaseq_analysis_on_input_file.sh` script:
