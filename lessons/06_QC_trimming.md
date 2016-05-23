@@ -394,8 +394,8 @@ TrimmomaticSE: Completed successfully
 The *Trimmomatic* command successfully ran and generated a new fastq file:
 
 ```bash
-$ ls Mov10_oe_1*
-Mov10_oe_1.subset.fq  Mov10_oe_1.qualtrim25.minlen35.fq
+$ ls ../trimmed_fastq/Mov10_oe_1*
+Mov10_oe_1.qualtrim25.minlen35.fq
 ```
 
 #### Trimming all files and checking the quality using the LSF scheduler
