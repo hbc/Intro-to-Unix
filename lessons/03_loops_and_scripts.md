@@ -38,7 +38,7 @@ We will start our script with a shebang line:
 
 `#!/bin/bash`
 
-The shebang `#!` is used to determine whether the file to be executed is a script or a binary. When the shebang is present, the exec() function will run the executable specified after the shebang instead. In our case, the executable is the Bash interpreter and so we provide the path to the that file `/bin/bash`. The shebang line ensures that the bash shell interprets the script even if it is executed using a different shell. 
+The shebang `#!` is used to determine whether the file to be executed is a script or a binary. When the shebang is present, the shell will run the script using the executable specified. In our case, the executable is the Bash interpreter and so we provide the path to the that file `/bin/bash`. The shebang line ensures that the bash shell interprets the script even if it is executed using a different shell. 
 
 Then type in the following lines in the `listing.sh` file:
 
