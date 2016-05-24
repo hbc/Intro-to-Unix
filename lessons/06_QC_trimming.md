@@ -538,6 +538,8 @@ Let's move both files to our `logs` directory:
 $ mv <job#>.* logs/
 
 $ mv logs/<job#>.err logs/trimmomatic.err
+
+$ mv logs/<job#>.out logs/trimmomatic.out
 ```
 
 ---
