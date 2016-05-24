@@ -29,7 +29,7 @@ you've performed for `Mov10_oe_1` in a bash script. And you've already learned h
 lessons. So here's a short exercise...
 
 
-Using the text editor on your laptop, start creating a script with the commands you used to do the alignment and counting. 
+Using the text editor on your laptop, start creating a script with the commands you used to do the alignment and counting for `Mov10_oe_1`. 
 
 > Note: You can use your command history to retrieve the commands for each step. Don't forget the "shebang line". Make sure you include the `mkdir` commands you used to create new directories.
 
