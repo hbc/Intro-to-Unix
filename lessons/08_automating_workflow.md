@@ -236,7 +236,9 @@ sleep 1
 done
 ```
 
-**In the above for loop please note that after the bsub directives the `sh rnaseq_analysis_on_input_file.sh $fq` command is in quotes!**
+	sh rnaseq_analysis_on_allfiles_for-lsf.sh
+
+**In the context of this script, you will have to run the command (`paste ...`) to put the count matrix with all the counts files together after all the jobs finished running.**
 
 > NOTE: All job schedulers are similar, but not the same. Once you understand how one works, you can transition to another one without too much trouble. They all have their pros and cons that the system administrators for your setup have taken into consideration and picked one that fits the needs of the users best. 
 
