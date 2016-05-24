@@ -536,6 +536,8 @@ Let's move both files to our `logs` directory:
 
 ```bash
 $ mv <job#>.* logs/
+
+$ mv logs/<job#>.err logs/trimmomatic.err
 ```
 
 ---
