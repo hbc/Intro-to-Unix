@@ -123,6 +123,7 @@ The basic options to **generate genome indices** using STAR as follows:
 STAR --runThreadN 5 --runMode genomeGenerate --genomeDir ./ --genomeFastaFiles chr1.fa --sjdbGTFfile chr1-hg19_genes.gtf --sjdbOverhang 99
 
 ```
+> *NOTE:* In case of reads of varying length, the ideal value for `--sjdbOverhang` is max(ReadLength)-1. In most cases, the default value of 100 will work as well as the ideal value.
 
 The basic options for **mapping reads** to the genome using STAR is as follows:
 
