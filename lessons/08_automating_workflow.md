@@ -227,13 +227,14 @@ Let's make a new file called `rnaseq_analysis_on_allfiles-for_lsf.sh`. Note this
 
 This file will loop through the same files as in the previous script, but the command it submits will be the actual bsub command:
 
-	#! /bin/bash
-
-    	for fq in ~/unix_workshop/raw_fastq/*.fq
-	do
-      	bsub -q priority -n 6 -W 1:30 -R "rusage[mem=4000]" -J rnaseq_mov10 -o %J.out -e %J.err sh rnaseq_analysis_on_input_file.sh $fq
-      	sleep 1
-    	done
+```
+#! /bin/bash
+for fq in ~/unix_workshop/raw_fastq/*.fq
+do
+bsub -q priority -n 6 -W 1:30 -R "rusage[mem=4000]" -J rnaseq_mov10 -o %J.out -e %J.err sh rnaseq_analysis_on_input_file.sh $fq
+sleep 1
+done
+```
 
 **In the above for loop please note that after the bsub directives the `sh rnaseq_analysis_on_input_file.sh $fq` command is in quotes!**
 
