@@ -242,7 +242,7 @@ done
 
 If you've noticed, we slipped a new `grep` flag `-H` in there. This flag will report the filename along with the match string. This is useful for when we generate the summary file.
 
-And now, at the end of the script as a best practice of capturing all of our work into a running summary log:
+And now as a best practice, at the end of the script we add a command to capture all of our work into a running summary log:
 
 ```
 # and add this summary to our run log
