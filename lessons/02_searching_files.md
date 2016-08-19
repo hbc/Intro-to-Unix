@@ -77,6 +77,8 @@ from all the files in to another file called `bad_reads.txt`.
 
 `$ grep -B1 -A2 NNNNNNNNNN Mov10_oe_1.subset.fq > bad_reads.txt`
 
+`$ls -l`
+
 The prompt should sit there a little bit, and then it should look like nothing
 happened. But type `ls`. You should have a new file called `bad_reads.txt`. Take
 a look at it and see if it has what you think it should.
