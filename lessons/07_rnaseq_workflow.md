@@ -142,8 +142,6 @@ Additionally, default filtering is applied in which the maximum number of multip
 
 * `--outSAMtype`: output filetype (SAM default)
 * `--outSAMUnmapped`: what to do with unmapped reads
-* `--outSAMattributes`: specify SAM attributes in output file
-
 
 More details on STAR and its functionality can be found in the [user manual](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf), we encourage you to peruse through to get familiar with all available options.
 
@@ -157,7 +155,6 @@ $ STAR --runThreadN 6 --genomeDir /groups/hbctraining/unix_workshop_other/refere
 --outFileNamePrefix results/STAR/Mov10_oe_1_ \
 --outSAMtype BAM SortedByCoordinate \
 --outSAMunmapped Within \
---outSAMattributes NH HI NM MD AS
 ```
 
 
