@@ -172,19 +172,19 @@ You should now see that only `Mov10_oe_1.subset` is returned. *How would you mod
 
 ## Automating with Scripts
 	
-Now that you've learned how to use loops and variables, let's put this processing power to work. Imagine, if you will, a script that will run a series of commands that would do the following for us each time we get a new data set:
+Now that you've learned how to use many important concepts in Unix, including loops and variables, let's put this processing power to work. Imagine, if you will, a script that will run a series of commands that would do the following for us each time we get a new data set:
 
 - Use for loop to iterate over each FASTQ file
 - Generate a prefix to use for naming our output files
 - Dump out bad reads into a new file
 - Get the count of the number of bad reads and generate a summary for each file
-- And after all the FASTQ files are processed, write the summary to a log file
+- And after all the FASTQ files are processed, exit the for loop and write a summary to a log file
 
 You might not realize it, but this is something that you now know how to do. Let's get started...
 
 Rather than doing all of this in the terminal we are going to create a script file with all relevant commands. Move back in to `unix_workshop` and use `nano` to create our new script file:
 
-```bash
+```
 $ cd unix_workshop
 $ nano generate_bad_reads_summary.sh
 ```
@@ -193,24 +193,28 @@ We always want to start our scripts with a shebang line:
 
 `#!/bin/bash`
 
+When the shebang `#!` is present, the shell will run the script using the executable program we have specified. In our case, we have a shell script and we want to **run it using the executable for the Bash interpreter**. So following the `#!` we provide the path to the executable file `/bin/bash`. 
+
+
+> *NOTE:* You may have noticed that the first script we created did not have a shebang line and we were still able to run it. This is because when we run it using the `sh` command we are also identifying the shell interpreter we wish to use. Even though it may seem redundant, we encourage you to include a shebang line as it is useful for others who may use your script. The shebang line ensures that the bash shell interprets the script even if the user running the script is using a different shell.
 
 After the shebang line, we enter the commands we want to execute. First we want to move into our `raw_fastq` directory:
 
-``` bash
+``` 
 # enter directory with raw FASTQs
 cd ~/unix_workshop/raw_fastq
 ```
 
 And now we loop over all the FASTQs:
 
-```bash
+```
 # count bad reads for each FASTQ file in our directory
 for filename in *.fq
 ```
 
 We begin to `do` or execute the commands for each loop. For each file that we process we can use `basename` to create a variable that will uniquely identify our output file based on where it originated from:
 
-```bash
+```
 do 
 
    # create a prefix for all output files
@@ -219,7 +223,7 @@ do
 
 We then want to grab all the bad read records into new file:
 
-```bash
+```
 
   # tell us what file we're working on
   echo $filename
@@ -228,9 +232,9 @@ We then want to grab all the bad read records into new file:
   grep -B1 -A2 NNNNNNNNNN $filename > $base-badreads.fastq
 ``` 
   
-We'll also count the number of these reads and put that in a new file, using the count flag of `grep`:
+We'll also count the number of these reads and put that in a new file, using the count flag of `grep`. And finish with `done` to indicate the last command we wish to execute within the loop.
 
-```bash
+```
   # grab the number of bad reads and write it to a summary file
   grep -cH NNNNNNNNNN $filename > $base-badreads.count.summary
 done
@@ -238,9 +242,9 @@ done
 
 If you've noticed, we slipped a new `grep` flag `-H` in there. This flag will report the filename along with the match string. This is useful for when we generate the summary file.
 
-And now, as a best practice of capturing all of our work into a running summary log:
+And now, at the end of the script as a best practice of capturing all of our work into a running summary log:
 
-```bash
+```
 # and add this summary to our run log
 cat *badreads.count.summary >> runlog.txt
 ```
