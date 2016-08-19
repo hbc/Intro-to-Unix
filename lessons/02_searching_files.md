@@ -102,7 +102,7 @@ the `grep` command to `less`
 Now we can use the arrows to scroll up and down and use `q` to get out.
 
 We can also do something tricky and use the command `wc`. `wc` stands for
-*word count*. It counts the number of lines or characters. So, we can use
+*word count*. It counts the number of words, lines or characters. So, we can use
 it to count the number of lines we're getting back from our `grep` command.
 And that will magically tell us how many sequences we're finding.
 
