@@ -26,7 +26,7 @@ Today we're going to go through how to access Unix/Linux and some of the basic s
 
 Since we are going to be working with this data on our remote server, **Orchestra**, we first need to log onto the server. After we're logged on, we will each make our own copy of the example data folder.
 
-#### Logging in
+### Logging in
 
 **With Macs**
 
