@@ -197,7 +197,7 @@ Index the BAM file for visualization with IGV:
 
 **Transfer files to your laptop using the command line**
 
-We previously used FileZilla to transfer files from Orchestra to your laptop. However, there is another way to do so using the command line interface. **This option is only available for Mac and Linux users! PC users can use Filezilla.**  Similar to the `cp` command to copy there is a command that allows you to securely copy files between computers. The command is called `scp` and allows files to be copied to, from, or between different hosts. It uses ssh for data transfer and provides the same authentication and same level of security as ssh. 
+We previously used FileZilla to transfer files from Orchestra to your laptop. However, there is another way to do so using the command line interface. Similar to the `cp` command to copy there is a command that allows you to securely copy files between computers. The command is called `scp` and allows files to be copied to, from, or between different hosts. It uses ssh for data transfer and provides the same authentication and same level of security as ssh. 
 
 First, identify the location of the _origin file_ you intend to copy, followed by the _destination_ of that file. Since the origin file is located on Orchestra, this requires you to provide remote host and login information.
 
@@ -211,6 +211,7 @@ The following 2 files need to be moved from Orchestra to your local machine,
 $ scp user_name@orchestra.med.harvard.edu:/home/user_name/unix_workshop/rnaseq_project/results/Mov10_oe_1_Aligned.sortedByCoord.out.bam* /path/to/directory_on_laptop
 ```
 
+> If you are not comfortable using the command line to, we encourgae participants to continue using Filezilla for the transfer.  
 
 **Visualize**
 
