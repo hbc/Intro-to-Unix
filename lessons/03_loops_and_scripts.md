@@ -34,12 +34,6 @@ First move into `unix_workshop` and open a new file using `nano`:
 	$ cd unix_workshop
 	$ nano listing.sh
 
-We will start our script with a shebang line: 
-
-`#!/bin/bash`
-
-When the shebang `#!` is present, the shell will run the script using the executable program we have specified. In our case, we have a shell script and we want to run it using the executable for the Bash interpreter. So following the `#!` we provide the path to the executable file `/bin/bash`. The shebang line ensures that the bash shell interprets the script even if the user running the script is using a different shell.
-
 Then type in the following lines in the `listing.sh` file:
 
 	echo "Your current working directory is:"
@@ -47,12 +41,9 @@ Then type in the following lines in the `listing.sh` file:
 	echo "These are the contents of this directory:"
 	ls -l 
 
-Close nano and save the file. Now let's **run the new script** we have created. To run a shell script you can do this in one of two ways. 
+Close nano and save the file. Now let's **run the new script** we have created. 
 
-1. You can use the `bash` or `sh` command. This means that you are specifying the interpreter on the command line, and so shell won't even look at the shebang line in the script.
-2. You can use `./listing.sh` if you want to invoke the interpreter specified on the shebang line. To do this the script must have the executable permissions set on our script (*NOTE: we will discuss permissions in more detail in a later lesson*).
-
-We will using the first command even though we have the shebang line in our script. This is considered best practice as specifying an interpreter is important for anyone else running the script down the road. 
+To run the shell script we use the `bash` or `sh` command:
 
 	$ sh listing.sh
 	
@@ -66,24 +57,39 @@ This is a very simple shell script. In this session and in upcoming sessions, we
 
 A **variable** is a common concept shared by many programming languages. Variables are essentially a symbolic/temporary name for, or a reference to, some information. Variables are analogous to "buckets", where information can be stored, maintained and modified without too much hassle. 
 
+
 Extending the bucket analogy: the bucket has a name associated with it, i.e. the name of the variable, and when referring to the information in the bucket, we use the name of the bucket, and do not directly refer to the actual data stored in it.
 
-In the example below, we define a variable or a 'bucket' called `file`. We will put the filename `Mov10_oe_1.subset.fq` as the value inside the bucket.
+Let's start with a simple variable that has a single number stored in it. Our variable is called `num` and we are storing the number 25 in it:
+
+	$ num=25
+
+*How do we know that we actually created the bash variable?* We can use the `echo` command to print to terminal:
+
+	$ echo num
+
+_What do you see in the terminal?_ The `echo` utility takes what arguments you provide and prints to terminal. In this case it interpreted `num` as a a character string and simply printed it back to us. This is because **when using the variable as an argument to the `echo` command, we explicitly use a `$` in front of it**:
+
+	$ echo $num
+
+Now you should see the number 25 returned to you. Did you notice that when we created the variable we just typed in the variable name? This is standard shell notation (syntax) for defining and using variables. When defining the variable (i.e. setting the value) you can just type it as is, but when **retrieving the value of a variable don't forget the `$`!** 
+
+Variables can also store a string of characters. In the example below, we define a variable or a 'bucket' called `file`. Inside the bucket we will put a character string `Mov10_oe_1.subset.fq` as the value.
 
 	$ file=Mov10_oe_1.subset.fq
 
-Once you press return, you should be back at the command prompt. *How do we know that we actually created the bash variable?* We can use the echo command to list what's inside `file`:
+Once you press return, you should be back at the command prompt. Let's check what's stored inside `file`:
 
 	$ echo $file
 
-What do you see in the terminal? If the variable was not created, the command will return nothing. Did you notice that when we created the variable we just typed in the variable name, but when using it as an argument to the `echo` command, we explicitly use a `$` in front of it (`$file`)? Why? 
+What do you see in the terminal? If the variable was not created, the command will return nothing.
 
-Well, in the former, we're setting the value, while in the latter, we're retrieving the value. This is standard shell notation (syntax) for defining and using variables. **Don't forget the `$` when you want to retrieve the value of a variable!** 
-
-Let's try another command using the variable that we have created. In the last lesson, we introduced the `wc -l` command which allows us to count the number of lines in a file. We can count the number of lines in `Mov10_oe_1.subset.fq` by referencing the `file` variable, but first move into the `raw_fastq` directory:
+Let's try another command using the variable `file` that we have just created. In the last lesson, we introduced the `wc -l` command which allows us to count the number of lines in a file. We can count the number of lines in `Mov10_oe_1.subset.fq` by referencing the `file` variable, but first move into the `raw_fastq` directory:
 
 	$ cd ~/unix_workshop/raw_fastq
 	$ wc -l $file
+
+> *NOTE:* The variables we create in a session are system-wide, and independent of where you are in the filesystem. This is why we can reference it from any directory. However, it is only available for your current session. If you exit Orchestra and login again at a later time, the variables you have created will no longer exist.
 
 Ok, so we know variables are like buckets, and so far we have seen that bucket filled with a single value. **Variables can store more than just a single value.** They can store multiple values and in this way can be useful to carry out many things at once. Let's create a new variable called `filenames` and this time we will store *all of the filenames* in the `raw_fastq` directory as values. 
 
