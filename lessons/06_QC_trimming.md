@@ -300,7 +300,7 @@ $ ls -lh *fastqc
 $ head *fastqc/summary.txt
 ```
 
-To save a record, let's `cat` all `fastqc summary.txt` files into one `fastqc_summaries.txt` and move this to `~/unix_workshop/rnaseq_project/docs`. 
+To save a record, let's `cat` all `fastqc summary.txt` files into one `fastqc_summaries.txt` and move this to `~/unix_workshop/rnaseq_project/logs`. 
 You can use wildcards in paths as well as file names.  Do you remember how we said `cat` is really meant for concatenating text files?
     
 ```bash
