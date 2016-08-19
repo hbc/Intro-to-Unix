@@ -120,6 +120,11 @@ if you have created these directories, you should get the following output from 
 
 ```
 
+Alternatively, if you wanted to view the **directory structure** you could use the `tree` command. Type it in at the command prompt and see what happens:
+
+`tree`
+
+
 ### Documenting
 
 For all of those steps, collecting specimens, extracting DNA, prepping your samples, you've likely kept a lab notebook that details how and why you did each step, but **documentation doesn't stop at the sequencer**! 
