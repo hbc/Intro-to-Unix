@@ -163,7 +163,7 @@ This will make your analysis traversable by you and your collaborators, and writ
 
 ```
 ## This directory contains data generated from the Intro to Unix workshop
-## Date: May 24th, 2016
+## Date: Aug 22, 2016
 
 There are four directories in this directory:
 
