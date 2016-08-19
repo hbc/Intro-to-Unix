@@ -124,7 +124,7 @@ Looping is a concept shared by several programming languages, and its implementa
 
 The structure or the syntax of (*for*) loops in bash is as follows:
 
-```
+```bash
 for (variable_name) in (list)
  do
    (commands $variable_name) 
@@ -136,10 +136,10 @@ where the ***variable_name*** defines (or initializes) a variable that takes the
 For example, we can run the same commands (`echo` and `wc -l`) used in the "Bash variables" section but this time run them sequentially on each file:
 
 ```
-$ for var in *.fq
+$ for filename in *.fq
  do
-   echo $var
-   wc -l $var
+   echo $filename
+   wc -l $filename
  done
 ```
 
@@ -150,17 +150,6 @@ Most simply, it writes to the terminal (`echo`) the name of the file and the num
 In this case the list of files is specified using the asterisk wildcard: `*.fq`, i.e. all files that end in `.fq`. Then, we execute 2 commands between the `do` and `done`. With a loop, we execute these commands for each file at a time. Once the commands are executed for one file, the loop then executes the same commands on the next file in the list. 
 
 Essentially, **the number of loops == the number of items in the list**, in our case that is 2 times since we have 2 files in `~/unix_workshop/raw_fastq` that end in `.fq`. This is done by changing the value of the `var` variable 2 times. 
-
-Of course, `var` is a useless variable name. But since it doesn't matter what variable name we use, we can make it something more intuitive.
-
-```bash
-$ for filename in *.fq
- do
-   echo $filename
-   wc -l $filename
- done
-```
-In the long run, it's best to use a name that will help point out a variable's function, so your future self will understand what you are thinking now.
 
 Pretty simple and cool, huh?
 
