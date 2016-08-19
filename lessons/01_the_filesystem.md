@@ -20,22 +20,9 @@ Paul Wilson, Milad Fatenejad, Sasha Wood and Radhika Khetani for Software Carpen
 - What is it good for?
 - Where are resources where I can learn more? (because the shell is awesome)
 
-
-## Why use the Unix shell?
-
-![Automation](../img/gvng.jpg)
-
-   Unix is user-friendly. It's just very selective about who its friends are.
-
-
-Today we're going to go through how to access Unix/Linux and some of the basic
-shell commands.
-
-> As a reminder, the shell is the "interpreter" that helps us interact with the computer using human-readable commands.
-
 ## Setting up
 
-We will spend most of our time learning about the basics of the shell by manipulating some experimental data.
+Today we're going to go through how to access Unix/Linux and some of the basic shell commands. We will be doing this by manipulating an example dataset from a small RNA-Seq experiment.
 
 Since we are going to be working with this data on our remote server, **Orchestra**, we first need to log onto the server. After we're logged on, we will each make our own copy of the example data folder.
 
