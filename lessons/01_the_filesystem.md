@@ -30,11 +30,11 @@ Since we are going to be working with this data on our remote server, **Orchestr
 
 **With Macs**
 
-Macs have a utility application called Terminal for performing tasks on the command line via bash (the shell, the interpreter), both locally and on remote machines. We will be using it to log into Orchestra.
+Macs have a utility application called Terminal for performing tasks on the command line (shell), both locally and on remote machines. We will be using it to log into Orchestra.
 
 **With Windows**
 
-By default, there is no terminal for the bash shell available in the Windows OS, so you have to use a downloaded program, Git BASH. Git BASH is part of the [Git for Windows](https://git-for-windows.github.io/) download, and is a bash emulator.
+By default, there is no terminal for the bash shell available in the Windows OS, so you have to use a downloaded program, Git BASH. Git BASH is part of the [Git for Windows](https://git-for-windows.github.io/) download, and is a shell (bash) emulator.
 
 > You can also use [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html) to log in to remote machines from Windows computers, but it is a little more involved and has different capabilities.
 
