@@ -271,7 +271,7 @@ The shell will fill in the rest of the directory name for `unix_workshop`. Now g
 
 ```$ ls Mov10_oe_<tab><tab>```
 
-When you hit the first tab, nothing happens. The reason is that there are multiple directories in the home directory which start with `Mov10_oe_`. Thus, the shell does not know which one to fill in. When you hit tab again, the shell will list the possible choices.
+When you hit the first tab, nothing happens. The reason is that there are multiple files and/or directories in the `raw_fastq` directory which start with `Mov10_oe_`. Thus, the shell does not know which one to fill in. When you hit tab again, the shell will list the possible choices.
 
 Tab completion can also fill in the names of commands. For example, enter `e<tab><tab>`. You will see the name of every command that starts with an `e`. One of those is `echo`. If you enter `ec<tab>` you will see that tab completion works. 
 
