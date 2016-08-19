@@ -451,7 +451,7 @@ The `-n` option to either of these commands can be used to print the first or la
 
 ## Creating, moving, copying, and removing
 
-Now we can move around in the file structure, look at files, search files, redirect. But what if we want to do normal things like copy files or move them around or get rid of them. Sure we could do most of these things without the command line, but what fun would that be?! Besides it's often faster to do it at the command line, or you'll be on a remote server like Amazon where you won't have another option.
+What if we want to do normal things like copy files or move them around or get rid of them. Sure we could do most of these things without the command line, but what fun would that be?! Besides it's often faster to do it at the command line, or you'll be on a remote server like a compute cluster or on the cloud where you won't have another option.
 
 Our raw data in this case is fastq files. We don't want to change the original files,
 so let's make a copy to work with.
@@ -483,36 +483,22 @@ We can now move our backed up file in to this directory. We can move files aroun
 	drwxrwsr-x 8 mp298 mp298      203 Sep 30 13:58 ..
 	-rw-rw-r-- 1 mp298 mp298 75706556 Sep 30 13:56 Mov10_oe_1.subset-copy.fq
 
-The `mv` command is also how you rename files. Since this file is so
-important, let's rename it:
+The `mv` command is also how you rename files and directories.
 
-```$ cd backup```
-
-`$ mv Mov10_oe_1.subset-copy.fq Mov10_oe_1.subset-copy.fq_DO_NOT_TOUCH!`
+`$ mv backup fastq_backup  # let's rename backup to something more intuitive`
 
 `$ ls`
 
-	Mov10_oe_1.subset-copy.fq_DO_NOT_TOUCH!
-
 > Both `mv` and `cp` require that you specify 2 things after the command on the command line: first is the object being copied, moved or renamed, and the second is the destination it's being moved or copied to, or the new name!
-
-Finally, we decided this was not what we needed to do, and we want to start over with an empty backup directory.
-
-	$ rm Mov10_oe_1.subset-copy.fq_DO_NOT_TOUCH!
-
-> The `rm` file permanently removes the file. Be careful with this command. The shell doesn't
-just nicely put the files in the Trash. They're really gone.
->
-> Same with moving and renaming files. It will **not** ask you if you are sure that you want to "replace existing file".
 
 *** 
 **Exercise**
 
 Do the following:
 
-1. Create a new directory called `backup_ref_data` in `~/unix_workshop/` (bonus points for doing this when you are in the `backup` directory!)
+1. Create a new directory called `backup_ref_data` in `~/unix_workshop/` (bonus points for doing this when you are in the `fastq_backup` directory!)
 2. Copy over the contents of the `~/unix_workshop/reference_data/` into `backup_ref_data` after changing directories to `~/unix_workshop` (if you are not already there).
-3. *Using just one command*, **move** the `raw_fastq/backup/` directory to your current working directory (which is `unix_workshop/`) and **rename** it `backup_fastq`.
+3. *Using just one command*, **move** the `raw_fastq/fastq_backup/` directory to your current working directory (which is `unix_workshop/`) and **rename** it `backup_fastq`.
 
 ***
 
