@@ -82,7 +82,6 @@ So, `ls` is an executable file that belong to user root and group root, and only
 >
 > The fact that something is marked as executable doesn't actually mean it contains or is a program of some kind. We could easily mark the `~/unix_workshop/raw_fastq/Irrel_kd_1.subset.fq` file as executable using the commands that are introduced below. Depending on the operating system we're using, trying to "run" it will fail (because it doesn't contain instructions the computer recognizes).
 
-
 Now let's run the command `ls -l ~/unix_workshop`, to list the files in that directory:
 
 ```
