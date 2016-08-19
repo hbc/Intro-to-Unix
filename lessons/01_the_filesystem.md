@@ -587,7 +587,7 @@ less
 head
 tail
 cp
-mdkir
+mkdir
 mv
 rm
 nano
