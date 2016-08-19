@@ -34,7 +34,7 @@ Macs have a utility application called Terminal for performing tasks on the comm
 
 **With Windows**
 
-By default, there is no terminal for the bash shell available in the Windows OS, so you have to use a downloaded program, git-BASH. git-BASH is part of the [git for Windows](https://git-scm.com/download/win) download and is a bash emulator.
+By default, there is no terminal for the bash shell available in the Windows OS, so you have to use a downloaded program, Git BASH. Git BASH is part of the [Git for Windows](https://git-for-windows.github.io/) download and is a bash emulator.
 
 > You can also use [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html) to log in to remote machines from Windows computers, but it is a little more involved and has different capabilities.
 
