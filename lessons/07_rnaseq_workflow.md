@@ -133,9 +133,9 @@ The basic options for **mapping reads** to the genome using STAR is as follows:
 * `--outFileNamePrefix`: prefix for all output files
 
 
-The STAR aligner first looks for the longest sequence that exactly matches one or more locations on the reference genome (MMP). For each MMP (seed1), the remaining unmapped portion (seed2) is mapped elsewhere. The separate seeds are then clustered based on proximity and stitched together to create a complete read. **If STAR does not find an exact matching sequence** for both seeds, the algorithm chooses to extend the MMP (allowing for a certain number of mismatches) *or* will soft-clip poor quality sequences (e.g. if quality of the extension is low, other contaminating sequence).
+The STAR aligner first looks for the longest sequence that exactly matches one or more locations on the reference genome (MMP1). The remaining unmapped portion (MMP2) is mapped elsewhere. The separate MMPs are then clustered based on proximity and stitched together to create a complete read. **If STAR does not find an exact matching sequence** for both MMPs, the algorithm chooses to extend MMP1 (allowing for a certain number of mismatches) *or* will soft-clip poor quality sequences (e.g. if quality of the extension is low, or presence of other contaminating sequence).
 
-> *NOTE:* STAR will extract splice junctions from the GTF file and use them to greatly improve accuracy of the mapping. While this is optional, and STAR can be run without annotations, **using annotations is highly recommended** whenever they are available. Without the GTF, the splice junctions are determined based on proximity and donor and acceptor motifs identfied on the two seeds.
+> *NOTE:* STAR will extract splice junctions from the GTF file and use them to greatly improve accuracy of the mapping. While this is optional, and STAR can be run without annotations, **using annotations is highly recommended** whenever they are available. Without the GTF, the splice junctions are determined based on proximity and donor and acceptor motifs identfied on the two MMPs.
 
 ![star](../img/star.png)
 
