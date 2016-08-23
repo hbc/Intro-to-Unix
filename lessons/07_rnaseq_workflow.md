@@ -92,7 +92,7 @@ In the script, we will eventually loop over all of our files and have the cluste
 > 
 
 ### Alignment to genome
-The alignment process consists of choosing an appropriate reference genome to map our reads against, and performing the read alignment using one of several splice-aware alignment tools such as [STAR](https://github.com/alexdobin/STAR) or [TopHat2](https://ccb.jhu.edu/software/tophat/index.shtml). The choice of aligner is a personal preference and also dependent on the computational resources that are available to you. 
+The alignment process consists of choosing an appropriate reference genome to map our reads against, and performing the read alignment using one of several splice-aware alignment tools such as [STAR](https://github.com/alexdobin/STAR) or [HISAT2](https://ccb.jhu.edu/software/hisat2/manual.shtml). The choice of aligner is a personal preference and also dependent on the computational resources that are available to you. 
 
 For RNA-seq it is important to use a **splice-aware aligner** because we want to **account for reads that span exon-exon junctions**. Other DNA aligners map reads against the reference genome and when an intron is encountered a long gap would be introduced in the mapping. This is not desired and might lead to false mappings. Splice-aware aligners use transcript information/restrictions from the GTF file so that it accounts for these junctions in its mapping algorithm.
  
