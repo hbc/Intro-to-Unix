@@ -419,24 +419,6 @@ You can also review your recent commands with the `history` command.  Just enter
 $ history
 ```
 
-to see a numbered list of recent commands, including this just issues
-`history` command.  You can reuse one of these commands directly by
-referring to the number of that command.
-
-If your history looked like this:
-
-    259  ls *
-    260  ls /usr/bin/*.sh
-    261  ls *fq
-
-then you could repeat command #260 by simply entering:
-
-```bash
-$ !260
-```
-
-(that's an exclamation mark).  You will be glad you learned this when you try to re-run very complicated commands.
-
 > Only a certain number of commands are stored and displayed with `history`, there is a way to modify this to store a different number.
 
 **Other handy command-related shortcuts**
