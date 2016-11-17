@@ -263,9 +263,10 @@ After navigating to your home directory, list the `Mov10_oe_1.subset.fq` (in the
 
 The `cd` command takes an argument which is the directory name. Directories can be specified using either a *relative path* or a *full path*. As we know, the directories on the computer are arranged into a hierarchy. The full path tells you where a directory is in that hierarchy. Navigate to the home directory (`cd`). Now, enter the `pwd` command and you should see:
 
-`$ pwd`
-
-`/home/username`
+```bash
+$ pwd
+```
+	/home/username
 
 which is the full path for your home directory. This tells you that you are in a directory called `username`, which sits inside a directory called `home` which sits inside the very top directory in the hierarchy, the *root directory*. So, to summarize: `username` is a directory in `home` which is a directory in `/`.
 
