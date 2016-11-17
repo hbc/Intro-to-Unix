@@ -323,7 +323,7 @@ Because *Trimmomatic* is java based, it is run using the `java -jar /opt/Trimmom
 
 ```bash
 $ java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
--threads 4 \
+-threads 3 \
 inputfile \
 outputfile \
 OPTION:VALUE... # DO NOT RUN THIS
