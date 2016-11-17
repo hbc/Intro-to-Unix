@@ -42,7 +42,9 @@ By default, there is no terminal for the bash shell available in the Windows OS,
 
 Type in the following command with your eCommons username to login:
 
-```ssh username@orchestra.med.harvard.edu```
+```bash
+ssh username@orchestra.med.harvard.edu
+```
 
 You will receive a prompt for your password, and you should type in your eCommons password; note that the cursor will *not move* as you type in your password.
 
@@ -52,13 +54,17 @@ A warning might pop up the first time you try to connect to a remote machine, ty
 
 Once logged in, you should see the Orchestra news and the command prompt: 
 
-```$ ```
+```bash
+$
+```
 
 The command prompt will have some characters before it, this is telling you what the name of the computer you are working on is (loge, pit, mezzanine).
 
 The first command we will type on the command prompt will be to start a so-called "interactive session" on Orchestra.
 
-```$ bsub -Is -q interactive bash```
+```bash
+$ bsub -Is -q interactive bash
+```
 
 Press enter after you type in that command. You will get a couple of messages, but in a few seconds you should get back the command prompt `$`; the string of characters before the command prompt, however, have changed. They should say something like `rsk27@clarinet002-062`. *We will be explaining what this means in more detail later this afternoon when we talk about HPC and Orchestra.* 
 
@@ -66,7 +72,9 @@ Make sure that your command prompt is now preceded by a character string that co
 
 Copy our example data folder to your home directory using the following command:
 
-```$ cp -r /groups/hbctraining/unix_workshop/ .```
+```bash
+$ cp -r /groups/hbctraining/unix_workshop/ .
+```
 
 >'cp' is the command for copy. This command required you to specify the location of the item you want to copy (/groups/hbctraining/unix_workshop/) and the location of the destination (.); please note the space between the 2 in the command. The "-r" is an option that modifies the copy command to do something slightly different than usual. The "." means "here", i.e. the destination location is where you currently are.
 
@@ -74,13 +82,17 @@ Copy our example data folder to your home directory using the following command:
 
 We have each created our own copy of the example data folder into our home directory, **unix_workshop**. Let's go into the data folder and explore the data using the shell.
 
-```$ cd unix_workshop```
+```bash
+$ cd unix_workshop
+```
 
 > 'cd' stands for 'change directory'
 
 Let's see what is in here. Type:
 
-```$ ls```
+```bash
+$ ls
+```
 
 You will see:
 
@@ -90,8 +102,9 @@ You will see:
 
 There are five items listed.  What are they? The colors are an indicator of what type of item it is. In addition to the colors, we can use a "modifier" with `ls` to get more information; this modifier is called an argument (more below).
 
-```$ ls -F```
-
+```bash
+$ ls -F
+```
 	genomics_data/  other/  raw_fastq/  README.txt  reference_data/
 
 Anything with a "/" after it is a directory. Things with a "*" after them are programs.  If there are no decorations after the name, it's a file.
@@ -100,7 +113,9 @@ Anything with a "/" after it is a directory. Things with a "*" after them are pr
 
 You can also use the command:
 
-```$ ls -l```
+```bash
+$ ls -l
+```
 to see whether items in a directory are files or directories. `ls -l` gives a lot more information too.
 
 	total 124
@@ -112,9 +127,13 @@ to see whether items in a directory are files or directories. `ls -l` gives a lo
 
 Let's go into the raw_fastq directory and see what is in there.
 
-```$ cd raw_fastq/```
+```bash
+$ cd raw_fastq/
+```
 
-```$ ls -F```
+```bash
+$ ls -F
+```
 
 	Irrel_kd_1.subset.fq  Irrel_kd_3.subset.fq  Mov10_oe_2.subset.fq
 	Irrel_kd_2.subset.fq  Mov10_oe_1.subset.fq  Mov10_oe_3.subset.fq
@@ -129,7 +148,9 @@ Most commands take additional arguments that control their exact behavior. For e
 Most commonly used shell commands have a manual available in the shell. You can access the
 manual using the `man` command. Try entering:
 
-```$ man ls```
+```bash
+$ man ls
+```
 
 This will open the manual page for `ls`. Use the space key to go forward and b to go backwards. When you are done reading, just hit `q` to quit.
 
@@ -181,7 +202,9 @@ Now using `cd` and `ls`, go in to the `unix_workshop` directory and list its con
 
 Let's also check to see where we are. Sometimes when we're wandering around in the file system, it's easy to lose track of where we are. The command that tells you this is:
 
-```$ pwd```
+```bash
+$ pwd
+```
 
 > This stands for 'print working directory'. i.e. the directory you're currently working in.
 
@@ -191,7 +214,9 @@ To go "back up a level" to the "parent directory" we can use `..`
 
 Type:
 
-```$ cd ..```
+```bash
+$ cd ..
+```
 
 Now do `ls` and `pwd`. 
 
@@ -204,17 +229,21 @@ By default, the `ls` commands lists the contents of the working directory (i.e. 
 
 Type:
 
-```$ cd```
+```bash
+$ cd
+```
 
 Then enter the command:
 
-```$ ls unix_workshop/```
+```bash
+$ ls unix_workshop/
+```
 
 This will list the contents of the `unix_workshop` directory without you having to navigate there.
 
 The `cd` command works in a similar way.
 
-```
+```bash
 $ cd unix_workshop/raw_fastq/
 $ pwd
 ```
@@ -242,12 +271,16 @@ which is the full path for your home directory. This tells you that you are in a
 
 Now enter the following command:
 
-```$ cd /home/username/unix_workshop/raw_fastq/```
+```bash
+$ cd /home/username/unix_workshop/raw_fastq/
+```
 
 This jumps to `raw_fastq`. Now go back to the home directory (`cd`). We saw
 earlier that the command:
 
-```$ cd unix_workshop/raw_fastq/```
+```bash
+$ cd unix_workshop/raw_fastq/
+```
 
 had the same effect - it took us to the `raw_fastq` directory. But, instead of specifying the full path (`/home/username/unix_workshop/raw_fastq`), we specified a *relative path*. In other words, we specified the path **relative to our current working directory**. 
 
@@ -272,11 +305,15 @@ Over time, it will become easier for you to keep a mental note of the structure 
 
 Navigate to the home directory. Typing out directory names can waste a lot of time. When you start typing out the name of a directory, then hit the tab key, the shell will try to fill in the rest of the directory name. For example, type `cd` to get back to your home directly, then enter:
 
-```$ cd uni<tab>```
+```bash
+$ cd uni<tab>
+```
 
 The shell will fill in the rest of the directory name for `unix_workshop`. Now go to `unix_workshop/raw_fastq` and 
 
-```$ ls Mov10_oe_<tab><tab>```
+```bash
+$ ls Mov10_oe_<tab><tab>
+```
 
 When you hit the first tab, nothing happens. The reason is that there are multiple files and/or directories in the `raw_fastq` directory which start with `Mov10_oe_`. Thus, the shell does not know which one to fill in. When you hit tab again, the shell will list the possible choices.
 
@@ -291,15 +328,21 @@ directory contains FASTQ files from our RNA-Seq experiment.
 
 The '*' character is a shortcut for "everything". Thus, if you enter `ls *`, you will see all of the contents of a given directory. Now try this command:
 
-```$ ls *fq```
+```bash
+$ ls *fq
+```
 
 This lists every file that ends with a `fq`. This command:
 
-```$ ls /usr/bin/*.sh```
+```bash
+$ ls /usr/bin/*.sh
+```
 
 Lists every file in `/usr/bin` that ends in the characters `.sh`.
 
-```$ ls Mov10*fq```
+```bash
+$ ls Mov10*fq
+```
 
 lists only the files that begin with 'Mov10' and end with 'fq'
 
@@ -328,23 +371,33 @@ home directory is very common. So, in the shell the tilde character,
 "~", is a shortcut for your home directory. Navigate to the `raw_fastq`
 directory:
 
-```$ cd```
+```bash
+$ cd
+```
 
-```$ cd unix_workshop/raw_fastq```
+```bash
+$ cd unix_workshop/raw_fastq
+```
 
 Then enter the command:
 
-```$ ls ~```
+```bash
+$ ls ~
+```
 
 This prints the contents of your home directory, without you having to type the full path because the tilde "~" is equivalent to "/home/username".
 
 Another shortcut that you are already familiar with is the "..":
 
-```$ ls ..```
+```bash
+$ ls ..
+```
 
 The shortcut `..` always refers to the directory above your current directory. So, it prints the contents of the `unix_workshop`. You can chain these together, so:
 
-```$ ls ../..```
+```bash
+$ ls ../..
+```
 
 prints the contents of `/home/username` which is your home directory. 
 
@@ -361,7 +414,9 @@ is very useful.
 
 You can also review your recent commands with the `history` command.  Just enter:
 
-```$ history```
+```bash
+$ history
+```
 
 to see a numbered list of recent commands, including this just issues
 `history` command.  You can reuse one of these commands directly by
@@ -375,7 +430,9 @@ If your history looked like this:
 
 then you could repeat command #260 by simply entering:
 
-```$ !260```
+```bash
+$ !260
+```
 
 (that's an exclamation mark).  You will be glad you learned this when you try to re-run very complicated commands.
 
@@ -403,7 +460,9 @@ contents of directories, but how do we look at the contents of files?
 The easiest way to examine a file is to just print out all of the
 contents using the command `cat`. Print the contents of `unix_workshop/other/sequences.fa` by entering the following command:
 
-`$ cat ~/unix_workshop/other/sequences.fa`
+```bash
+$ cat ~/unix_workshop/other/sequences.fa
+```
 
 This prints out the all the contents of `sequences.fa` to the screen.
 
@@ -415,7 +474,9 @@ What does this file contain?
 
 Move back to our `raw_fastq` directory and enter the following command:
 
-`less Mov10_oe_1.subset.fq`
+```bash
+$ less Mov10_oe_1.subset.fq
+```
 
 We will explore fastq files in more detail later, but notice that fastq files have four lines of data associated with every sequence read. Not only is there a header line and the nucleotide sequence, similar to a fasta file, but fastq files also contain quality information for each nucleotide in the sequence. 
 
@@ -446,15 +507,22 @@ to see the beginning or end of the file, or see how it's formatted.
 The commands are `head` and `tail` and they just let you look at
 the beginning and end of a file respectively.
 
-```$ head Mov10_oe_1.subset.fq ```
+```bash
+$ head Mov10_oe_1.subset.fq 
+```
 
-```$ tail Mov10_oe_1.subset.fq```
+```$ tail Mov10_oe_1.subset.fq
+```
 
 The `-n` option to either of these commands can be used to print the first or last `n` lines of a file. To print the first/last line of the file use:
 
-```$ head -n 1 Mov10_oe_1.subset.fq```
+```bash
+$ head -n 1 Mov10_oe_1.subset.fq
+```
 
-```$ tail -n 1 Mov10_oe_1.subset.fq```
+```bash
+$ tail -n 1 Mov10_oe_1.subset.fq
+```
 
 ## Creating, moving, copying, and removing
 
@@ -465,9 +533,13 @@ so let's make a copy to work with.
 
 Lets copy the file using the copy `cp` command. Navigate to the `raw_fastq` directory and enter:
 
-```$ cp Mov10_oe_1.subset.fq Mov10_oe_1.subset-copy.fq```
+```bash
+$ cp Mov10_oe_1.subset.fq Mov10_oe_1.subset-copy.fq
+```
 
-```$ ls -l```
+```bash
+$ ls -l
+```
 
 Now ``Mov10_oe_1.subset-copy.fq`` has been created as a copy of `Mov10_oe_1.subset.fq`
 
@@ -476,15 +548,21 @@ Let's make a 'backup' directory where we can put this file.
 The `mkdir` command is used to make a directory. Just enter `mkdir`
 followed by a space, then the directory name.
 
-```$ mkdir backup```
+```bash
+$ mkdir backup
+```
 
 > File/directory/program names with spaces in them do not work in unix, use characters like hyphens or underscores instead.
 
 We can now move our backed up file in to this directory. We can move files around using the command `mv`. Enter this command:
 
-```$ mv *copy.fq backup```
+```bash
+$ mv *copy.fq backup
+```
 
-```$ ls -al backup```
+```bash
+$ ls -al backup
+```
 
 	drwxrwsr-x 2 mp298 mp298       43 Sep 30 13:59 .
 	drwxrwsr-x 8 mp298 mp298      203 Sep 30 13:58 ..
@@ -492,9 +570,13 @@ We can now move our backed up file in to this directory. We can move files aroun
 
 The `mv` command is also how you rename files and directories.
 
-`$ mv backup fastq_backup  # let's rename backup to something more intuitive`
+```bash
+$ mv backup fastq_backup  # let's rename backup to something more intuitive
+```
 
-`$ ls`
+```bash
+$ ls
+```
 
 > Both `mv` and `cp` require that you specify 2 things after the command on the command line: first is the object being copied, moved or renamed, and the second is the destination it's being moved or copied to, or the new name!
 
@@ -522,7 +604,9 @@ We've been able to do a lot of work with files that already exist, but what if w
 To write in files, we're going to use the command `nano`. We're going to create
 a file that contains some text. We'll name this file 'awesome.txt'.
 
-```$ nano awesome.txt```
+```bash
+$ nano awesome.txt
+```
 
 Now you have something that looks like
 
