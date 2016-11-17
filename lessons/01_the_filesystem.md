@@ -494,7 +494,8 @@ the beginning and end of a file respectively.
 $ head Mov10_oe_1.subset.fq 
 ```
 
-```$ tail Mov10_oe_1.subset.fq
+```bash
+$ tail Mov10_oe_1.subset.fq
 ```
 
 The `-n` option to either of these commands can be used to print the first or last `n` lines of a file. To print the first/last line of the file use:
