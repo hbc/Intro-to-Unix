@@ -54,7 +54,7 @@ Once logged in, you should see the Orchestra news and the command prompt:
 
 ```$ ```
 
-The command prompt will have some characters before it, something like "-bash-4.1", this is telling you what the name of the computer you are working on is.
+The command prompt will have some characters before it, this is telling you what the name of the computer you are working on is (loge, pit, mezzanine).
 
 The first command we will type on the command prompt will be to start a so-called "interactive session" on Orchestra.
 
@@ -62,7 +62,7 @@ The first command we will type on the command prompt will be to start a so-calle
 
 Press enter after you type in that command. You will get a couple of messages, but in a few seconds you should get back the command prompt `$`; the string of characters before the command prompt, however, have changed. They should say something like `rsk27@clarinet002-062`. *We will be explaining what this means in more detail later this afternoon when we talk about HPC and Orchestra.* 
 
-Make sure that your command prompt is now preceded by a character string that contain words like "clarinet", "bassoon", etc.
+Make sure that your command prompt is now preceded by a character string that contain words like "clarinet", "bassoon", "ottavino" etc.
 
 Copy our example data folder to your home directory using the following command:
 
@@ -88,7 +88,7 @@ You will see:
 
 > ls stands for 'list' and it lists the contents of a directory.
 
-There are five items listed.  What are they? We can use a "modifier" with `ls` to get more information; this modifier is called an argument (more below).
+There are five items listed.  What are they? The colors are an indicator of what type of item it is. In addition to the colors, we can use a "modifier" with `ls` to get more information; this modifier is called an argument (more below).
 
 ```$ ls -F```
 
@@ -140,7 +140,7 @@ Commands that are run from the shell can get extremely complicated. To see an ex
 
 ## The Unix directory file structure (a.k.a. where am I?)
  
-As you've already just seen, you can move around in different directories or folders at the command line. Why would you want to do this, rather than just navigating around the normal way using a GUI (GUI = Graphical User Interface, pronounced like "gooey").
+As you've already just seen, you can move around in different directories or folders at the command line. Why would you want to do this, rather than just navigating around the normal way using a GUI (GUI = Graphical User Interface, pronounced like "gooey")?
 
 #### Moving around the file system
 
@@ -180,7 +180,7 @@ Let's also check to see where we are. Sometimes when we're wandering around in t
 
 What if we want to move back up and out of the `raw_fastq` directory? Can we just type `cd unix_workshop`? Try it and see what happens.
 
-To go 'back up a level' we can use `..`
+To go "back up a level" to the "parent directory" we can use `..`
 
 Type:
 
