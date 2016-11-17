@@ -143,10 +143,6 @@ If we check which modules we currently have loaded, we should not see FastQC.
 
 `$ module list`
 
-If we try to run FastQC on one of our fastq files, Orchestra won't be able to find the program.
-
-`$ fastqc Mov10_oe_1.subset.fq`
-
 This is because the FastQC program is not in our $PATH (i.e. its not in a directory that unix will automatically check to run commands/programs).
 
 ```bash
@@ -171,17 +167,17 @@ FastQC will accept multiple file names as input, so we can use the *.fq wildcard
 
 *Did you notice how each file was processed serially? How do we speed this up?*
 
-Exit the interactive session and start a new one with 6 cores, and use the multi-threading funcionality of FastQC to run 6 jobs at once.
+Exit the interactive session and start a new one with 3 cores, and use the multi-threading funcionality of FastQC to run 3 jobs at once.
 
 `$ exit`      #exit the current interactive session
 	
-`$ bsub -Is -n 6 -q interactive bash`      #start a new one with 6 cpus (-n 6)
+`$ bsub -Is -n 3 -q interactive bash`      #start a new one with 3 cpus (-n 3)
 	
 `$ module load seq/fastqc/0.11.3`     #you'll have to reload the module for the new session
 
 `$ cd unix_workshop/rnaseq_project/data/untrimmed_fastq/` #change to the untrimmed_fastq directory
 	
-`$ fastqc -t 6 *.fq`      #note the extra parameter we specified for 6 threads
+`$ fastqc -t 3 *.fq`      #note the extra parameter we specified for 3 threads
 
 How did I know about the -t argument for FastQC?
 
@@ -368,7 +364,7 @@ For the single fastq input file `Mov10_oe_1.subset.fq`, we're going to run the f
 
 ```bash
 $ java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
--threads 4 \
+-threads 3 \
 -phred33 \
 Mov10_oe_1.subset.fq \
 ../trimmed_fastq/Mov10_oe_1.qualtrim25.minlen35.fq \
@@ -383,7 +379,7 @@ This command tells *Trimmomatic* to run on a fastq file containing Single-End re
 After the job finishes, you should see the *Trimmomatic* output in the terminal: 
 
 ```
-TrimmomaticSE: Started with arguments: -threads 4 -phred33 Mov10_oe_1.subset.fq ../trimmed_fastq/Mov10_oe_1.qualtrim25.minlen35.fq ILLUMINACLIP:/opt/Trimmomatic-0.33/adapters/TruSeq3-SE.fa:2:30:10 TRAILING:25 MINLEN:35
+TrimmomaticSE: Started with arguments: -threads 3 -phred33 Mov10_oe_1.subset.fq ../trimmed_fastq/Mov10_oe_1.qualtrim25.minlen35.fq ILLUMINACLIP:/opt/Trimmomatic-0.33/adapters/TruSeq3-SE.fa:2:30:10 TRAILING:25 MINLEN:35
 Using Long Clipping Sequence: 'AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA'
 Using Long Clipping Sequence: 'AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC'
 ILLUMINACLIP: Using 0 prefix pairs, 2 forward/reverse sequences, 0 forward only sequences, 0 reverse only sequences
@@ -450,7 +446,7 @@ do
  
   # Run Trimmomatic command
   java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE \
-  -threads 4 \
+  -threads 3 \
   -phred33 \
   $infile \
   ../trimmed_fastq/$outfile \
@@ -480,7 +476,7 @@ After we have created the trimmed fastq files, we need to make sure that the qua
 ```bash
 # Run FastQC on all trimmed files
 echo "Running FastQC..."
-fastqc -t 6 ../trimmed_fastq/*.fq
+fastqc -t 3 ../trimmed_fastq/*.fq
 ```
 
 We can transfer the FastQC reports to our machine to make sure the trimming improved the quality of our reads without removing too many of them. 
@@ -492,7 +488,7 @@ Now our script is complete. We could run this script, as is, by submitting it to
 ```bash
 #BSUB -q priority 	# queue name
 #BSUB -W 2:00 		# hours:minutes runlimit after which job will be killed.
-#BSUB -n 6 		# number of cores requested
+#BSUB -n 3 		# number of cores requested
 #BSUB -J rnaseq_mov10_qc         # Job name
 #BSUB -o %J.out       # File to which standard out will be written
 #BSUB -e %J.err       # File to which standard err will be written
