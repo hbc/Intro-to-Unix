@@ -427,6 +427,8 @@ $ history
 
 * \^-a will bring you to the start of the command you are writing.
 
+* \^-e will bring you to the end of the command you are writing.
+
 ****
 **Exercise**
 
