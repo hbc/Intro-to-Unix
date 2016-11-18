@@ -265,7 +265,7 @@ In it's most basic form the `htseq` command requires only the BAM file and the G
 You will notice at the end of the command we have added a redirection symbol. Since htseq-count outputs results to screen, we need to re-direct it to file.
 
 ```
-$ htseq-count --stranded reverse results/STAR/Mov10_oe_1_Aligned.sortedByCoord.out.bam data/reference_data/chr1-hg19_genes.gtf  >  results/counts/Mov10_oe_1.counts
+$ htseq-count --stranded reverse --format bam results/STAR/Mov10_oe_1_Aligned.sortedByCoord.out.bam data/reference_data/chr1-hg19_genes.gtf  >  results/counts/Mov10_oe_1.counts
 ```
 
 ***
