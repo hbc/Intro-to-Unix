@@ -260,12 +260,12 @@ Let's start by creating a directory for the output:
 $ mkdir results/counts
 ```
 
-In it's most basic form the `htseq` command requires only the BAM file and the GTF file. We will add in a few additional parameters including `--format` to indicate BAM file, and `--stranded reverse` to specify that we have a stranded library created via the dUTP method. By default htseq-count will **ignore any reads that map to multiple locations** on the genome. This results in undercounting but also helps reduce false positives. While multi-mappers are a feature that cannot be modified, there is a parameter that allows the user to filter reads by specifying a minimum alignment quality. 
+In it's most basic form the `htseq` command requires only the BAM file and the GTF file. We will add in an additional parameter, `--stranded reverse`, to specify that we have a stranded library created via the dUTP method. By default htseq-count will **ignore any reads that map to multiple locations** on the genome. This results in undercounting but also helps reduce false positives. While multi-mappers are a feature that cannot be modified, there is a parameter that allows the user to filter reads by specifying a minimum alignment quality. 
 
 You will notice at the end of the command we have added a redirection symbol. Since htseq-count outputs results to screen, we need to re-direct it to file.
 
 ```
-$ htseq-count --stranded reverse --format bam results/STAR/Mov10_oe_1_Aligned.sortedByCoord.out.bam data/reference_data/chr1-hg19_genes.gtf  >  results/counts/Mov10_oe_1.counts
+$ htseq-count --stranded reverse results/STAR/Mov10_oe_1_Aligned.sortedByCoord.out.bam data/reference_data/chr1-hg19_genes.gtf  >  results/counts/Mov10_oe_1.counts
 ```
 
 ***
