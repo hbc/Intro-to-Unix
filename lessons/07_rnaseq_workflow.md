@@ -257,10 +257,12 @@ We will be using the **'union' mode as it is default** and most commonly used. T
 Let's start by creating a directory for the output:
 
 ```
+$ cd ~/unix_workshop/rnaseq_project/
+
 $ mkdir results/counts
 ```
 
-In it's most basic form the `htseq` command requires only the BAM file and the GTF file. We will add in an additional parameter, `--stranded reverse`, to specify that we have a stranded library created via the dUTP method. By default htseq-count will **ignore any reads that map to multiple locations** on the genome. This results in undercounting but also helps reduce false positives. While multi-mappers are a feature that cannot be modified, there is a parameter that allows the user to filter reads by specifying a minimum alignment quality. 
+In it's most basic form the `htseq` command requires only the SAM file and the GTF file. We will add in a couple of additional parameters: `--stranded reverse`, to specify that we have a stranded library created via the dUTP method and `--format` to specify our input is in BAM format. By default htseq-count will **ignore any reads that map to multiple locations** on the genome. This results in undercounting but also helps reduce false positives. While multi-mappers are a feature that cannot be modified, there is a parameter that allows the user to filter reads by specifying a minimum alignment quality. 
 
 You will notice at the end of the command we have added a redirection symbol. Since htseq-count outputs results to screen, we need to re-direct it to file.
 
