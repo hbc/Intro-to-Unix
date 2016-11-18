@@ -202,16 +202,7 @@ $ bsub < rnaseq_analysis_on_allfiles.lsf
 
 > ##### Processing the count matrix for downstream applications
 >
-> Now we have a count matrix for our dataset, the only thing we are missing is a header to indicate which columns correspond to which sample. We can add that in by creating a file with the header information in it:
->
-> `$ nano header.txt`
->
-> Type in the following with tab separators "ID OE.1 OE.2 OE.3 IR.1 IR.2 IR.3"
->
-> Now join the header to the file using `cat` with the `header.txt` file as the first argument:
->	
-> `$ cat header.txt Mov10_rnaseq_counts.txt > Mov10_rnaseq_counts_complete.txt`
-
+> Now we have a count matrix for our dataset, the only thing we are missing is a header to indicate which columns correspond to which sample. We can add it, "ID OE.1 OE.2 OE.3 IR.1 IR.2 IR.3", using `nano` or another text editor. 
 
 #### Parallelizing workflow for efficiency
 
