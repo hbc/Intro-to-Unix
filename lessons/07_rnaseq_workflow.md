@@ -22,7 +22,7 @@ To get started with this lesson, we will login to the cluster but this time we a
 ssh username@orchestra.med.harvard.edu
 (enter password)
 
-$ bsub -Is -n 6 -q interactive bash	
+$ bsub -Is -n 6 -q training bash	
 ```
 
 Change directories into the `unix_workshop` directory and copy the `reference_data` folder into your project directory:
